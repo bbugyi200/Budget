@@ -1,13 +1,17 @@
 """ payperiod.py
 
 This module focuses on objects that represent more holistic models
-of a single pay cycle
+of a single pay cycle.
 """
 
 import expenses
 
 
 class PayPeriod:
+    """ PayPeriod object is used to represent a single pay period, the initial
+    amount of money received in your paycheck, all of your expenses, and also
+    the remaining amount of funds you have left from this pay cycle.
+    """
     def __init__(self, PayCheck, StartDate):
         self.initial = float(PayCheck)
         self.remaining = float(PayCheck)
@@ -30,6 +34,12 @@ class PayPeriod:
 
 
 class Expense_List:
+    """ A comprehensive list of all of your expenses in a given PayPeriod.
+
+    This class is meant to be integrated into the PayPeriod class and serves
+    as a way to seperate the 'expense' operations that take place each
+    PayPeriod from other PayPeriod related operations.
+    """
     def __init__(self):
         self.allExpenses = []
 

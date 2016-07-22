@@ -6,6 +6,7 @@ Budget Program
 
 
 class Expense:
+    """ Meta-Class Expense Object. """
     def __init__(self, expense_type, value, notes):
         self.expense_type = expense_type
         self.value = value
