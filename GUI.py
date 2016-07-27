@@ -9,6 +9,8 @@ import payperiod
 
 class B_GUI_Setup:
     def __init__(self, master):
+        """ Initializes the GUI """
+        # PP is a pay period object
         self.PP = bdata.GetPayPeriod()
 
         self._createMenu(master)
@@ -16,29 +18,37 @@ class B_GUI_Setup:
         self.frame1 = tk.Frame(master, width=50, height=100)
         self.frame1.grid(row=0, columnspan=5)
 
+        # frame1 is used for the window title
         self._createTitle(self.frame1)
 
         self.frame2 = tk.Frame(master, width=700, height=200)
         self.frame2.grid(row=1, column=0)
 
+        # frame2 is used for the initial and remaining amounts
         self._createIR(self.frame2)
 
         self.frame3 = tk.Frame(master, width=200, height=100)
         self.frame3.grid(row=1, column=2)
 
+        # frame3 is used for the Expense form
         self._createExpenseForm(self.frame3)
 
         self.SubmitFrame = tk.Frame(master)
         self.SubmitFrame.grid(row=2, column=2)
 
+        # SubmitFrame is used for the 'Submit' button of the Expense form
         self._createSubmit(self.SubmitFrame)
 
         self.OuterEFrame = tk.Frame(master)
         self.OuterEFrame.grid(row=1, column=1)
 
+        # The OuterEFrame is used to display the expenses and is an "outer"
+        # frame so the inner frame can be deleted as needed without affecting
+        # the outer frame.
         self._showExpenses(self.OuterEFrame)
 
     def _createMenu(self, master):
+        """ Creates dropdown menus on the top of the window """
         menu = tk.Menu(master)
         master.config(menu=menu)
 
@@ -55,12 +65,18 @@ class B_GUI_Setup:
             viewMenu.add_command(label=date, command=self._GetPPFactory(date))
 
     def _GetPPFactory(self, date):
+        """ Returns a function ('GetPP') that changes the PP object and then
+        refreshes the screen.
+        """
         def GetPP():
             self.PP = bdata.GetPayPeriod(date)
             self.refresh_screen()
         return GetPP
 
     def _createTitle(self, frame):
+        """ Creates the title of the window, which is just the pay period
+        date.
+        """
         self.Lab_PayPeriod_Text = tk.StringVar()
         self.Lab_PayPeriod_Text.set(self.PP.StartDate)
         self.Lab_PayPeriod = tk.Label(frame,
@@ -71,6 +87,9 @@ class B_GUI_Setup:
         self.Lab_PayPeriod.grid(row=2, column=3)
 
     def _createIR(self, frame):
+        """ Used to create the 'initial' and 'remaining' fields of the given
+        pay period.
+        """
         self.Lab_initial_text = tk.StringVar()
         self.Lab_initial_text.set('Initial: ' + '{0:.2f}'.format(float(self.PP.initial)))
         self.Lab_remaining_text = tk.StringVar()
@@ -87,20 +106,20 @@ class B_GUI_Setup:
         OPTIONS = ['Food', 'Entertainment', 'Monthly Bills', 'Fuel', 'Other']
 
         self.expense_choice = tk.StringVar(frame)
+
         # Setting the default value
         self.expense_choice.set('Expense')
 
         ExpenseOptions = tk.OptionMenu(frame, self.expense_choice, *OPTIONS)
         ExpenseOptions.grid(row=0)
 
+        # Amount Label
         Lab_Amount = tk.Label(frame, text='Amount: ')
         Lab_Amount.grid(row=0, column=1)
 
         self.ValueEntry = tk.Entry(frame)
         self.ValueEntry.bind('<Return>', self.SubmitFunc)
         self.ValueEntry.grid(row=0, column=2)
-
-        Lab_Notes = tk.Label(frame, text='Notes: ')
         Lab_Notes.grid(row=1, column=1)
 
         self.NotesEntry = tk.Entry(frame)
@@ -108,11 +127,15 @@ class B_GUI_Setup:
         self.NotesEntry.grid(row=1, column=2)
 
     def _createSubmit(self, frame):
+        """ Creates the Expense form Submit button """
         SubmitButton = tk.Button(frame, text='Submit')
         SubmitButton.bind('<Button-1>', self.SubmitFunc)
         SubmitButton.pack()
 
     def _showExpenses(self, outer_frame):
+        """ Displays all of this pay period's expenses. """
+
+        # If the ExpenseFrame exists, it will be destroyed
         try:
             self.ExpenseFrame.destroy()
         except AttributeError:
@@ -122,9 +145,14 @@ class B_GUI_Setup:
         self.ExpenseFrame.pack(fill='both')
 
         Exp_Attrs = self.PP.expenses.get()
-        print(Exp_Attrs)
+
+        # Debugging Assistance
+        assert False, print(Exp_Attrs)
 
         self.expense_checkboxes = []
+
+        # The expense_checkboxes list is used to store the status of an
+        # arbitrary amount of checkboxes.
         for i, Exp in enumerate(Exp_Attrs):
             self.expense_checkboxes.append(tk.IntVar())
 
@@ -153,7 +181,15 @@ class B_GUI_Setup:
 
 
 class BudgetGUI(B_GUI_Setup):
+    """ BudgetGUI Class
+    
+    Contains all of the "dynamic" functionality of the GUI.
+    """
+
     def SubmitFunc(self, event):
+        """ This function is called if the Expense form's 'Submit' button
+        is pressed.
+        """
         try:
             self.PP.add_expense(self.expense_choice.get(),
                     self.ValueEntry.get(),
@@ -171,6 +207,9 @@ class BudgetGUI(B_GUI_Setup):
             raise
 
     def newPP(self):
+        """ Creates a new GUI window that prompts the user for the new
+        pay period's information.
+        """
         self.NPP_root = tk.Tk()
 
         topFrame = tk.Frame(self.NPP_root)
@@ -215,6 +254,9 @@ class BudgetGUI(B_GUI_Setup):
         self.NPP_root.mainloop()
 
     def _SubmitNewPP(self, event):
+        """ This function is called when the user submits the NewPP 
+        information.
+        """
         M, D, Y = (self.month_entry.get(),
                 self.day_entry.get(),
                 self.year_entry.get())
@@ -231,12 +273,16 @@ class BudgetGUI(B_GUI_Setup):
         self.NPP_root.destroy()
 
     def refresh_screen(self):
+        """ This function is used to refresh the main GUI window. """
         self.Lab_PayPeriod_Text.set(self.PP.StartDate)
         self.Lab_initial_text.set('Initial: ' + '{0:.2f}'.format(float(self.PP.initial)))
         self.Lab_remaining_text.set('Remaining: ' + '{0:.2f}'.format(float(self.PP.remaining)))
         self._showExpenses(self.OuterEFrame)
 
     def DeleteSelected(self, event):
+        """ This function is called when the user presses the
+        Expense form's 'Delete Selected' button.
+        """
         deleted_count = 0
         for i, checkbox in enumerate(self.expense_checkboxes):
             if checkbox.get():
