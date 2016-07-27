@@ -1,0 +1,8 @@
+----- Todo List -----
+* Review and comment GUI.py
+* Remove personal data from Github and figure out how to "initialize" data at start (perhaps a welcome message?)
+* Cleanup GUI appearance
+
+----- Additional Features ------
+* Matplotlib pie chart statistics
+* Planned budget goals 
