@@ -1,6 +1,6 @@
 ----- Todo List -----
 X Review and comment GUI.py
-* Remove personal data from Github and figure out how to "initialize" data at start (perhaps a welcome message?)
+X Remove personal data from Github and figure out how to "initialize" data at start (perhaps a welcome message?)
 * Cleanup GUI appearance
 
 ----- Additional Features ------
