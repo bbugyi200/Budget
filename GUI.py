@@ -8,6 +8,12 @@ import payperiod
 
 
 class B_GUI_Setup:
+    """ B_GUI_Setup Class
+    
+    This class contains all of the methods that are used for the initial 
+    setup of the main Budget GUI window.
+    """
+
     def __init__(self, master):
         """ Initializes the GUI """
         # PP is a pay period object
