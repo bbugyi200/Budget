@@ -13,7 +13,7 @@ def getPP_files():
 
     getPP_files() -> Sorted list of PayPeriod files without their .db extension
     """
-    files = [f[:-3] for f in listdir('data/') if isfile(join('data/', f))]
+    files = [f[:-3] for f in listdir('data/') if isfile(join('data/', f)) and f[-2:]=='db']
     return sorted(files, key=_date_sorter)
 
 

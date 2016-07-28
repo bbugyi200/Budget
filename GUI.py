@@ -139,14 +139,14 @@ class B_GUI_Setup:
         Lab_Amount.grid(row=0, column=1)
 
         self.ValueEntry = tk.Entry(frame)
-        self.ValueEntry.bind('<Return>', self.SubmitFunc)
+        self.ValueEntry.bind('<Return>', self.SubmitFuncBind)
         self.ValueEntry.grid(row=0, column=2)
 
         Lab_Notes = tk.Label(frame, text='Notes: ')
         Lab_Notes.grid(row=1, column=1)
 
         self.NotesEntry = tk.Entry(frame)
-        self.NotesEntry.bind('<Return>', self.SubmitFunc)
+        self.NotesEntry.bind('<Return>', self.SubmitFuncBind)
         self.NotesEntry.grid(row=1, column=2)
 
     def _createSubmit(self, frame):
@@ -227,6 +227,13 @@ class BudgetGUI(B_GUI_Setup):
             tkinter.messagebox.showinfo("ERROR",
                                         "You must select an expense type!")
             raise
+    
+    def SubmitFuncBind(self, event):
+        """ Used to allow 'Entry' widgets to bind to the SubmitFunc. Binded
+        widgets require that the function they are binded to have an 'event'
+        argument.
+        """
+        self.SubmitFunc()
 
     def newPP(self):
         """ Creates a new GUI window that prompts the user for the new
