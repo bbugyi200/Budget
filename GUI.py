@@ -5,6 +5,7 @@ import tkinter.messagebox
 import bdata
 import bdates
 import payperiod
+from bdata import NoData
 
 
 class B_GUI_Setup:
@@ -16,8 +17,14 @@ class B_GUI_Setup:
 
     def __init__(self, master):
         """ Initializes the GUI """
-        # PP is a pay period object
-        self.PP = bdata.GetPayPeriod()
+        try:
+            self.PP = bdata.GetPayPeriod()
+
+        # If the 'data/' folder is empty, a default PayPeriod is created
+        # and subsequently the 'FirstUse()' function is later called.
+        except NoData:
+            self.PP = payperiod.PayPeriod(0, 'First Pay Period')
+
 
         self._createMenu(master)
 
@@ -52,6 +59,11 @@ class B_GUI_Setup:
         # frame so the inner frame can be deleted as needed without affecting
         # the outer frame.
         self._showExpenses(self.OuterEFrame)
+
+        if self.PP.StartDate=='First Pay Period':
+            self.FirstUse()
+
+        master.mainloop()
 
     def _createMenu(self, master):
         """ Creates dropdown menus on the top of the window """
@@ -139,8 +151,7 @@ class B_GUI_Setup:
 
     def _createSubmit(self, frame):
         """ Creates the Expense form Submit button """
-        SubmitButton = tk.Button(frame, text='Submit')
-        SubmitButton.bind('<Button-1>', self.SubmitFunc)
+        SubmitButton = tk.Button(frame, text='Submit', command=self.SubmitFunc)
         SubmitButton.pack()
 
     def _showExpenses(self, outer_frame):
@@ -173,8 +184,8 @@ class B_GUI_Setup:
                                 variable=self.expense_checkboxes[i])
             Lab_Expense.pack(side='top')
 
-        deleteButton = tk.Button(self.ExpenseFrame, text="Delete Selected")
-        deleteButton.bind('<Button-1>', self.DeleteSelected)
+        deleteButton = tk.Button(self.ExpenseFrame, text="Delete Selected",
+                command=self.DeleteSelected)
         deleteButton.pack(side='bottom')
 
 
@@ -197,7 +208,7 @@ class BudgetGUI(B_GUI_Setup):
     Contains all of the "dynamic" functionality of the GUI.
     """
 
-    def SubmitFunc(self, event):
+    def SubmitFunc(self):
         """ This function is called if the Expense form's 'Submit' button
         is pressed.
         """
@@ -221,6 +232,7 @@ class BudgetGUI(B_GUI_Setup):
         """ Creates a new GUI window that prompts the user for the new
         pay period's information.
         """
+
         self.NPP_root = tk.Tk()
 
         topFrame = tk.Frame(self.NPP_root)
@@ -258,13 +270,12 @@ class BudgetGUI(B_GUI_Setup):
         bottomFrame = tk.Frame(self.NPP_root)
         bottomFrame.grid(row=2)
 
-        submit_button = tk.Button(bottomFrame, text='Submit')
-        submit_button.bind('<Button-1>', self._SubmitNewPP)
+        submit_button = tk.Button(bottomFrame, text='Submit', command=self._SubmitNewPP)
         submit_button.pack()
 
         self.NPP_root.mainloop()
 
-    def _SubmitNewPP(self, event):
+    def _SubmitNewPP(self):
         """ This function is called when the user submits the NewPP 
         information.
         """
@@ -280,7 +291,9 @@ class BudgetGUI(B_GUI_Setup):
 
         bdata.SavePP(NEWPP)
         self.PP = NEWPP
+
         self.refresh_screen()
+
         self.NPP_root.destroy()
 
     def refresh_screen(self):
@@ -290,7 +303,7 @@ class BudgetGUI(B_GUI_Setup):
         self.Lab_remaining_text.set('Remaining: ' + '{0:.2f}'.format(float(self.PP.remaining)))
         self._showExpenses(self.OuterEFrame)
 
-    def DeleteSelected(self, event):
+    def DeleteSelected(self):
         """ This function is called when the user presses the
         Expense form's 'Delete Selected' button.
         """
@@ -302,11 +315,19 @@ class BudgetGUI(B_GUI_Setup):
         self.refresh_screen()
         bdata.SavePP(self.PP)
 
+    def FirstUse(self):
+        """ This function welcomes a new user to the program and then prompts
+        him to setup his first PayPeriod.
+        """
+        tkinter.messagebox.showinfo("WELCOME!",
+                "Welcome to the Budget Program!" 
+                "\n\nLet's setup your first pay period!")
+        self.newPP()
+
+
 
 
 if __name__ == '__main__':
     root = tk.Tk()
 
     myGUI = BudgetGUI(root)
-
-    root.mainloop()

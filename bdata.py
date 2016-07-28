@@ -7,6 +7,8 @@ import pickle
 import payperiod
 import bdates
 
+""" This exception is raised when no files are found in the 'data/' folder """
+class NoData(Exception): pass
 
 def GetPayPeriod(date=None):
     """ Used to return a payperiod object loaded with the pickle module
@@ -23,12 +25,9 @@ def GetPayPeriod(date=None):
         with open('data/' + filename, 'rb') as F:
             PP = pickle.load(F)
 
-    # If an exception is raised, create a default PayPeriod
-    # object and save it to a file.
-    except Exception as e:
-        print(str(e))
-        PP = payperiod.PayPeriod(1036.03, bdates.getLatestPP())
-        SavePP(PP)
+    except IndexError as e:
+        raise NoData
+
 
     return PP
 
