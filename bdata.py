@@ -23,7 +23,7 @@ def GetPayPeriod(date=None):
         with open('data/' + filename, 'rb') as F:
             PP = pickle.load(F)
 
-    # If the PayPeriod object could not be found, create a default PayPeriod
+    # If an exception is raised, create a default PayPeriod
     # object and save it to a file.
     except Exception as e:
         print(str(e))

@@ -109,6 +109,9 @@ class B_GUI_Setup:
         self.Lab_remaining.grid(row=1)
 
     def _createExpenseForm(self, frame):
+        """ Creates the form that the user uses to input a new expense into
+        the database.
+        """
         OPTIONS = ['Food', 'Entertainment', 'Monthly Bills', 'Fuel', 'Other']
 
         self.expense_choice = tk.StringVar(frame)
@@ -126,6 +129,8 @@ class B_GUI_Setup:
         self.ValueEntry = tk.Entry(frame)
         self.ValueEntry.bind('<Return>', self.SubmitFunc)
         self.ValueEntry.grid(row=0, column=2)
+
+        Lab_Notes = tk.Label(frame, text='Notes: ')
         Lab_Notes.grid(row=1, column=1)
 
         self.NotesEntry = tk.Entry(frame)
@@ -153,7 +158,7 @@ class B_GUI_Setup:
         Exp_Attrs = self.PP.expenses.get()
 
         # Debugging Assistance
-        assert False, print(Exp_Attrs)
+        assert True, print(Exp_Attrs)
 
         self.expense_checkboxes = []
 
