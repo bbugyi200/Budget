@@ -133,9 +133,28 @@ class B_GUI_Setup:
         self.expense_choice = tk.StringVar(frame)
 
         # Setting the default value
-        self.expense_choice.set('Expense')
+        self.expense_choice.set('Expense Type')
 
         ExpenseOptions = tk.OptionMenu(frame, self.expense_choice, *OPTIONS)
+
+
+        def DropdownConfigs():
+            """ Sets all dropdown configurations """
+
+            arrow = tk.PhotoImage(file='img/arrow.gif')
+
+            # Config options for the dropdown expense box
+            ExpenseOptions.config(indicatoron=0, activebackground="GREY", activeforeground="BLACK",
+                    compound='right', image=arrow)
+
+            # Needed or the image will not appear
+            ExpenseOptions.image=arrow
+
+            # Config options for the menu items in the dropdown expense box
+            ExpenseOptions['menu'].config(activebackground="GREY", activeforeground="BLACK")
+
+        DropdownConfigs()
+
         ExpenseOptions.grid(row=0)
 
         # Amount Label
