@@ -192,6 +192,9 @@ class B_GUI_Setup:
     def SubmitFunc(self):
         assert False, "The SubmitFunc function must be overloaded!"
 
+    def SubmitFuncBind(self):
+        assert False, "The SubmitFuncBind function must be overloaded!"
+
     def newPP(self):
         assert False, "The newPP function must be overloaded!"
 
@@ -200,6 +203,9 @@ class B_GUI_Setup:
 
     def DeleteSelected(self):
         assert False, "The DeleteSelected function must be overloaded!"
+
+    def FirstUse(self):
+        assert False, "The FirstUse function must be overloaded!"
 
 
 class BudgetGUI(B_GUI_Setup):
