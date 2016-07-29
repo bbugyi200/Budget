@@ -25,6 +25,8 @@ def GetPayPeriod(date=None):
         with open('data/' + filename, 'rb') as F:
             PP = pickle.load(F)
 
+    # IndexError will be raised if the 'dates' list in 'bdates.py' is empty.
+    # Caused by 'dates[-1].month'.
     except IndexError as e:
         raise NoData
 
