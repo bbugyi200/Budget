@@ -189,6 +189,12 @@ class B_GUI_Setup:
         deleteButton.pack(side='bottom')
 
 
+
+    ########################
+    #   Abstract Methods   #
+    ########################
+
+
     def SubmitFunc(self):
         assert False, "The SubmitFunc function must be overloaded!"
 
