@@ -2,6 +2,9 @@
 X Review and comment GUI.py
 X Remove personal data from Github and figure out how to "initialize" data at start (perhaps a welcome message?)
 * Cleanup GUI appearance
+    > Make dropbox functionality more evident
+    > The 'Submit' button should stay in place when expenses are added
+    > The expenses should be in a seperate scrollbar box
 
 ----- Additional Features ------
 * Matplotlib pie chart statistics
