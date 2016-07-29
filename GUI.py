@@ -1,4 +1,8 @@
-""" This is a Graphical Budget Program  """
+""" GUI.py
+
+All classes and functions that are related to the tkinter GUI should be
+stored in this module.
+"""
 
 import tkinter as tk
 import tkinter.messagebox

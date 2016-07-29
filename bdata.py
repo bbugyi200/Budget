@@ -1,7 +1,8 @@
 """ bdata.py
 
 All functions that relate directly to the user data should be stored in
-this module. """
+this module.
+"""
 
 import pickle
 import payperiod
