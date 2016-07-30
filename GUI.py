@@ -127,6 +127,9 @@ class B_GUI_Setup:
         """
         OPTIONS = ['Food', 'Entertainment', 'Monthly Bills', 'Fuel', 'Other']
 
+        frame = tk.Frame(frame)
+        frame.grid(row=0)
+
         self.expense_choice = tk.StringVar(frame)
 
         # Setting the default value
@@ -171,6 +174,18 @@ class B_GUI_Setup:
 
     def _createSubmit(self, frame):
         """ Creates the Expense form Submit button """
+        fill_row_frame = tk.Frame(frame, height=15)
+        fill_row_frame.grid(row=1)
+
+        submit_container = tk.Frame(frame)
+        submit_container.grid(row=2)
+
+        fill_col_frame = tk.Frame(submit_container, width=175)
+        fill_col_frame.grid(row=0)
+
+        frame = tk.Frame(submit_container)
+        frame.grid(row=0, column=1)
+
         SubmitButton = tk.Button(frame, text='Submit', command=self.SubmitFunc)
         SubmitButton.grid(row=2, column=2)
 

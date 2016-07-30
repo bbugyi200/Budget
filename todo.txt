@@ -4,6 +4,7 @@ X Remove personal data from Github and figure out how to "initialize" data at st
 * Cleanup GUI appearance
     x Make dropdown functionality more evident
     > The 'Submit' button should stay in place when expenses are added
+        @ Add comments to your changes and cleanup unnecessary changes
     > The expenses should be in a seperate scrollbar box
 
 ----- Additional Features ------
