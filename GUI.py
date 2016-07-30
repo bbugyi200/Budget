@@ -50,11 +50,8 @@ class B_GUI_Setup:
         # frame3 is used for the Expense form
         self._createExpenseForm(self.frame3)
 
-        self.SubmitFrame = tk.Frame(master)
-        self.SubmitFrame.grid(row=2, column=2)
-
         # SubmitFrame is used for the 'Submit' button of the Expense form
-        self._createSubmit(self.SubmitFrame)
+        self._createSubmit(self.frame3)
 
         self.OuterEFrame = tk.Frame(master)
         self.OuterEFrame.grid(row=1, column=1)
@@ -175,7 +172,7 @@ class B_GUI_Setup:
     def _createSubmit(self, frame):
         """ Creates the Expense form Submit button """
         SubmitButton = tk.Button(frame, text='Submit', command=self.SubmitFunc)
-        SubmitButton.pack()
+        SubmitButton.grid(row=2, column=2)
 
     def _showExpenses(self, outer_frame):
         """ Displays all of this pay period's expenses. """
@@ -257,7 +254,7 @@ class BudgetGUI(B_GUI_Setup):
             self._createIR(self.frame2)
             self._showExpenses(self.OuterEFrame)
             bdata.SavePP(self.PP)
-        except TypeError:
+        except AttributeError:
             tkinter.messagebox.showinfo("ERROR",
                                         "You must select an expense type!")
             raise
