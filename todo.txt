@@ -4,6 +4,7 @@ X Remove personal data from Github and figure out how to "initialize" data at st
 * Cleanup GUI appearance
     > Make dropbox functionality more evident
     > The 'Submit' button should stay in place when expenses are added
+    > Add space between expenses and 'Delete Selected' button
     > The expenses should be in a seperate scrollbar box
 
 ----- Additional Features ------
