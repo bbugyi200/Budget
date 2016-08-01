@@ -50,8 +50,8 @@ class B_GUI_Setup:
         # frame3 is used for the Expense form
         self._createExpenseForm(self.frame3)
 
-        # frame3 is used for Submit button
-        # Spacing is added by creating multiple inner frames within frame3
+        # frame3 is used for Submit button.
+        # Spacing is added by creating multiple inner frames within frame3.
         self._createSubmit(self.frame3)
 
         self.OuterEFrame = tk.Frame(master)
@@ -189,7 +189,7 @@ class B_GUI_Setup:
         submit_container.grid(row=2)
 
         # fill_col is used to create horizontal space between the submit
-        # button and the expense form.
+        # button and the expense list.
         fill_col_frame = tk.Frame(submit_container, width=175)
         fill_col_frame.grid(row=0)
 
