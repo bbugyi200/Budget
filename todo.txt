@@ -3,10 +3,15 @@ X Review and comment GUI.py
 X Remove personal data from Github and figure out how to "initialize" data at start (perhaps a welcome message?)
 * Cleanup GUI appearance
     x Make dropdown functionality more evident
-    > The 'Submit' button should stay in place when expenses are added
-        @ Add comments to your changes and cleanup unnecessary changes
+    x The 'Submit' button should stay in place when expenses are added
     > The expenses should be in a seperate scrollbar box
+        x Convert listbox into Treeview object
+        @ Reevaluate the 'Delete Selected' button
+        @ Add comments to all changes
+    > Seperate each section of the GUI into labeled boxes. This will provide seperation. 
+    > Set explicit size of main frame
 
 ----- Additional Features ------
 * Matplotlib pie chart statistics
 * Planned budget goals 
+* Change base class so that it inherits from tk.Frame

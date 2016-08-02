@@ -5,6 +5,7 @@ stored in this module.
 """
 
 import tkinter as tk
+import tkinter.ttk as ttk
 import tkinter.messagebox
 import bdata
 import bdates
@@ -216,22 +217,24 @@ class B_GUI_Setup:
         # Debugging Assistance
         assert True, print(Exp_Attrs)
 
-        self.expense_checkboxes = []
+        scrollbar = tk.Scrollbar(self.ExpenseFrame)
+        scrollbar.pack(side='right', fill='y')
+
+        dataCols = ['Expense Type', 'Cost', 'Notes']
+
+        tree = ttk.Treeview(self.ExpenseFrame, columns=dataCols, show='headings')
+
+        for c in dataCols:
+            tree.heading(c, text=c)
 
         # The expense_checkboxes list is used to store the status of an
         # arbitrary amount of checkboxes.
-        for i, Exp in enumerate(Exp_Attrs):
-            self.expense_checkboxes.append(tk.IntVar())
+        for item in Exp_Attrs:
+            tree.insert('', 'end', values=item)
 
-            labelText = ' - '.join(Exp)
-            Lab_Expense = tk.Checkbutton(self.ExpenseFrame, text=labelText,
-                                font='Helvetica 10',
-                                variable=self.expense_checkboxes[i])
-            Lab_Expense.pack(side='top')
-
-        deleteButton = tk.Button(self.ExpenseFrame, text="Delete Selected",
-                command=self.DeleteSelected)
-        deleteButton.pack(side='bottom')
+        tree['yscroll'] = scrollbar.set
+        tree.pack(side='left', fill='both')
+        scrollbar.config(command=tree.yview)
 
 
     ########################
