@@ -236,8 +236,7 @@ class B_GUI_Setup:
         for c in dataCols:
             self.tree.heading(c, text=c)
 
-        # The expense_checkboxes list is used to store the status of an
-        # arbitrary amount of checkboxes.
+        # Inserts each expense into the Treeview object
         for item in Exp_Attrs:
             self.tree.insert('', 'end', values=item)
 
