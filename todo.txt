@@ -8,6 +8,9 @@ X Remove personal data from Github and figure out how to "initialize" data at st
         x Convert listbox into Treeview object
         x Reevaluate the 'Delete Selected' button
         x Add comments to all changes
+    > Cleanup Expense Form
+        @ Put 'Expense Type' option on top of other options
+        @ Add horizontal spacing
     > Seperate each section of the GUI into labeled boxes. This will provide seperation. 
     > Set explicit size of main frame
 

@@ -135,7 +135,7 @@ class B_GUI_Setup:
         self.expense_choice = tk.StringVar(frame)
 
         # Setting the default value
-        self.expense_choice.set('Expense Type')
+        self.expense_choice.set('Food')
 
         ExpenseOptions = tk.OptionMenu(frame, self.expense_choice, *OPTIONS)
 
@@ -157,22 +157,33 @@ class B_GUI_Setup:
 
         DropdownConfigs()
 
-        ExpenseOptions.grid(row=0)
+        # Dropdown width and expense width, respectively 
+        dwidth = 100
+        ewidth = 18
+
+        Lab_Expense_Type = tk.Label(frame, text='Expense Type: ')
+        Lab_Expense_Type.grid(row=0, column=0)
+        ExpenseOptions.grid(row=0, column=1)
 
         # Amount Label
         Lab_Amount = tk.Label(frame, text='Amount: ')
-        Lab_Amount.grid(row=0, column=1)
+        Lab_Amount.grid(row=1, column=0)
 
         self.ValueEntry = tk.Entry(frame)
         self.ValueEntry.bind('<Return>', self.SubmitFuncBind)
-        self.ValueEntry.grid(row=0, column=2)
+        self.ValueEntry.grid(row=1, column=1)
 
         Lab_Notes = tk.Label(frame, text='Notes: ')
-        Lab_Notes.grid(row=1, column=1)
+        Lab_Notes.grid(row=2, column=0)
 
         self.NotesEntry = tk.Entry(frame)
         self.NotesEntry.bind('<Return>', self.SubmitFuncBind)
-        self.NotesEntry.grid(row=1, column=2)
+        self.NotesEntry.grid(row=2, column=1)
+
+        # Set widths of all entrys and dropdowns
+        ExpenseOptions.config(width=dwidth)
+        self.ValueEntry.config(width=ewidth)
+        self.NotesEntry.config(width=ewidth)
 
     def _createSubmit(self, frame):
         """ Creates the Expense form Submit button """
@@ -191,7 +202,7 @@ class B_GUI_Setup:
 
         # fill_col is used to create horizontal space between the submit
         # button and the expense list.
-        fill_col_frame = tk.Frame(submit_container, width=175)
+        fill_col_frame = tk.Frame(submit_container, width=100)
         fill_col_frame.grid(row=0)
 
         frame = tk.Frame(submit_container)
