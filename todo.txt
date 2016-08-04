@@ -4,10 +4,10 @@ X Remove personal data from Github and figure out how to "initialize" data at st
 * Cleanup GUI appearance
     x Make dropdown functionality more evident
     x The 'Submit' button should stay in place when expenses are added
-    > The expenses should be in a seperate scrollbar box
+    x The expenses should be in a seperate scrollbar box
         x Convert listbox into Treeview object
-        @ Reevaluate the 'Delete Selected' button
-        @ Add comments to all changes
+        x Reevaluate the 'Delete Selected' button
+        x Add comments to all changes
     > Seperate each section of the GUI into labeled boxes. This will provide seperation. 
     > Set explicit size of main frame
 
