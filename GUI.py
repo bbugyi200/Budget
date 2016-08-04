@@ -236,6 +236,21 @@ class B_GUI_Setup:
         tree.pack(side='left', fill='both')
         scrollbar.config(command=tree.yview)
 
+        def Create_Delete_Button():
+            outer_delete_frame = tk.Frame(outer_frame)
+            outer_delete_frame.pack(side='bottom')
+
+            delete_buffer = tk.Frame(outer_delete_frame, height=25)
+            delete_buffer.pack(side='top')
+
+            inner_delete_frame = tk.Frame(outer_delete_frame)
+            inner_delete_frame.pack()
+
+            delete_button = tk.Button(inner_delete_frame, text='Delete Selected', command=lambda: print("Deleting Stuff"))
+            delete_button.pack()
+
+        Create_Delete_Button()
+
 
     ########################
     #   Abstract Methods   #
@@ -373,11 +388,6 @@ class BudgetGUI(B_GUI_Setup):
         """ This function is called when the user presses the
         Expense form's 'Delete Selected' button.
         """
-        deleted_count = 0
-        for i, checkbox in enumerate(self.expense_checkboxes):
-            if checkbox.get():
-                self.PP.remove_expense(i - deleted_count)
-                deleted_count += 1
         self.refresh_screen()
         bdata.SavePP(self.PP)
 
