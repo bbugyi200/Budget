@@ -209,6 +209,8 @@ class B_GUI_Setup:
         except AttributeError:
             pass
 
+        # inner_outer is created so the delete button frames can be seperated
+        # visually from the expense list frame
         self.inner_outer = tk.Frame(outer_frame)
         self.inner_outer.pack()
 
@@ -220,13 +222,17 @@ class B_GUI_Setup:
         # Debugging Assistance
         assert True, print(Exp_Attrs)
 
+        # Scrollbar for expense list
         scrollbar = tk.Scrollbar(self.ExpenseFrame)
         scrollbar.pack(side='right', fill='y')
 
+        # Columns for expense list
         dataCols = ['Expense Type', 'Cost', 'Notes']
 
         self.tree = ttk.Treeview(self.ExpenseFrame, columns=dataCols, show='headings')
 
+        # Sets the headings in the expense list.
+        # Without this loop, the headings will not actually show.
         for c in dataCols:
             self.tree.heading(c, text=c)
 
@@ -235,21 +241,33 @@ class B_GUI_Setup:
         for item in Exp_Attrs:
             self.tree.insert('', 'end', values=item)
 
+        # 'yscroll' option must be set to scrollbar set object
         self.tree['yscroll'] = scrollbar.set
+
         self.tree.pack(side='left', fill='both')
+
+        # Associates scrollbar with the Treeview object
         scrollbar.config(command=self.tree.yview)
 
         def Create_Delete_Button():
+            """ Creates a delete button and adds extra vertical space
+            between the button and the expense list
+            """
+
+            # Outer frame that hold delete button and buffer space
             outer_delete_frame = tk.Frame(self.inner_outer)
             outer_delete_frame.pack(side='bottom')
 
+            # Buffer space between the button and the expense list
             delete_buffer = tk.Frame(outer_delete_frame, height=25)
             delete_buffer.pack(side='top')
 
+            # This frame will hold the actual delete button
             inner_delete_frame = tk.Frame(outer_delete_frame)
             inner_delete_frame.pack()
 
-            delete_button = tk.Button(inner_delete_frame, text='Delete Selected', command=self.DeleteSelected)
+            delete_button = tk.Button(inner_delete_frame, text='Delete Selected',
+                    command=self.DeleteSelected)
             delete_button.pack()
 
         Create_Delete_Button()
@@ -392,10 +410,12 @@ class BudgetGUI(B_GUI_Setup):
         Expense form's 'Delete Selected' button.
         """
         index = 0
+        # Sets index to the offset of the selected item in the expense list
         for i, item in enumerate(self.tree.get_children()):
             if item == self.tree.focus():
                 index = i
 
+        # Deletes the expense at the specified index
         self.PP.remove_expense(index)
         self.refresh_screen()
         bdata.SavePP(self.PP)
