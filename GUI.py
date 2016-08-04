@@ -205,11 +205,14 @@ class B_GUI_Setup:
 
         # If the ExpenseFrame exists, it will be destroyed
         try:
-            self.ExpenseFrame.destroy()
+            self.inner_outer.destroy()
         except AttributeError:
             pass
 
-        self.ExpenseFrame = tk.Frame(outer_frame)
+        self.inner_outer = tk.Frame(outer_frame)
+        self.inner_outer.pack()
+
+        self.ExpenseFrame = tk.Frame(self.inner_outer)
         self.ExpenseFrame.pack(fill='both')
 
         Exp_Attrs = self.PP.expenses.get()
@@ -222,22 +225,22 @@ class B_GUI_Setup:
 
         dataCols = ['Expense Type', 'Cost', 'Notes']
 
-        tree = ttk.Treeview(self.ExpenseFrame, columns=dataCols, show='headings')
+        self.tree = ttk.Treeview(self.ExpenseFrame, columns=dataCols, show='headings')
 
         for c in dataCols:
-            tree.heading(c, text=c)
+            self.tree.heading(c, text=c)
 
         # The expense_checkboxes list is used to store the status of an
         # arbitrary amount of checkboxes.
         for item in Exp_Attrs:
-            tree.insert('', 'end', values=item)
+            self.tree.insert('', 'end', values=item)
 
-        tree['yscroll'] = scrollbar.set
-        tree.pack(side='left', fill='both')
-        scrollbar.config(command=tree.yview)
+        self.tree['yscroll'] = scrollbar.set
+        self.tree.pack(side='left', fill='both')
+        scrollbar.config(command=self.tree.yview)
 
         def Create_Delete_Button():
-            outer_delete_frame = tk.Frame(outer_frame)
+            outer_delete_frame = tk.Frame(self.inner_outer)
             outer_delete_frame.pack(side='bottom')
 
             delete_buffer = tk.Frame(outer_delete_frame, height=25)
@@ -246,7 +249,7 @@ class B_GUI_Setup:
             inner_delete_frame = tk.Frame(outer_delete_frame)
             inner_delete_frame.pack()
 
-            delete_button = tk.Button(inner_delete_frame, text='Delete Selected', command=lambda: print("Deleting Stuff"))
+            delete_button = tk.Button(inner_delete_frame, text='Delete Selected', command=self.DeleteSelected)
             delete_button.pack()
 
         Create_Delete_Button()
@@ -388,6 +391,12 @@ class BudgetGUI(B_GUI_Setup):
         """ This function is called when the user presses the
         Expense form's 'Delete Selected' button.
         """
+        index = 0
+        for i, item in enumerate(self.tree.get_children()):
+            if item == self.tree.focus():
+                index = i
+
+        self.PP.remove_expense(index)
         self.refresh_screen()
         bdata.SavePP(self.PP)
 
