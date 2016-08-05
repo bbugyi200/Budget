@@ -17,5 +17,5 @@ X Cleanup GUI appearance
 
 ----- Additional Features ------
 * Matplotlib pie chart statistics
-* Planned budget goals 
+* Allow user to set planned budget goals 
 * Change base class so that it inherits from tk.Frame
