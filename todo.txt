@@ -15,7 +15,16 @@ X Cleanup GUI appearance
 
 * Add title to expense form and budget data
 
------ Additional Features ------
-* Matplotlib pie chart statistics
+* Replace main title with 'Expenses' title 
+
+* Change window title to reflect payperiod date after every change in payperiod
+
+* Show the payperiod date in the left hand column
+
 * Allow user to set planned budget goals 
+
 * Change base class so that it inherits from tk.Frame
+
+
+----- Someday/Maybe Features ------
+* Matplotlib pie chart statistics
