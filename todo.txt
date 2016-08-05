@@ -25,6 +25,8 @@ X Cleanup GUI appearance
 
 * Change base class so that it inherits from tk.Frame
 
+* Package into first version release (i.e. Create frozen binary)
+
 
 ----- Someday/Maybe Features ------
 * Matplotlib pie chart statistics
