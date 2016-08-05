@@ -1,7 +1,7 @@
 ----- Todo List -----
 X Review and comment GUI.py
 X Remove personal data from Github and figure out how to "initialize" data at start (perhaps a welcome message?)
-* Cleanup GUI appearance
+X Cleanup GUI appearance
     x Make dropdown functionality more evident
     x The 'Submit' button should stay in place when expenses are added
     x The expenses should be in a seperate scrollbar box
@@ -12,8 +12,8 @@ X Remove personal data from Github and figure out how to "initialize" data at st
         x Put 'Expense Type' option on top of other options
         x Add horizontal spacing
         x Comment changes
-    > Set explicit size of main frame
-    > Seperate each section of the GUI into labeled boxes. This will provide seperation. 
+
+* Add title to expense form and budget data
 
 ----- Additional Features ------
 * Matplotlib pie chart statistics
