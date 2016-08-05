@@ -12,6 +12,9 @@ import bdates
 import payperiod
 from bdata import NoData
 
+# Default width and height for buffer between frames
+width = 25
+height = 25
 
 class B_GUI_Setup:
     """ B_GUI_Setup Class
@@ -21,7 +24,6 @@ class B_GUI_Setup:
     """
 
     def __init__(self, master):
-        """ Initializes the GUI """
         try:
             self.PP = bdata.GetPayPeriod()
 
@@ -30,6 +32,7 @@ class B_GUI_Setup:
         except NoData:
             self.PP = payperiod.PayPeriod(0, 'First Pay Period')
 
+        master.title('Paycheck Budget Program')
 
         self._createMenu(master)
 
@@ -40,11 +43,20 @@ class B_GUI_Setup:
         # top is used for the window title
         self._createTitle(self.top)
 
+        
         # frame1 is the leftmost frame
         self.frame1 = tk.Frame(master, width=700, height=200)
         self.frame1.grid(row=1, column=0)
 
-        self.calculate_data(self.frame1)
+        self.frame1_Lbuffer = tk.Frame(self.frame1, width=width)
+        self.frame1_Lbuffer.grid()
+        self.frame1_Rbuffer = tk.Frame(self.frame1, width=width)
+        self.frame1_Rbuffer.grid(column=100)
+
+
+        self.data_frame = tk.Frame(self.frame1)
+        self.data_frame.grid(row=0, column=1)
+        self.calculate_data(self.data_frame)
 
         self.frame2 = tk.Frame(master)
         self.frame2.grid(row=1, column=1)
@@ -54,21 +66,27 @@ class B_GUI_Setup:
         self.frame3 = tk.Frame(master, width=200, height=200)
         self.frame3.grid(row=1, column=2)
 
-        # fframe3 allows buffer room between expense list and form
-        self.fframe3 = tk.Frame(self.frame3)
-        self.fframe3.grid(row=0)
+        # Left buffer for fframe3
+        self.frame3_Lbuffer = tk.Frame(self.frame3, width=width)
+        self.frame3_Lbuffer.grid()
 
-        # frame3_buffer provides space between frames
-        self.frame3_buffer = tk.Frame(self.fframe3, width=25)
-        self.frame3_buffer.grid(row=0)
+        # Right buffer for fframe3
+        self.frame3_Rbuffer = tk.Frame(self.frame3, width=width)
+        self.frame3_Rbuffer.grid(column=100)
 
         # frame3 is used for the Expense form
-        self._createExpenseForm(self.fframe3)
+        self.form_frame = tk.Frame(self.frame3)
+        self.form_frame.grid(row=0, column=1)
+        self._createExpenseForm(self.form_frame)
 
         # frame3 is used for Submit button.
         # Spacing is added by creating multiple inner frames within frame3.
-        self._createSubmit(self.fframe3)
+        self.submit_frame = tk.Frame(self.frame3)
+        self.submit_frame.grid(row=1, column=1)
+        self._createSubmit(self.submit_frame)
 
+        # Recognizes that there is no payperiod data and asks user to setup
+        # first payperiod.
         if self.PP.StartDate=='First Pay Period':
             self.FirstUse()
 
@@ -104,6 +122,9 @@ class B_GUI_Setup:
         """ Creates the title of the window, which is just the pay period
         date.
         """
+        title_Bbuffer = tk.Frame(frame, height=10)
+        title_Bbuffer.pack(side='bottom')
+
         self.Lab_PayPeriod_Text = tk.StringVar()
         self.Lab_PayPeriod_Text.set(self.PP.StartDate)
         self.Lab_PayPeriod = tk.Label(frame,
@@ -111,7 +132,7 @@ class B_GUI_Setup:
                 width=50,
                 font='Verdana 15 underline')
 
-        self.Lab_PayPeriod.grid(row=2, column=3)
+        self.Lab_PayPeriod.pack()
 
     def calculate_data(self, frame):
         """ Used to create the 'initial' and 'remaining' fields of the given
@@ -194,25 +215,25 @@ class B_GUI_Setup:
     def _createSubmit(self, frame):
         """ Creates the Expense form Submit button """
 
-        # fill_row_frame is used to create vertical space between the submit
+        # submit_Tbuffer is used to create vertical space between the submit
         # button and the expense form.
-        fill_row_frame = tk.Frame(frame, height=15)
-        fill_row_frame.grid(row=1, column=1)
+        submit_Tbuffer = tk.Frame(frame, height=15)
+        submit_Tbuffer.grid(row=0, column=1)
+
+        # submit_Lbuffer is used to create horizontal space between the submit
+        # button and the expense list.
+        submit_Lbuffer = tk.Frame(frame, width=100)
+        submit_Lbuffer.grid(row=1, column=0)
 
         # In order to have complete control of the Submit button's horizontal
         # positioning, the columns of frame3 must be seperate from the columns
         # in the Submit button's encapsulating frame. The submit_container
         # fulfills this purpose.
         submit_container = tk.Frame(frame)
-        submit_container.grid(row=2, column=1)
-
-        # fill_col is used to create horizontal space between the submit
-        # button and the expense list.
-        fill_col_frame = tk.Frame(submit_container, width=100)
-        fill_col_frame.grid(row=0)
+        submit_container.grid(row=1, column=1)
 
         SubmitButton = tk.Button(submit_container, text='Submit', command=self.SubmitFunc)
-        SubmitButton.grid(row=2, column=2)
+        SubmitButton.grid()
 
     def _showExpenses(self, frame):
         """ Displays all of this pay period's expenses. """
@@ -272,14 +293,17 @@ class B_GUI_Setup:
             outer_delete_frame.pack(side='bottom')
 
             # Buffer space between the button and the expense list
-            delete_buffer = tk.Frame(outer_delete_frame, height=25)
-            delete_buffer.pack(side='top')
+            delete_Tbuffer = tk.Frame(outer_delete_frame, height=height)
+            delete_Tbuffer.pack(side='top')
+
+            delete_Bbuffer = tk.Frame(outer_delete_frame, height=height)
+            delete_Bbuffer.pack(side='bottom')
 
             # This frame will hold the actual delete button
-            inner_delete_frame = tk.Frame(outer_delete_frame)
-            inner_delete_frame.pack()
+            delete_frame = tk.Frame(outer_delete_frame)
+            delete_frame.pack()
 
-            delete_button = tk.Button(inner_delete_frame, text='Delete Selected',
+            delete_button = tk.Button(delete_frame, text='Delete Selected',
                     command=self.DeleteSelected)
             delete_button.pack()
 
