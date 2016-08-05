@@ -13,7 +13,9 @@ X Cleanup GUI appearance
         x Add horizontal spacing
         x Comment changes
 
-* Add title to expense form and budget data
+X Add title to expense form and budget data
+
+* Change font of 'delete' and 'submit' button so they stand out more
 
 * Replace main title with 'Expenses' title 
 

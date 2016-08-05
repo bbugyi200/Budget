@@ -138,17 +138,24 @@ class B_GUI_Setup:
         """ Used to create the 'initial' and 'remaining' fields of the given
         pay period.
         """
+        row=0
+
+        text = "Budget Data"
+        BudgetDataTitle = tk.Label(frame, text=text,
+                    font="Verdana 12 underline")
+        BudgetDataTitle.grid(row=row); row+=1
+
         self.Lab_initial_text = tk.StringVar()
         self.Lab_initial_text.set('Initial: ' + '{0:.2f}'.format(float(self.PP.initial)))
         self.Lab_remaining_text = tk.StringVar()
         self.Lab_remaining_text.set('Remaining: ' + '{0:.2f}'.format(float(self.PP.remaining)))
 
         self.Lab_initial = tk.Label(frame, textvariable=self.Lab_initial_text)
-        self.Lab_initial.grid(row=0)
+        self.Lab_initial.grid(row=row); row+=1
 
         self.Lab_remaining = tk.Label(frame,
                              textvariable=self.Lab_remaining_text)
-        self.Lab_remaining.grid(row=1)
+        self.Lab_remaining.grid(row=row); row+=1
 
     def _createExpenseForm(self, frame):
         """ Creates the form that the user uses to input a new expense into
@@ -158,6 +165,11 @@ class B_GUI_Setup:
 
         frame = tk.Frame(frame)
         frame.grid(row=0, column=1)
+
+        text = "New Expense"
+        ExpenseFormTitle = tk.Label(frame, text=text,
+                    font="Verdana 12 underline")
+        ExpenseFormTitle.grid(row=0, columnspan=2)
 
         self.expense_choice = tk.StringVar(frame)
 
@@ -189,23 +201,23 @@ class B_GUI_Setup:
         ewidth = 18
 
         Lab_Expense_Type = tk.Label(frame, text='Expense Type: ')
-        Lab_Expense_Type.grid(row=0, column=0)
-        ExpenseOptions.grid(row=0, column=1)
+        Lab_Expense_Type.grid(row=1, column=0)
+        ExpenseOptions.grid(row=1, column=1)
 
         # Amount Label
         Lab_Amount = tk.Label(frame, text='Amount: ')
-        Lab_Amount.grid(row=1, column=0)
+        Lab_Amount.grid(row=2, column=0)
 
         self.ValueEntry = tk.Entry(frame)
         self.ValueEntry.bind('<Return>', self.SubmitFuncBind)
-        self.ValueEntry.grid(row=1, column=1)
+        self.ValueEntry.grid(row=2, column=1)
 
         Lab_Notes = tk.Label(frame, text='Notes: ')
-        Lab_Notes.grid(row=2, column=0)
+        Lab_Notes.grid(row=3, column=0)
 
         self.NotesEntry = tk.Entry(frame)
         self.NotesEntry.bind('<Return>', self.SubmitFuncBind)
-        self.NotesEntry.grid(row=2, column=1)
+        self.NotesEntry.grid(row=3, column=1)
 
         # Set widths of all entrys and dropdowns
         ExpenseOptions.config(width=dwidth)
