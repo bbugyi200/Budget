@@ -33,35 +33,41 @@ class B_GUI_Setup:
 
         self._createMenu(master)
 
-        self.frame1 = tk.Frame(master, width=50, height=100)
-        self.frame1.grid(row=0, columnspan=5)
+        # Title frame holds title of the window
+        self.top = tk.Frame(master, width=50, height=100)
+        self.top.grid(row=0, columnspan=5)
 
-        # frame1 is used for the window title
-        self._createTitle(self.frame1)
+        # top is used for the window title
+        self._createTitle(self.top)
 
-        self.frame2 = tk.Frame(master, width=700, height=200)
-        self.frame2.grid(row=1, column=0)
+        # frame1 is the leftmost frame
+        self.frame1 = tk.Frame(master, width=700, height=200)
+        self.frame1.grid(row=1, column=0)
 
-        # frame2 is used for the initial and remaining amounts
-        self._createIR(self.frame2)
+        self.calculate_data(self.frame1)
 
-        self.frame3 = tk.Frame(master, width=200, height=100)
+        self.frame2 = tk.Frame(master)
+        self.frame2.grid(row=1, column=1)
+
+        self._showExpenses(self.frame2)
+
+        self.frame3 = tk.Frame(master, width=200, height=200)
         self.frame3.grid(row=1, column=2)
 
+        # fframe3 allows buffer room between expense list and form
+        self.fframe3 = tk.Frame(self.frame3)
+        self.fframe3.grid(row=0)
+
+        # frame3_buffer provides space between frames
+        self.frame3_buffer = tk.Frame(self.fframe3, width=25)
+        self.frame3_buffer.grid(row=0)
+
         # frame3 is used for the Expense form
-        self._createExpenseForm(self.frame3)
+        self._createExpenseForm(self.fframe3)
 
         # frame3 is used for Submit button.
         # Spacing is added by creating multiple inner frames within frame3.
-        self._createSubmit(self.frame3)
-
-        self.OuterEFrame = tk.Frame(master)
-        self.OuterEFrame.grid(row=1, column=1)
-
-        # The OuterEFrame is used to display the expenses and is an "outer"
-        # frame so the inner frame can be deleted as needed without affecting
-        # the outer frame.
-        self._showExpenses(self.OuterEFrame)
+        self._createSubmit(self.fframe3)
 
         if self.PP.StartDate=='First Pay Period':
             self.FirstUse()
@@ -107,7 +113,7 @@ class B_GUI_Setup:
 
         self.Lab_PayPeriod.grid(row=2, column=3)
 
-    def _createIR(self, frame):
+    def calculate_data(self, frame):
         """ Used to create the 'initial' and 'remaining' fields of the given
         pay period.
         """
@@ -130,7 +136,7 @@ class B_GUI_Setup:
         OPTIONS = ['Food', 'Entertainment', 'Monthly Bills', 'Fuel', 'Other']
 
         frame = tk.Frame(frame)
-        frame.grid(row=0)
+        frame.grid(row=0, column=1)
 
         self.expense_choice = tk.StringVar(frame)
 
@@ -191,41 +197,38 @@ class B_GUI_Setup:
         # fill_row_frame is used to create vertical space between the submit
         # button and the expense form.
         fill_row_frame = tk.Frame(frame, height=15)
-        fill_row_frame.grid(row=1)
+        fill_row_frame.grid(row=1, column=1)
 
         # In order to have complete control of the Submit button's horizontal
         # positioning, the columns of frame3 must be seperate from the columns
         # in the Submit button's encapsulating frame. The submit_container
         # fulfills this purpose.
         submit_container = tk.Frame(frame)
-        submit_container.grid(row=2)
+        submit_container.grid(row=2, column=1)
 
         # fill_col is used to create horizontal space between the submit
         # button and the expense list.
         fill_col_frame = tk.Frame(submit_container, width=100)
         fill_col_frame.grid(row=0)
 
-        frame = tk.Frame(submit_container)
-        frame.grid(row=0, column=1)
-
-        SubmitButton = tk.Button(frame, text='Submit', command=self.SubmitFunc)
+        SubmitButton = tk.Button(submit_container, text='Submit', command=self.SubmitFunc)
         SubmitButton.grid(row=2, column=2)
 
-    def _showExpenses(self, outer_frame):
+    def _showExpenses(self, frame):
         """ Displays all of this pay period's expenses. """
 
         # If the ExpenseFrame exists, it will be destroyed
         try:
-            self.inner_outer.destroy()
+            self.outer_expense_frame.destroy()
         except AttributeError:
             pass
 
-        # inner_outer is created so the delete button frames can be seperated
+        # outer_expense_frame is created so the delete button frames can be seperated
         # visually from the expense list frame
-        self.inner_outer = tk.Frame(outer_frame)
-        self.inner_outer.pack()
+        self.outer_expense_frame = tk.Frame(frame)
+        self.outer_expense_frame.pack()
 
-        self.ExpenseFrame = tk.Frame(self.inner_outer)
+        self.ExpenseFrame = tk.Frame(self.outer_expense_frame)
         self.ExpenseFrame.pack(fill='both')
 
         Exp_Attrs = self.PP.expenses.get()
@@ -265,7 +268,7 @@ class B_GUI_Setup:
             """
 
             # Outer frame that hold delete button and buffer space
-            outer_delete_frame = tk.Frame(self.inner_outer)
+            outer_delete_frame = tk.Frame(self.outer_expense_frame)
             outer_delete_frame.pack(side='bottom')
 
             # Buffer space between the button and the expense list
@@ -325,8 +328,8 @@ class BudgetGUI(B_GUI_Setup):
             self.ValueEntry.delete(0, 'end')
             self.NotesEntry.delete(0, 'end')
 
-            self._createIR(self.frame2)
-            self._showExpenses(self.OuterEFrame)
+            self.calculate_data(self.frame1)
+            self._showExpenses(self.frame2)
             bdata.SavePP(self.PP)
         except AttributeError:
             tkinter.messagebox.showinfo("ERROR",
@@ -413,7 +416,7 @@ class BudgetGUI(B_GUI_Setup):
         self.Lab_PayPeriod_Text.set(self.PP.StartDate)
         self.Lab_initial_text.set('Initial: ' + '{0:.2f}'.format(float(self.PP.initial)))
         self.Lab_remaining_text.set('Remaining: ' + '{0:.2f}'.format(float(self.PP.remaining)))
-        self._showExpenses(self.OuterEFrame)
+        self._showExpenses(self.frame2)
 
     def DeleteSelected(self):
         """ This function is called when the user presses the
@@ -438,8 +441,6 @@ class BudgetGUI(B_GUI_Setup):
                 "Welcome to the Budget Program!" 
                 "\n\nLet's setup your first pay period!")
         self.newPP()
-
-
 
 
 if __name__ == '__main__':
