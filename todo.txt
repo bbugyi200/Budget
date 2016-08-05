@@ -11,7 +11,7 @@ X Remove personal data from Github and figure out how to "initialize" data at st
     x Cleanup Expense Form
         x Put 'Expense Type' option on top of other options
         x Add horizontal spacing
-        @ Comment changes
+        x Comment changes
     > Seperate each section of the GUI into labeled boxes. This will provide seperation. 
     > Set explicit size of main frame
 
