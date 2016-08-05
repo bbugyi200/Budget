@@ -352,8 +352,6 @@ class BudgetGUI(B_GUI_Setup):
             self.ValueEntry.delete(0, 'end')
             self.NotesEntry.delete(0, 'end')
 
-            # self.calculate_data(self.frame1)
-            # self._showExpenses(self.frame2)
             self.refresh_screen()
             bdata.SavePP(self.PP)
         except AttributeError:
