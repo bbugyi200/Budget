@@ -447,23 +447,28 @@ class BudgetGUI(B_GUI_Setup):
         """ This function is called when the user presses the
         Expense form's 'Delete Selected' button.
         """
-        index = 0
-        # Sets index to the offset of the selected item in the expense list
-        for i, item in enumerate(self.tree.get_children()):
-            if item == self.tree.focus():
-                index = i
+        index = None
+        try:
+            # Sets index to the offset of the selected item in the expense list
+            for i, item in enumerate(self.tree.get_children()):
+                if item == self.tree.focus():
+                    index = i
 
-        # Deletes the expense at the specified index
-        self.PP.remove_expense(index)
-        self.refresh_screen()
-        bdata.SavePP(self.PP)
+            # Deletes the expense at the specified index
+            self.PP.remove_expense(index)
+            self.refresh_screen()
+            bdata.SavePP(self.PP)
+
+        # Does nothing if 'Delete Selected' button is clicked when no item is
+        # selected.
+        except TypeError: pass
 
     def FirstUse(self):
         """ This function welcomes a new user to the program and then prompts
         him to setup his first PayPeriod.
         """
         tkinter.messagebox.showinfo("WELCOME!",
-                "Welcome to the Budget Program!" 
+                "Welcome to the Budget Program!" + 
                 "\n\nLet's setup your first pay period!")
         self.newPP()
 
