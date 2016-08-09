@@ -4,7 +4,7 @@ After switching from Windows over to the Linux community I found that my favorit
 
 This project is my attempt at creating a platform independent budgeting program specifically designed to manage your money one pay-period at a time.
 
-I would gladly accept outside contributions to this project. If you would like to contribute please email me at bryan_bugyi@mymail.rcbc.edu.
+I would gladly accept outside contributions to this project. If you would like to contribute, please email me at bryan_bugyi@mymail.rcbc.edu.
 
 ## Running the Budget Program
 Currently this program can be run simply by running the GUI.py script, although this will likely be changed shortly. 
