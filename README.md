@@ -1,6 +1,6 @@
 # Budget GUI (built on Tkinter)
 
-After switching from Windows over to the Linux community I found that my favorite budgeting software no longer worked.
+After switching from Windows over to the Linux community, I found that my favorite budgeting software no longer worked.
 
 This project is my attempt at creating a platform independent budgeting program specifically designed to manage your money one pay-period at a time.
 
