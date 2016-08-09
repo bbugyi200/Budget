@@ -16,6 +16,20 @@ from bdata import NoData
 width = 25
 height = 25
 
+
+class Fonts:
+    """ This class holds methods that return font types for tkinter.
+    
+    An object of this class is meant to be embedded into the main GUI
+    class.
+    """
+    def __init__(self): pass
+        
+    def title(self, size='12'):
+        return 'Verdana ' + size + ' underline'
+
+
+
 class B_GUI_Setup:
     """ B_GUI_Setup Class
     
@@ -33,6 +47,9 @@ class B_GUI_Setup:
             self.PP = payperiod.PayPeriod(0, 'First Pay Period')
 
         master.title('Paycheck Budget Program')
+
+        # Embedded 'Fonts' object
+        self.fonts = Fonts()
 
         self._createMenu(master)
 
@@ -130,7 +147,7 @@ class B_GUI_Setup:
         self.Lab_PayPeriod = tk.Label(frame,
                 textvariable=self.Lab_PayPeriod_Text,
                 width=50,
-                font='Verdana 15 underline')
+                font=self.fonts.title(size='15'))
 
         self.Lab_PayPeriod.pack()
 
@@ -142,7 +159,7 @@ class B_GUI_Setup:
 
         text = "Budget Data"
         BudgetDataTitle = tk.Label(frame, text=text,
-                    font="Verdana 12 underline")
+                    font=self.fonts.title())
         BudgetDataTitle.grid(row=row); row+=1
 
         self.Lab_initial_text = tk.StringVar()
@@ -168,7 +185,7 @@ class B_GUI_Setup:
 
         text = "New Expense"
         ExpenseFormTitle = tk.Label(frame, text=text,
-                    font="Verdana 12 underline")
+                    font=self.fonts.title())
         ExpenseFormTitle.grid(row=0, columnspan=2)
 
         self.expense_choice = tk.StringVar(frame)
