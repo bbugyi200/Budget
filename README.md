@@ -7,6 +7,8 @@ This project is my attempt at creating a platform independent budgeting program 
 I would gladly accept outside contributions to this project. If you would like to contribute, please email me at bryan_bugyi@mymail.rcbc.edu.
 
 ## Running the Budget Program
+This program requires that you have Python3 installed on your machine.
+
 Currently this program can be run simply by running the GUI.py script, although this will likely be changed shortly. 
 
 ##Questions or Comments?
