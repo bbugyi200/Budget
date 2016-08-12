@@ -21,11 +21,15 @@ X Format 'Value' data so it displays with two decimal places and add $ sign
 
 X Change font of 'delete' and 'submit' button so they stand out more
 
+* Change 'mouseover' color scheme to match for buttons and dropdowns
+
 * Replace main title with 'Expenses' title 
 
 * Change window title to reflect payperiod date after every change in payperiod
 
 * Show the payperiod date in the left hand column
+
+* Allow user to specify where data will be stored
 
 * Allow user to set planned budget goals 
 
