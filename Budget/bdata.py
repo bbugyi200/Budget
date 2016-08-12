@@ -5,8 +5,8 @@ this module.
 """
 
 import pickle
-import payperiod
-import bdates
+from . import payperiod
+from . import bdates
 
 """ This exception is raised when no files are found in the 'data/' folder """
 class NoData(Exception): pass

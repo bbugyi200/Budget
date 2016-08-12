@@ -7,14 +7,15 @@ stored in this module.
 import tkinter as tk
 import tkinter.ttk as ttk
 import tkinter.messagebox
-import bdata
-import bdates
-import payperiod
-from bdata import NoData
+from .. import bdata
+from ..bdata import NoData
+from .. import bdates
+from .. import payperiod
 
 # Style imports
-import GUI.style as sty
-from GUI.style import width, height
+from . import style as sty
+from .style import width
+from .style import height
 
 
 class B_GUI_Setup:
