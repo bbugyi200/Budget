@@ -123,6 +123,10 @@ class B_GUI_Setup:
                                    font=fonts.title())
         BudgetDataTitle.grid(row=row); row += 1
 
+        # Bottom buffer space between title and the rest of the data
+        BTitle_bbuffer = tk.Frame(frame, height=5)
+        BTitle_bbuffer.grid(row=row); row += 1
+
         self.Lab_initial_text = tk.StringVar()
         self.Lab_initial_text.set('Initial: ' +
                                   '{0:.2f}'.format(float(self.PP.initial)))
@@ -146,10 +150,16 @@ class B_GUI_Setup:
         frame = tk.Frame(frame)
         frame.grid(row=0, column=1)
 
+        row = 0
+
         text = "New Expense"
         ExpenseFormTitle = tk.Label(frame, text=text,
                                     font=fonts.title())
-        ExpenseFormTitle.grid(row=0, columnspan=2)
+        ExpenseFormTitle.grid(row=row, columnspan=2); row += 1
+
+        # Bottom buffer space between expense form title and the actual form
+        ETitle_bbuffer = tk.Frame(frame, height=5)
+        ETitle_bbuffer.grid(row=row); row += 1
 
         self.expense_choice = tk.StringVar(frame)
 
@@ -182,23 +192,26 @@ class B_GUI_Setup:
         ewidth = 18
 
         Lab_Expense_Type = tk.Label(frame, text='Expense Type: ')
-        Lab_Expense_Type.grid(row=1, column=0)
-        ExpenseOptions.grid(row=1, column=1)
+        Lab_Expense_Type.grid(row=row, column=0)
+        ExpenseOptions.grid(row=row, column=1)
+        row += 1
 
         # Amount Label
         Lab_Amount = tk.Label(frame, text='Amount: ')
-        Lab_Amount.grid(row=2, column=0)
+        Lab_Amount.grid(row=row, column=0)
 
         self.ValueEntry = tk.Entry(frame)
         self.ValueEntry.bind('<Return>', self.SubmitFuncBind)
-        self.ValueEntry.grid(row=2, column=1)
+        self.ValueEntry.grid(row=row, column=1)
+        row += 1
 
         Lab_Notes = tk.Label(frame, text='Notes: ')
-        Lab_Notes.grid(row=3, column=0)
+        Lab_Notes.grid(row=row, column=0)
 
         self.NotesEntry = tk.Entry(frame)
         self.NotesEntry.bind('<Return>', self.SubmitFuncBind)
-        self.NotesEntry.grid(row=3, column=1)
+        self.NotesEntry.grid(row=row, column=1)
+        row += 1
 
         # Set widths of all entrys and dropdowns
         ExpenseOptions.config(width=dwidth)
