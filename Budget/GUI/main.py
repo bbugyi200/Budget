@@ -18,10 +18,11 @@ from .style import width, height
 
 fonts = sty.Fonts()
 
+
 class B_GUI_Setup:
     """ B_GUI_Setup Class
-    
-    This class contains all of the methods that are used for the initial 
+
+    This class contains all of the methods that are used for the initial
     setup of the main Budget GUI window.
     """
 
@@ -45,7 +46,6 @@ class B_GUI_Setup:
         # top is used for the window title
         self._createTitle(self.top)
 
-        
         # frame1 is the leftmost frame
         self.frame1 = tk.Frame(master, width=700, height=200)
         self.frame1.grid(row=1, column=0)
@@ -54,7 +54,6 @@ class B_GUI_Setup:
         self.frame1_Lbuffer.grid()
         self.frame1_Rbuffer = tk.Frame(self.frame1, width=width)
         self.frame1_Rbuffer.grid(column=100)
-
 
         self.data_frame = tk.Frame(self.frame1)
         self.data_frame.grid(row=0, column=1)
@@ -89,7 +88,7 @@ class B_GUI_Setup:
 
         # Recognizes that there is no payperiod data and asks user to setup
         # first payperiod.
-        if self.PP.StartDate=='First Pay Period':
+        if self.PP.StartDate == 'First Pay Period':
             self.FirstUse()
 
         master.mainloop()
@@ -130,9 +129,9 @@ class B_GUI_Setup:
         self.Lab_PayPeriod_Text = tk.StringVar()
         self.Lab_PayPeriod_Text.set(self.PP.StartDate)
         self.Lab_PayPeriod = tk.Label(frame,
-                textvariable=self.Lab_PayPeriod_Text,
-                width=50,
-                font=fonts.title(size='15'))
+                                      textvariable=self.Lab_PayPeriod_Text,
+                                      width=50,
+                                      font=fonts.title(size='15'))
 
         self.Lab_PayPeriod.pack()
 
@@ -140,24 +139,26 @@ class B_GUI_Setup:
         """ Used to create the 'initial' and 'remaining' fields of the given
         pay period.
         """
-        row=0
+        row = 0
 
         text = "Budget Data"
         BudgetDataTitle = tk.Label(frame, text=text,
-                    font=fonts.title())
-        BudgetDataTitle.grid(row=row); row+=1
+                                   font=fonts.title())
+        BudgetDataTitle.grid(row=row); row += 1
 
         self.Lab_initial_text = tk.StringVar()
-        self.Lab_initial_text.set('Initial: ' + '{0:.2f}'.format(float(self.PP.initial)))
+        self.Lab_initial_text.set('Initial: ' +
+                                  '{0:.2f}'.format(float(self.PP.initial)))
         self.Lab_remaining_text = tk.StringVar()
-        self.Lab_remaining_text.set('Remaining: ' + '{0:.2f}'.format(float(self.PP.remaining)))
+        self.Lab_remaining_text.set('Remaining: ' +
+                                    '{0:.2f}'.format(float(self.PP.remaining)))
 
         self.Lab_initial = tk.Label(frame, textvariable=self.Lab_initial_text)
-        self.Lab_initial.grid(row=row); row+=1
+        self.Lab_initial.grid(row=row); row += 1
 
         self.Lab_remaining = tk.Label(frame,
-                             textvariable=self.Lab_remaining_text)
-        self.Lab_remaining.grid(row=row); row+=1
+                                      textvariable=self.Lab_remaining_text)
+        self.Lab_remaining.grid(row=row); row += 1
 
     def _createExpenseForm(self, frame):
         """ Creates the form that the user uses to input a new expense into
@@ -170,7 +171,7 @@ class B_GUI_Setup:
 
         text = "New Expense"
         ExpenseFormTitle = tk.Label(frame, text=text,
-                    font=fonts.title())
+                                    font=fonts.title())
         ExpenseFormTitle.grid(row=0, columnspan=2)
 
         self.expense_choice = tk.StringVar(frame)
@@ -180,25 +181,28 @@ class B_GUI_Setup:
 
         ExpenseOptions = tk.OptionMenu(frame, self.expense_choice, *OPTIONS)
 
-
         def DropdownConfigs():
             """ Sets all dropdown configurations """
 
             arrow = tk.PhotoImage(file='img/arrow.gif')
 
             # Config options for the dropdown expense box
-            ExpenseOptions.config(indicatoron=0, activebackground="GREY", activeforeground="BLACK",
-                    compound='right', image=arrow)
+            ExpenseOptions.config(indicatoron=0,
+                                  activebackground="GREY",
+                                  activeforeground="BLACK",
+                                  compound='right',
+                                  image=arrow)
 
             # Needed or the image will not appear
-            ExpenseOptions.image=arrow
+            ExpenseOptions.image = arrow
 
             # Config options for the menu items in the dropdown expense box
-            ExpenseOptions['menu'].config(activebackground="GREY", activeforeground="BLACK")
+            ExpenseOptions['menu'].config(activebackground="GREY",
+                                          activeforeground="BLACK")
 
         DropdownConfigs()
 
-        # Dropdown width and expense width, respectively 
+        # Dropdown width and expense width, respectively
         dwidth = 100
         ewidth = 18
 
@@ -246,7 +250,9 @@ class B_GUI_Setup:
         submit_container = tk.Frame(frame)
         submit_container.grid(row=1, column=1)
 
-        SubmitButton = tk.Button(submit_container, text='Submit', command=self.SubmitFunc,
+        SubmitButton = tk.Button(submit_container,
+                                 text='Submit',
+                                 command=self.SubmitFunc,
                                  font=fonts.button())
         SubmitButton.grid()
 
@@ -259,8 +265,8 @@ class B_GUI_Setup:
         except AttributeError:
             pass
 
-        # outer_expense_frame is created so the delete button frames can be seperated
-        # visually from the expense list frame
+        # outer_expense_frame is created so the delete button frames can be
+        # seperated visually from the expense list frame.
         self.outer_expense_frame = tk.Frame(frame)
         self.outer_expense_frame.pack()
 
@@ -279,7 +285,9 @@ class B_GUI_Setup:
         # Columns for expense list
         dataCols = ['Expense Type', 'Cost', 'Notes']
 
-        self.tree = ttk.Treeview(self.ExpenseFrame, columns=dataCols, show='headings')
+        self.tree = ttk.Treeview(self.ExpenseFrame,
+                                 columns=dataCols,
+                                 show='headings')
 
         # Sets the headings in the expense list.
         # Without this loop, the headings will not actually show.
@@ -318,17 +326,17 @@ class B_GUI_Setup:
             delete_frame = tk.Frame(outer_delete_frame)
             delete_frame.pack()
 
-            delete_button = tk.Button(delete_frame, text='Delete Selected',
-                    command=self.DeleteSelected, font=fonts.button())
+            delete_button = tk.Button(delete_frame,
+                                      text='Delete Selected',
+                                      command=self.DeleteSelected,
+                                      font=fonts.button())
             delete_button.pack()
 
         Create_Delete_Button()
 
-
     ########################
     #   Abstract Methods   #
     ########################
-
 
     def SubmitFunc(self):
         assert False, "The SubmitFunc function must be overloaded!"
@@ -351,7 +359,7 @@ class B_GUI_Setup:
 
 class BudgetGUI(B_GUI_Setup):
     """ BudgetGUI Class
-    
+
     Contains all of the "dynamic" functionality of the GUI.
     """
 
@@ -361,8 +369,8 @@ class BudgetGUI(B_GUI_Setup):
         """
         try:
             self.PP.add_expense(self.expense_choice.get(),
-                    self.ValueEntry.get(),
-                    self.NotesEntry.get())
+                                self.ValueEntry.get(),
+                                self.NotesEntry.get())
 
             self.ValueEntry.delete(0, 'end')
             self.NotesEntry.delete(0, 'end')
@@ -377,10 +385,11 @@ class BudgetGUI(B_GUI_Setup):
 
         # Catches error if user enters string into 'Value' entrybox
         except ValueError:
-            tkinter.messagebox.showinfo("ERROR",
-                                        "The formatting of this entry is invalid!")
+            message = "The formatting of this entry is invalid!"
+            tkinter.messagebox.showinfo("ERROR", message)
+
             raise
-    
+
     def SubmitFuncBind(self, event):
         """ Used to allow 'Entry' widgets to bind to the SubmitFunc. Binded
         widgets require that the function they are binded to have an 'event'
@@ -398,7 +407,9 @@ class BudgetGUI(B_GUI_Setup):
         topFrame = tk.Frame(self.NPP_root)
         topFrame.grid(row=0)
 
-        StartPPLabel = tk.Label(topFrame, text="Start of PayPeriod", font='Verdana 14 underline')
+        StartPPLabel = tk.Label(topFrame,
+                                text="Start of PayPeriod",
+                                font='Verdana 14 underline')
         StartPPLabel.grid(row=0, columnspan=5)
 
         leftFrame = tk.Frame(self.NPP_root)
@@ -430,18 +441,21 @@ class BudgetGUI(B_GUI_Setup):
         bottomFrame = tk.Frame(self.NPP_root)
         bottomFrame.grid(row=2)
 
-        submit_button = tk.Button(bottomFrame, text='Submit', command=self._SubmitNewPP, font=fonts.button())
+        submit_button = tk.Button(bottomFrame,
+                                  text='Submit',
+                                  command=self._SubmitNewPP,
+                                  font=fonts.button())
         submit_button.pack()
 
         self.NPP_root.mainloop()
 
     def _SubmitNewPP(self):
-        """ This function is called when the user submits the NewPP 
+        """ This function is called when the user submits the NewPP
         information.
         """
         M, D, Y = (self.month_entry.get(),
-                self.day_entry.get(),
-                self.year_entry.get())
+                   self.day_entry.get(),
+                   self.year_entry.get())
 
         M, D, Y = int(M), int(D), int(Y[-2:])
 
@@ -459,8 +473,10 @@ class BudgetGUI(B_GUI_Setup):
     def refresh_screen(self):
         """ This function is used to refresh the main GUI window. """
         self.Lab_PayPeriod_Text.set(self.PP.StartDate)
-        self.Lab_initial_text.set('Initial: ' + '{0:.2f}'.format(float(self.PP.initial)))
-        self.Lab_remaining_text.set('Remaining: ' + '{0:.2f}'.format(float(self.PP.remaining)))
+        self.Lab_initial_text.set('Initial: ' +
+                                  '{0:.2f}'.format(float(self.PP.initial)))
+        self.Lab_remaining_text.set('Remaining: ' +
+                                    '{0:.2f}'.format(float(self.PP.remaining)))
         self._showExpenses(self.frame2)
 
     def DeleteSelected(self):
@@ -481,13 +497,14 @@ class BudgetGUI(B_GUI_Setup):
 
         # Does nothing if 'Delete Selected' button is clicked when no item is
         # selected.
-        except TypeError: pass
+        except TypeError:
+            pass
 
     def FirstUse(self):
         """ This function welcomes a new user to the program and then prompts
         him to setup his first PayPeriod.
         """
-        tkinter.messagebox.showinfo("WELCOME!",
-                "Welcome to the Budget Program!" + 
-                "\n\nLet's setup your first pay period!")
+        message = "Welcome to the Budget Program!" \
+                  "\n\nLet's setup your first pay period!"
+        tkinter.messagebox.showinfo("WELCOME!", message)
         self.newPP()
