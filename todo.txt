@@ -18,8 +18,8 @@ X Format 'Value' data so it displays with two decimal places and add $ sign
 X Change font of 'delete' and 'submit' button so they stand out more
 X Change 'mouseover' color scheme to match for buttons and dropdowns
 X Replace main title with 'Expenses' title 
-* Change top title frame to make it fit in the middle column
-* Add buffer to the bottom of titles
+X Change top title frame to make it fit in the middle column
+X Add buffer to the bottom of titles
 * Change window title to reflect payperiod date after every change in payperiod
 * Show the payperiod date in the left hand column
 * Allow user to set planned budget goals 
@@ -29,6 +29,10 @@ X Replace main title with 'Expenses' title
 * Migrate all buffer frame setups to the 'style.py' file
 * Change base class so that it inherits from tk.Frame
 * Allow user to specify where data will be stored
+* Turn any method in the main GUI class that has its own embedded functions
+  into a class.
+* Reassess the names of all GUI methods (should they have an underscore 
+  prefacing their names?)
 
 
 ----- Someday/Maybe Features ------

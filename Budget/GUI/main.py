@@ -35,13 +35,20 @@ class B_GUI_Setup:
         except NoData:
             self.PP = payperiod.PayPeriod(0, 'First Pay Period')
 
-        master.title('Paycheck Budget Program')
+        master.title('The Budget Program')
 
         self._createMenu(master)
 
+        row = 0
+
+        self.topFrame = tk.Frame(master)
+        self.topFrame.grid(row=row, columnspan=5); row += 1
+
+        self._createTitle(self.topFrame)
+
         # frame1 is the leftmost frame
         self.frame1 = tk.Frame(master, width=700, height=200)
-        self.frame1.grid(row=1, column=0)
+        self.frame1.grid(row=row, column=0)
 
         self.frame1_Lbuffer = tk.Frame(self.frame1, width=width)
         self.frame1_Lbuffer.grid()
@@ -53,12 +60,12 @@ class B_GUI_Setup:
         self.calculate_data(self.data_frame)
 
         self.frame2 = tk.Frame(master)
-        self.frame2.grid(row=1, column=1)
+        self.frame2.grid(row=row, column=1)
 
         self._showExpenses(self.frame2)
 
         self.frame3 = tk.Frame(master, width=200, height=200)
-        self.frame3.grid(row=1, column=2)
+        self.frame3.grid(row=row, column=2)
 
         # Left buffer for fframe3
         self.frame3_Lbuffer = tk.Frame(self.frame3, width=width)
@@ -85,6 +92,14 @@ class B_GUI_Setup:
             self.FirstUse()
 
         master.mainloop()
+
+    def _createTopTitle(self, frame):
+        TopTitle = tk.Label(frame,
+                            text='The Budget Program',
+                            font='Verdana 45 underline')
+        TopTitle.pack(side='top')
+        TT_bbuffer = tk.Frame(frame, height=20)
+        TT_bbuffer.pack(side='bottom')
 
     def _createMenu(self, master):
         """ Creates dropdown menus on the top of the window """
