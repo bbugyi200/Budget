@@ -19,8 +19,6 @@ X Create GUI folder and create 'fonts.py' file
 
 X Format 'Value' data so it displays with two decimal places and add $ sign
 
-* Create 'start.py' and edit 'README' to reflect the change
-
 * Change font of 'delete' and 'submit' button so they stand out more
 
 * Replace main title with 'Expenses' title 
