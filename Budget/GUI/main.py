@@ -14,7 +14,7 @@ from .. import payperiod
 
 # Style imports
 from . import style as sty
-from .style import width, height
+from .style import width, height, abcolor
 
 fonts = sty.Fonts()
 
@@ -188,8 +188,7 @@ class B_GUI_Setup:
 
             # Config options for the dropdown expense box
             ExpenseOptions.config(indicatoron=0,
-                                  activebackground="GREY",
-                                  activeforeground="BLACK",
+                                  activebackground=abcolor,
                                   compound='right',
                                   image=arrow)
 
@@ -197,8 +196,7 @@ class B_GUI_Setup:
             ExpenseOptions.image = arrow
 
             # Config options for the menu items in the dropdown expense box
-            ExpenseOptions['menu'].config(activebackground="GREY",
-                                          activeforeground="BLACK")
+            ExpenseOptions['menu'].config(activebackground=abcolor)
 
         DropdownConfigs()
 
@@ -252,6 +250,7 @@ class B_GUI_Setup:
 
         SubmitButton = tk.Button(submit_container,
                                  text='Submit',
+                                 activebackground=abcolor,
                                  command=self.SubmitFunc,
                                  font=fonts.button())
         SubmitButton.grid()
@@ -328,6 +327,7 @@ class B_GUI_Setup:
 
             delete_button = tk.Button(delete_frame,
                                       text='Delete Selected',
+                                      activebackground=abcolor,
                                       command=self.DeleteSelected,
                                       font=fonts.button())
             delete_button.pack()
