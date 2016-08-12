@@ -9,12 +9,11 @@ height = 25
 
 
 class Fonts:
-    """ This class holds methods that return font types for tkinter.
-    
-    An object of this class is meant to be embedded into the main GUI
-    class.
-    """
+    """ This class holds methods that return font types for tkinter """
     def __init__(self): pass
         
     def title(self, size='12'):
         return 'Verdana ' + size + ' underline'
+
+    def button(self):
+        return 'default 13 bold'

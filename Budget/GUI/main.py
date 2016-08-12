@@ -16,6 +16,7 @@ from .. import payperiod
 from . import style as sty
 from .style import width, height
 
+fonts = sty.Fonts()
 
 class B_GUI_Setup:
     """ B_GUI_Setup Class
@@ -34,9 +35,6 @@ class B_GUI_Setup:
             self.PP = payperiod.PayPeriod(0, 'First Pay Period')
 
         master.title('Paycheck Budget Program')
-
-        # Embedded 'Fonts' object
-        self.fonts = sty.Fonts()
 
         self._createMenu(master)
 
@@ -134,7 +132,7 @@ class B_GUI_Setup:
         self.Lab_PayPeriod = tk.Label(frame,
                 textvariable=self.Lab_PayPeriod_Text,
                 width=50,
-                font=self.fonts.title(size='15'))
+                font=fonts.title(size='15'))
 
         self.Lab_PayPeriod.pack()
 
@@ -146,7 +144,7 @@ class B_GUI_Setup:
 
         text = "Budget Data"
         BudgetDataTitle = tk.Label(frame, text=text,
-                    font=self.fonts.title())
+                    font=fonts.title())
         BudgetDataTitle.grid(row=row); row+=1
 
         self.Lab_initial_text = tk.StringVar()
@@ -172,7 +170,7 @@ class B_GUI_Setup:
 
         text = "New Expense"
         ExpenseFormTitle = tk.Label(frame, text=text,
-                    font=self.fonts.title())
+                    font=fonts.title())
         ExpenseFormTitle.grid(row=0, columnspan=2)
 
         self.expense_choice = tk.StringVar(frame)
@@ -248,7 +246,8 @@ class B_GUI_Setup:
         submit_container = tk.Frame(frame)
         submit_container.grid(row=1, column=1)
 
-        SubmitButton = tk.Button(submit_container, text='Submit', command=self.SubmitFunc)
+        SubmitButton = tk.Button(submit_container, text='Submit', command=self.SubmitFunc,
+                                 font=fonts.button())
         SubmitButton.grid()
 
     def _showExpenses(self, frame):
@@ -320,7 +319,7 @@ class B_GUI_Setup:
             delete_frame.pack()
 
             delete_button = tk.Button(delete_frame, text='Delete Selected',
-                    command=self.DeleteSelected)
+                    command=self.DeleteSelected, font=fonts.button())
             delete_button.pack()
 
         Create_Delete_Button()
@@ -431,7 +430,7 @@ class BudgetGUI(B_GUI_Setup):
         bottomFrame = tk.Frame(self.NPP_root)
         bottomFrame.grid(row=2)
 
-        submit_button = tk.Button(bottomFrame, text='Submit', command=self._SubmitNewPP)
+        submit_button = tk.Button(bottomFrame, text='Submit', command=self._SubmitNewPP, font=fonts.button())
         submit_button.pack()
 
         self.NPP_root.mainloop()
