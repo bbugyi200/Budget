@@ -35,7 +35,8 @@ class B_GUI_Setup:
         except NoData:
             self.PP = payperiod.PayPeriod(0, 'First Pay Period')
 
-        master.title('The Budget Program')
+        self.master = master
+        master.title('The Budget Program - (' + self.PP.StartDate + ')')
 
         self._createMenu(master)
 
@@ -44,7 +45,7 @@ class B_GUI_Setup:
         self.topFrame = tk.Frame(master)
         self.topFrame.grid(row=row, columnspan=5); row += 1
 
-        self._createTitle(self.topFrame)
+        self._createTopTitle(self.topFrame)
 
         # frame1 is the leftmost frame
         self.frame1 = tk.Frame(master, width=700, height=200)
@@ -96,7 +97,7 @@ class B_GUI_Setup:
     def _createTopTitle(self, frame):
         TopTitle = tk.Label(frame,
                             text='The Budget Program',
-                            font='Verdana 45 underline')
+                            font='Verdana 40 underline')
         TopTitle.pack(side='top')
         TT_bbuffer = tk.Frame(frame, height=20)
         TT_bbuffer.pack(side='bottom')
@@ -263,6 +264,17 @@ class B_GUI_Setup:
     def _showExpenses(self, frame):
         """ Displays all of this pay period's expenses. """
 
+        # If the ExpenseFrame exists, it will be destroyed
+        try:
+            self.outer_expense_frame.destroy()
+        except AttributeError:
+            pass
+
+        # outer_expense_frame is created so the delete button frames can be
+        # seperated visually from the expense list frame.
+        self.outer_expense_frame = tk.Frame(frame)
+        self.outer_expense_frame.pack()
+
         def createTitle(frame):
             title_Bbuffer = tk.Frame(frame, height=5)
 
@@ -274,18 +286,7 @@ class B_GUI_Setup:
             self.Lab_PayPeriod.pack(side='top')
             title_Bbuffer.pack(side='top')
 
-        createTitle(frame)
-
-        # If the ExpenseFrame exists, it will be destroyed
-        try:
-            self.outer_expense_frame.destroy()
-        except AttributeError:
-            pass
-
-        # outer_expense_frame is created so the delete button frames can be
-        # seperated visually from the expense list frame.
-        self.outer_expense_frame = tk.Frame(frame)
-        self.outer_expense_frame.pack()
+        createTitle(self.outer_expense_frame)
 
         self.ExpenseFrame = tk.Frame(self.outer_expense_frame)
         self.ExpenseFrame.pack(fill='both')
@@ -427,7 +428,7 @@ class BudgetGUI(B_GUI_Setup):
 
         StartPPLabel = tk.Label(topFrame,
                                 text="Start of PayPeriod",
-                                font='Verdana 14 underline')
+                                font=fonts.title())
         StartPPLabel.grid(row=0, columnspan=5)
 
         leftFrame = tk.Frame(self.NPP_root)
@@ -490,7 +491,7 @@ class BudgetGUI(B_GUI_Setup):
 
     def refresh_screen(self):
         """ This function is used to refresh the main GUI window. """
-        self.Lab_PayPeriod_Text.set(self.PP.StartDate)
+        self.master.title('The Budget Program - (' + self.PP.StartDate + ')')
         self.Lab_initial_text.set('Initial: ' +
                                   '{0:.2f}'.format(float(self.PP.initial)))
         self.Lab_remaining_text.set('Remaining: ' +
