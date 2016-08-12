@@ -1,4 +1,4 @@
-# Budget GUI (built on Tkinter)
+# Personal Budget GUI (built on Tkinter)
 
 After switching from Windows over to the Linux community, I found that my favorite budgeting software no longer worked.
 
