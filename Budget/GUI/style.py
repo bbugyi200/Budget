@@ -1,4 +1,4 @@
-""" fonts.py
+""" style.py
 
 Holds GUI fonts and formatting relevant information.
 """

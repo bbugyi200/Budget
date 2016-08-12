@@ -17,7 +17,7 @@ X Add title to expense form and budget data
 
 X Create GUI folder and create 'fonts.py' file 
 
-* Format 'Value' data so it displays with two decimal places and add $ sign
+X Format 'Value' data so it displays with two decimal places and add $ sign
 
 * Create 'start.py' and edit 'README' to reflect the change
 

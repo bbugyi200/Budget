@@ -14,8 +14,7 @@ from .. import payperiod
 
 # Style imports
 from . import style as sty
-from .style import width
-from .style import height
+from .style import width, height
 
 
 class B_GUI_Setup:
