@@ -15,6 +15,8 @@ X Cleanup GUI appearance
 
 X Add title to expense form and budget data
 
+* Create GUI folder and create 'fonts.py' file 
+
 * Change font of 'delete' and 'submit' button so they stand out more
 
 * Replace main title with 'Expenses' title 
