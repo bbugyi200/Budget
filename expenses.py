@@ -9,7 +9,9 @@ class Expense:
     """ Meta-Class Expense Object. """
     def __init__(self, expense_type, value, notes):
         self.expense_type = expense_type
-        self.value = value
+        # It is important to convert to float here.
+        # This will produce a ValueError exception if 'value' is not an int or float
+        self.value = float(value)
         self.notes = notes
 
     def get(self):

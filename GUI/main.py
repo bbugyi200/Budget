@@ -383,9 +383,16 @@ class BudgetGUI(B_GUI_Setup):
 
             self.refresh_screen()
             bdata.SavePP(self.PP)
+
         except AttributeError:
             tkinter.messagebox.showinfo("ERROR",
                                         "You must select an expense type!")
+            raise
+
+        # Catches error if user enters string into 'Value' entrybox
+        except ValueError:
+            tkinter.messagebox.showinfo("ERROR",
+                                        "The formatting of this entry is invalid!")
             raise
     
     def SubmitFuncBind(self, event):
