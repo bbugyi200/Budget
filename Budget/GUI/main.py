@@ -203,7 +203,7 @@ class B_GUI_Setup:
         DropdownConfigs()
 
         # Dropdown width and expense width, respectively
-        dwidth = 100
+        dwidth = 115
         ewidth = 18
 
         Lab_Expense_Type = tk.Label(frame, text='Expense Type: ')
