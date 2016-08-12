@@ -38,6 +38,7 @@ X Show the payperiod date in the left hand column
 * Clean up 'Budget Data' and seperate it into columns
 * Add 'Preferences' dropdown which will allow the user to customize things
   such as which 'Expense Types' are relevant to him/her.
+* Find Graphic Logo for program
 
 
 ----- Someday/Maybe Features ------
