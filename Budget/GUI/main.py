@@ -39,13 +39,6 @@ class B_GUI_Setup:
 
         self._createMenu(master)
 
-        # Title frame holds title of the window
-        self.top = tk.Frame(master, width=50, height=100)
-        self.top.grid(row=0, columnspan=5)
-
-        # top is used for the window title
-        self._createTitle(self.top)
-
         # frame1 is the leftmost frame
         self.frame1 = tk.Frame(master, width=700, height=200)
         self.frame1.grid(row=1, column=0)
@@ -118,20 +111,6 @@ class B_GUI_Setup:
             self.PP = bdata.GetPayPeriod(date)
             self.refresh_screen()
         return GetPP
-
-    def _createTitle(self, frame):
-        """ Creates the title of the window, which is just the pay period
-        date.
-        """
-        title_Bbuffer = tk.Frame(frame, height=5)
-        title_Bbuffer.pack(side='bottom')
-
-        title_text = "Expense List"
-        self.Lab_PayPeriod = tk.Label(frame,
-                                      text=title_text,
-                                      font=fonts.title())
-
-        self.Lab_PayPeriod.pack(side='bottom')
 
     def calculate_data(self, frame):
         """ Used to create the 'initial' and 'remaining' fields of the given
@@ -255,6 +234,19 @@ class B_GUI_Setup:
 
     def _showExpenses(self, frame):
         """ Displays all of this pay period's expenses. """
+
+        def createTitle(frame):
+            title_Bbuffer = tk.Frame(frame, height=5)
+
+            title_text = "Expense List"
+            self.Lab_PayPeriod = tk.Label(frame,
+                                          text=title_text,
+                                          font=fonts.title())
+
+            self.Lab_PayPeriod.pack(side='top')
+            title_Bbuffer.pack(side='top')
+
+        createTitle(frame)
 
         # If the ExpenseFrame exists, it will be destroyed
         try:

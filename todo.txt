@@ -1,4 +1,4 @@
------ Todo List -----
+----- Version 1 -----
 X Review and comment GUI.py
 X Remove personal data from Github and figure out how to "initialize" data at start (perhaps a welcome message?)
 X Cleanup GUI appearance
@@ -12,34 +12,23 @@ X Cleanup GUI appearance
         x Put 'Expense Type' option on top of other options
         x Add horizontal spacing
         x Comment changes
-
 X Add title to expense form and budget data
-
 X Create GUI folder and create 'fonts.py' file 
-
 X Format 'Value' data so it displays with two decimal places and add $ sign
-
 X Change font of 'delete' and 'submit' button so they stand out more
-
 X Change 'mouseover' color scheme to match for buttons and dropdowns
-
 X Replace main title with 'Expenses' title 
-
 * Change top title frame to make it fit in the middle column
-
 * Add buffer to the bottom of titles
-
 * Change window title to reflect payperiod date after every change in payperiod
-
 * Show the payperiod date in the left hand column
-
-* Allow user to specify where data will be stored
-
 * Allow user to set planned budget goals 
-
-* Change base class so that it inherits from tk.Frame
-
 * Package into first version release (i.e. Create frozen binary)
+
+----- Version 2 -----
+* Migrate all buffer frame setups to the 'style.py' file
+* Change base class so that it inherits from tk.Frame
+* Allow user to specify where data will be stored
 
 
 ----- Someday/Maybe Features ------
