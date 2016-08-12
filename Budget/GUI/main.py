@@ -143,6 +143,16 @@ class B_GUI_Setup:
         BTitle_bbuffer = tk.Frame(frame, height=5)
         BTitle_bbuffer.grid(row=row); row += 1
 
+        # Shows the Pay-Period start date
+        self.SDText = tk.StringVar()
+        self.SDText.set('Pay Period: ' +
+                        '{0}'.format(self.PP.StartDate))
+        startDateLabel = tk.Label(frame, textvariable=self.SDText)
+        startDateLabel.grid(row=row); row += 1
+        # Adds veritical buffer
+        SD_bbuffer = tk.Frame(frame, height=10)
+        SD_bbuffer.grid(row=row); row += 1
+
         self.Lab_initial_text = tk.StringVar()
         self.Lab_initial_text.set('Initial: ' +
                                   '{0:.2f}'.format(float(self.PP.initial)))
@@ -492,6 +502,8 @@ class BudgetGUI(B_GUI_Setup):
     def refresh_screen(self):
         """ This function is used to refresh the main GUI window. """
         self.master.title('The Budget Program - (' + self.PP.StartDate + ')')
+        self.SDText.set('Pay Period: ' +
+                        '{0}'.format(self.PP.StartDate))
         self.Lab_initial_text.set('Initial: ' +
                                   '{0:.2f}'.format(float(self.PP.initial)))
         self.Lab_remaining_text.set('Remaining: ' +

@@ -21,11 +21,11 @@ X Replace main title with 'Expenses' title
 X Change top title frame to make it fit in the middle column
 X Add buffer to the bottom of titles
 X Change window title to reflect payperiod date after every change in payperiod
-* Show the payperiod date in the left hand column
+X Show the payperiod date in the left hand column
 * Allow user to set planned budget goals 
 * Package into first version release (i.e. Create frozen binary)
 
------ Version 2 -----
+----- Version 2 ----- (Only to be persued if you can attract initial users)
 * Migrate all buffer frame setups to the 'style.py' file
 * Change base class so that it inherits from tk.Frame
 * Allow user to specify where data will be stored
@@ -34,6 +34,7 @@ X Change window title to reflect payperiod date after every change in payperiod
 * Reassess the names of all GUI methods (should they have an underscore 
   prefacing their names?)
 * Add option to delete an entire Pay-Period
+* Clean up 'Budget Data' and seperate it into columns
 
 
 ----- Someday/Maybe Features ------
