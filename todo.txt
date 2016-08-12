@@ -50,3 +50,5 @@ X Show the payperiod date in the left hand column
 * Add quote of the day about money!
 * Add Savings tracker. It will be just like the one you use for college, 
   updatable on a monthly basis. 
+* Add '$$$ Awareness Meeter.' You would need to give the user an option to
+  mark pay-period as 'Completed' or 'Not Completed'
