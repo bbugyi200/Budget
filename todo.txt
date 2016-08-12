@@ -23,6 +23,7 @@ X Add buffer to the bottom of titles
 X Change window title to reflect payperiod date after every change in payperiod
 X Show the payperiod date in the left hand column
 * Allow user to set planned budget goals 
+* Come up with a better repo name
 * Package into first version release (i.e. Create frozen binary)
 
 ----- Version 2 ----- (Only to be persued if you can attract initial users)
@@ -35,7 +36,15 @@ X Show the payperiod date in the left hand column
   prefacing their names?)
 * Add option to delete an entire Pay-Period
 * Clean up 'Budget Data' and seperate it into columns
+* Add 'Preferences' dropdown which will allow the user to customize things
+  such as which 'Expense Types' are relevant to him/her.
 
 
 ----- Someday/Maybe Features ------
 * Matplotlib pie chart statistics
+* If the user is overdue on certain categories, the category should flash red and get bolder
+* Show user where he needs work, based on previous pay-periods. Maybe even 
+  offer user links to articles that could help him lower his expenses in his 
+  problemed categories.
+* Make monthly bills budget automatically.
+* Add quote of the day about money!
