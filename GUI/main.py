@@ -12,22 +12,9 @@ import bdates
 import payperiod
 from bdata import NoData
 
-# Default width and height for buffer between frames
-width = 25
-height = 25
-
-
-class Fonts:
-    """ This class holds methods that return font types for tkinter.
-    
-    An object of this class is meant to be embedded into the main GUI
-    class.
-    """
-    def __init__(self): pass
-        
-    def title(self, size='12'):
-        return 'Verdana ' + size + ' underline'
-
+# Style imports
+import GUI.style as sty
+from GUI.style import width, height
 
 
 class B_GUI_Setup:
@@ -49,7 +36,7 @@ class B_GUI_Setup:
         master.title('Paycheck Budget Program')
 
         # Embedded 'Fonts' object
-        self.fonts = Fonts()
+        self.fonts = sty.Fonts()
 
         self._createMenu(master)
 
