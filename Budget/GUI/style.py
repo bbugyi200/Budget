@@ -7,6 +7,9 @@ Holds GUI fonts and formatting relevant information.
 width = 25
 height = 25
 
+# Colors
+abcolor = '#E8E7E7'
+
 
 class Fonts:
     """ This class holds methods that return font types for tkinter """
