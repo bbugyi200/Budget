@@ -16,7 +16,7 @@ class Fonts:
     def __init__(self):
         pass
 
-    def title(self, size='12'):
+    def title(self, size='15'):
         return 'Verdana ' + size + ' underline'
 
     def button(self):

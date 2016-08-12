@@ -123,17 +123,15 @@ class B_GUI_Setup:
         """ Creates the title of the window, which is just the pay period
         date.
         """
-        title_Bbuffer = tk.Frame(frame, height=10)
+        title_Bbuffer = tk.Frame(frame, height=5)
         title_Bbuffer.pack(side='bottom')
 
-        self.Lab_PayPeriod_Text = tk.StringVar()
-        self.Lab_PayPeriod_Text.set(self.PP.StartDate)
+        title_text = "Expense List"
         self.Lab_PayPeriod = tk.Label(frame,
-                                      textvariable=self.Lab_PayPeriod_Text,
-                                      width=50,
-                                      font=fonts.title(size='15'))
+                                      text=title_text,
+                                      font=fonts.title())
 
-        self.Lab_PayPeriod.pack()
+        self.Lab_PayPeriod.pack(side='bottom')
 
     def calculate_data(self, frame):
         """ Used to create the 'initial' and 'remaining' fields of the given

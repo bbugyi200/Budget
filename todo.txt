@@ -23,7 +23,11 @@ X Change font of 'delete' and 'submit' button so they stand out more
 
 X Change 'mouseover' color scheme to match for buttons and dropdowns
 
-* Replace main title with 'Expenses' title 
+X Replace main title with 'Expenses' title 
+
+* Change top title frame to make it fit in the middle column
+
+* Add buffer to the bottom of titles
 
 * Change window title to reflect payperiod date after every change in payperiod
 
