@@ -13,8 +13,9 @@ abcolor = '#E8E7E7'
 
 class Fonts:
     """ This class holds methods that return font types for tkinter """
-    def __init__(self): pass
-        
+    def __init__(self):
+        pass
+
     def title(self, size='12'):
         return 'Verdana ' + size + ' underline'
 
