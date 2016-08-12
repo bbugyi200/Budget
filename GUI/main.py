@@ -498,9 +498,3 @@ class BudgetGUI(B_GUI_Setup):
                 "Welcome to the Budget Program!" + 
                 "\n\nLet's setup your first pay period!")
         self.newPP()
-
-
-if __name__ == '__main__':
-    root = tk.Tk()
-
-    myGUI = BudgetGUI(root)

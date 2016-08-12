@@ -17,6 +17,8 @@ X Add title to expense form and budget data
 
 * Create GUI folder and create 'fonts.py' file 
 
+* Create 'start.py' and edit 'README' to reflect the change
+
 * Change font of 'delete' and 'submit' button so they stand out more
 
 * Replace main title with 'Expenses' title 
