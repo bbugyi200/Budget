@@ -25,6 +25,7 @@ X Show the payperiod date in the left hand column
 X Allow user to set planned budget goals 
 * Come up with a better repo name
 * Package into first version release (i.e. Create frozen binary)
+* Update README to really reflect the overarching vision behind this project
 * Add screenshot to README.md
 
 ----- Version 2 ----- (Only to be persued if you can attract initial users)
