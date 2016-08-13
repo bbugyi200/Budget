@@ -33,7 +33,7 @@ class B_GUI_Setup:
             self.PP = payperiod.PayPeriod(0, 'First Pay Period', 0)
 
         self.master = master
-        master.title('The Budget Program - (' + self.PP.StartDate + ')')
+        master.title('Paycheck to Paycheck - (' + self.PP.StartDate + ')')
 
         self._createMenu(master)
 
@@ -93,7 +93,7 @@ class B_GUI_Setup:
 
     def _createTopTitle(self, frame):
         TopTitle = tk.Label(frame,
-                            text='The Budget Program',
+                            text='Paycheck to Paycheck',
                             font='Verdana 40 underline')
         TopTitle.pack(side='top')
         TT_bbuffer = tk.Frame(frame, height=20)
