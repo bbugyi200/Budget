@@ -13,6 +13,7 @@ from .. import bdates
 from .. import payperiod
 from . import style as sty
 
+TITLE = 'Paycheck to Paycheck'
 fonts = sty.Fonts()
 
 
@@ -33,7 +34,7 @@ class B_GUI_Setup:
             self.PP = payperiod.PayPeriod(0, 'First Pay Period', 0)
 
         self.master = master
-        master.title('Paycheck to Paycheck - (' + self.PP.StartDate + ')')
+        master.title(TITLE + ' - (' + self.PP.StartDate + ')')
 
         self._createMenu(master)
 
@@ -93,7 +94,7 @@ class B_GUI_Setup:
 
     def _createTopTitle(self, frame):
         TopTitle = tk.Label(frame,
-                            text='Paycheck to Paycheck',
+                            text=TITLE,
                             font='Verdana 40 underline')
         TopTitle.pack(side='top')
         TT_bbuffer = tk.Frame(frame, height=20)
@@ -530,7 +531,7 @@ class BudgetGUI(B_GUI_Setup):
 
     def refresh_screen(self):
         """ This function is used to refresh the main GUI window. """
-        self.master.title('The Budget Program - (' + self.PP.StartDate + ')')
+        self.master.title(TITLE + ' - (' + self.PP.StartDate + ')')
         self.set_dynamic_data()
         self._showExpenses(self.frame2)
 
