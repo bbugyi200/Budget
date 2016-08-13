@@ -11,10 +11,7 @@ from .. import bdata
 from ..bdata import NoData
 from .. import bdates
 from .. import payperiod
-
-# Style imports
 from . import style as sty
-from .style import width, height, abcolor
 
 fonts = sty.Fonts()
 
@@ -51,9 +48,9 @@ class B_GUI_Setup:
         self.frame1 = tk.Frame(master, width=700, height=200)
         self.frame1.grid(row=row, column=0)
 
-        self.frame1_Lbuffer = tk.Frame(self.frame1, width=width)
+        self.frame1_Lbuffer = tk.Frame(self.frame1, width=sty.width)
         self.frame1_Lbuffer.grid()
-        self.frame1_Rbuffer = tk.Frame(self.frame1, width=width)
+        self.frame1_Rbuffer = tk.Frame(self.frame1, width=sty.width)
         self.frame1_Rbuffer.grid(column=100)
 
         self.data_frame = tk.Frame(self.frame1)
@@ -69,11 +66,11 @@ class B_GUI_Setup:
         self.frame3.grid(row=row, column=2)
 
         # Left buffer for fframe3
-        self.frame3_Lbuffer = tk.Frame(self.frame3, width=width)
+        self.frame3_Lbuffer = tk.Frame(self.frame3, width=sty.width)
         self.frame3_Lbuffer.grid()
 
         # Right buffer for fframe3
-        self.frame3_Rbuffer = tk.Frame(self.frame3, width=width)
+        self.frame3_Rbuffer = tk.Frame(self.frame3, width=sty.width)
         self.frame3_Rbuffer.grid(column=100)
 
         # frame3 is used for the Expense form
@@ -201,7 +198,7 @@ class B_GUI_Setup:
 
             # Config options for the dropdown expense box
             ExpenseOptions.config(indicatoron=0,
-                                  activebackground=abcolor,
+                                  activebackground=sty.abcolor,
                                   compound='right',
                                   image=arrow)
 
@@ -209,7 +206,7 @@ class B_GUI_Setup:
             ExpenseOptions.image = arrow
 
             # Config options for the menu items in the dropdown expense box
-            ExpenseOptions['menu'].config(activebackground=abcolor)
+            ExpenseOptions['menu'].config(activebackground=sty.abcolor)
 
         DropdownConfigs()
 
@@ -266,7 +263,7 @@ class B_GUI_Setup:
 
         SubmitButton = tk.Button(submit_container,
                                  text='Submit',
-                                 activebackground=abcolor,
+                                 activebackground=sty.abcolor,
                                  command=self.SubmitFunc,
                                  font=fonts.button())
         SubmitButton.grid()
@@ -344,10 +341,10 @@ class B_GUI_Setup:
             outer_delete_frame.pack(side='bottom')
 
             # Buffer space between the button and the expense list
-            delete_Tbuffer = tk.Frame(outer_delete_frame, height=height)
+            delete_Tbuffer = tk.Frame(outer_delete_frame, height=sty.height)
             delete_Tbuffer.pack(side='top')
 
-            delete_Bbuffer = tk.Frame(outer_delete_frame, height=height)
+            delete_Bbuffer = tk.Frame(outer_delete_frame, height=sty.height)
             delete_Bbuffer.pack(side='bottom')
 
             # This frame will hold the actual delete button
@@ -356,7 +353,7 @@ class B_GUI_Setup:
 
             delete_button = tk.Button(delete_frame,
                                       text='Delete Selected',
-                                      activebackground=abcolor,
+                                      activebackground=sty.abcolor,
                                       command=self.DeleteSelected,
                                       font=fonts.button())
             delete_button.pack()
