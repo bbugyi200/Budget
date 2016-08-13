@@ -9,7 +9,7 @@ I would gladly accept outside contributions to this project. If you would like t
 ## Running the Budget Program
 This program requires that you have Python3 installed on your machine.
 
-This program can be started by running `python start.py`.
+The program can be started by running `python start.py`.
 
 ##Questions or Comments?
 If you have any comments or questions about this software, its dependencies, or how you can contribute, please email me at bryan_bugyi@mymail.rcbc.edu.
