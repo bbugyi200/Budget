@@ -30,7 +30,7 @@ class B_GUI_Setup:
         # If the 'data/' folder is empty, a default PayPeriod is created
         # and subsequently the 'FirstUse()' function is later called.
         except NoData:
-            self.PP = payperiod.PayPeriod(0, 'First Pay Period')
+            self.PP = payperiod.PayPeriod(0, 'First Pay Period', 0)
 
         self.master = master
         master.title('The Budget Program - (' + self.PP.StartDate + ')')
