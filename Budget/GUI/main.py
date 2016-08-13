@@ -55,7 +55,7 @@ class B_GUI_Setup:
 
         self.data_frame = tk.Frame(self.frame1)
         self.data_frame.grid(row=0, column=1)
-        self.calculate_data(self.data_frame)
+        self.budget_data(self.data_frame)
 
         self.frame2 = tk.Frame(master)
         self.frame2.grid(row=row, column=1)
@@ -125,7 +125,7 @@ class B_GUI_Setup:
             self.refresh_screen()
         return GetPP
 
-    def calculate_data(self, frame):
+    def budget_data(self, frame):
         """ Used to create the 'initial' and 'remaining' fields of the given
         pay period.
         """
@@ -140,22 +140,22 @@ class B_GUI_Setup:
         BTitle_bbuffer = tk.Frame(frame, height=5)
         BTitle_bbuffer.grid(row=row); row += 1
 
-        # Shows the Pay-Period start date
+        # The dynamic textvariables
         self.SDText = tk.StringVar()
-        self.SDText.set('Pay Period: ' +
-                        '{0}'.format(self.PP.StartDate))
+        self.Lab_initial_text = tk.StringVar()
+        self.Lab_remaining_text = tk.StringVar()
+        self.SL_text = tk.StringVar()
+        self.RL_text = tk.StringVar()
+
+        # Shows the Pay-Period start date
         startDateLabel = tk.Label(frame, textvariable=self.SDText)
         startDateLabel.grid(row=row); row += 1
+
         # Adds veritical buffer
         SD_bbuffer = tk.Frame(frame, height=10)
         SD_bbuffer.grid(row=row); row += 1
 
-        self.Lab_initial_text = tk.StringVar()
-        self.Lab_initial_text.set('Initial: ' +
-                                  '{0:.2f}'.format(float(self.PP.initial)))
-        self.Lab_remaining_text = tk.StringVar()
-        self.Lab_remaining_text.set('Remaining: ' +
-                                    '{0:.2f}'.format(float(self.PP.remaining)))
+        self.set_dynamic_data()
 
         self.Lab_initial = tk.Label(frame, textvariable=self.Lab_initial_text)
         self.Lab_initial.grid(row=row); row += 1
@@ -163,6 +163,30 @@ class B_GUI_Setup:
         self.Lab_remaining = tk.Label(frame,
                                       textvariable=self.Lab_remaining_text)
         self.Lab_remaining.grid(row=row); row += 1
+
+        # Spending Limit Top Buffer
+        SL_Tbuffer = tk.Frame(frame, height=10)
+        SL_Tbuffer.grid(row=row); row += 1
+
+        spending_limit = tk.Label(frame, textvariable=self.SL_text)
+        spending_limit.grid(row=row); row += 1
+        remaining_limit = tk.Label(frame, textvariable=self.RL_text)
+        remaining_limit.grid(row=row); row += 1
+
+    def set_dynamic_data(self):
+        """ Used to update or initially set the data in the Budget Data
+        column.
+        """
+        self.SDText.set('Pay Period: ' +
+                        '{0}'.format(self.PP.StartDate))
+        self.Lab_initial_text.set('Initial Funds: ' +
+                                  '{0:.2f}'.format(float(self.PP.initial)))
+        self.Lab_remaining_text.set('Remaining Funds: ' +
+                                    '{0:.2f}'.format(float(self.PP.remaining)))
+        self.SL_text.set('Spending Limit: ' +
+                         '{0:.2f}'.format(float(self.PP.initialBud)))
+        self.RL_text.set('Remaining Limit: ' +
+                         '{0:.2f}'.format(float(self.PP.remainingBud)))
 
     def _createExpenseForm(self, frame):
         """ Creates the form that the user uses to input a new expense into
@@ -464,6 +488,12 @@ class BudgetGUI(B_GUI_Setup):
         self.paycheck_entry = tk.Entry(rightFrame)
         self.paycheck_entry.grid(row=0, column=1)
 
+        # Prompts the user for the budgeted spending limit for this pay-period
+        slimit = tk.Label(rightFrame, text='Spending Limit: ')
+        slimit.grid(row=1)
+        self.slimit_entry = tk.Entry(rightFrame)
+        self.slimit_entry.grid(row=1, column=1)
+
         bottomFrame = tk.Frame(self.NPP_root)
         bottomFrame.grid(row=2)
 
@@ -487,7 +517,9 @@ class BudgetGUI(B_GUI_Setup):
 
         StartDate = '{0:02d}-{1:02d}-{2}'.format(M, D, Y)
 
-        NEWPP = payperiod.PayPeriod(self.paycheck_entry.get(), StartDate)
+        NEWPP = payperiod.PayPeriod(self.paycheck_entry.get(),
+                                    StartDate=StartDate,
+                                    budgeted=self.slimit_entry.get())
 
         bdata.SavePP(NEWPP)
         self.PP = NEWPP
@@ -499,22 +531,19 @@ class BudgetGUI(B_GUI_Setup):
     def refresh_screen(self):
         """ This function is used to refresh the main GUI window. """
         self.master.title('The Budget Program - (' + self.PP.StartDate + ')')
-        self.SDText.set('Pay Period: ' +
-                        '{0}'.format(self.PP.StartDate))
-        self.Lab_initial_text.set('Initial: ' +
-                                  '{0:.2f}'.format(float(self.PP.initial)))
-        self.Lab_remaining_text.set('Remaining: ' +
-                                    '{0:.2f}'.format(float(self.PP.remaining)))
+        self.set_dynamic_data()
         self._showExpenses(self.frame2)
 
     def DeleteSelected(self):
         """ This function is called when the user presses the
         Expense form's 'Delete Selected' button.
         """
+        debug = False
         index = None
         try:
             # Sets index to the offset of the selected item in the expense list
             for i, item in enumerate(self.tree.get_children()):
+                if debug: print(self.tree.get_children())
                 if item == self.tree.focus():
                     index = i
 
@@ -526,7 +555,7 @@ class BudgetGUI(B_GUI_Setup):
         # Does nothing if 'Delete Selected' button is clicked when no item is
         # selected.
         except TypeError:
-            pass
+            if debug: raise
 
     def FirstUse(self):
         """ This function welcomes a new user to the program and then prompts

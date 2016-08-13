@@ -7,7 +7,7 @@ of a single pay cycle.
 from . import expenses
 
 
-class PayPeriod:
+class PP_Base:
     """ PayPeriod object is used to represent a single pay period, the initial
     amount of money received in your paycheck, all of your expenses, and also
     the remaining amount of funds you have left from this pay cycle.
@@ -19,18 +19,37 @@ class PayPeriod:
         self.StartDate = StartDate
 
     def add_expense(self, expense_type, value, notes):
+        self.remaining -= float(value)
         self.expenses.add_expense(expense_type, value, notes)
-        self.subtract(value)
 
-    def remove_expense(self, index):
-        self.add(self.expenses[index].value)
+    def remove_expense(self, index, value):
+        self.remaining += float(value)
         self.expenses.remove_expense(index)
 
-    def add(self, value):
-        self.remaining += float(value)
 
-    def subtract(self, value):
-        self.remaining -= float(value)
+class PP_Goals(PP_Base):
+    """ Contains all Budget Goal content. """
+    def __init__(self, Paycheck, StartDate, budgeted):
+        self.initialBud = float(budgeted)
+        self.remainingBud = float(budgeted)
+        PP_Base.__init__(self, Paycheck, StartDate)
+
+    def add_expense(self, expense_type, value, notes):
+        PP_Base.add_expense(self, expense_type, value, notes)
+        self.remainingBud -= float(value)
+
+    def remove_expense(self, index):
+        value = self.expenses[index].value
+        PP_Base.remove_expense(self, index, value)
+        self.remainingBud += float(value)
+
+
+class PayPeriod(PP_Goals):
+    """ Final PayPeriod Class. Inherits all pay-period functionality. This
+    class is really just a dummy-class. This was done so the content-specific
+    classes could all be named according to their content.
+    """
+    pass
 
 
 class Expense_List:
