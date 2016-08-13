@@ -27,7 +27,6 @@ X Allow user to set planned budget goals
 * Package into first version release (i.e. Create frozen binary)
 * Update README to really reflect the overarching vision behind this project
 * Add screenshot to README.md
-* TEST
 
 ----- Version 2 ----- (Only to be persued if you can attract initial users)
 * Migrate all buffer frame setups to the 'style.py' file
