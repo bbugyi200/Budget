@@ -27,6 +27,8 @@ X Come up with a better repo name
 * Package into first version release (i.e. Create frozen binary)
 * Update README to really reflect the overarching vision behind this project
 * Add screenshot to README.md
+* Get a few customers on board.
+* Get some kind of feedback loop started.
 
 ----- Version 2 ----- (Only to be persued if you can attract initial users)
 * Add date column to the 'Expense List'
