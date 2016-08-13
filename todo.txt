@@ -52,6 +52,9 @@ X Come up with a better repo name
 
 ----- Someday/Maybe Features ------
 * Matplotlib pie chart statistics
+* Provide the user advice on when they should split one of their common entries
+  into a brand new category. (You should advice customers to be precise with 
+  the 'Notes' section of their entries)
 * If the user is overdue on certain categories, the category should flash red and get bolder
 * Show user where he needs work, based on previous pay-periods. Maybe even 
   offer user links to articles that could help him lower his expenses in his 
