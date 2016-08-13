@@ -29,6 +29,8 @@ X Come up with a better repo name
 * Add screenshot to README.md
 
 ----- Version 2 ----- (Only to be persued if you can attract initial users)
+* Add date column to the 'Expense List'
+* Allow the user to sort the columns of the 'Expense List'
 * Migrate all buffer frame setups to the 'style.py' file
 * Change payperiod classes so they force keyword arguments
 * Change PayCheck var in 'payperiod.py' to use Money class.
