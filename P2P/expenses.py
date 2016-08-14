@@ -6,9 +6,11 @@ Budget Program
 
 
 class Money:
-    """ Used specifically to enable the string conversion of the expense value to pretty-print """
+    """ Used specifically to enable the string conversion of the expense value
+    to pretty-print
+    """
     def __init__(self, val):
-        self.val = float(val) 
+        self.val = float(val)
 
     def __str__(self):
         return '${0:.2f}'.format(self.val)
@@ -25,7 +27,7 @@ class Expense:
     def __init__(self, expense_type, value, notes):
         self.expense_type = expense_type
         # It is important to convert to float here.
-        # This will produce a ValueError exception if 'value' is not an int or float
+        # This will produce a ValueError exception if 'value' is not numeric
         self.value = Money(float(value))
         self.notes = notes
 
@@ -56,7 +58,6 @@ class Fuel(Expense):
 class Other(Expense):
     def __init__(self, value, notes):
         Expense.__init__(self, "Other", value, notes)
-
 
 
 if __name__ == '__main__':
