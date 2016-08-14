@@ -1,0 +1,17 @@
+===== Vision =====
+* So many people are forced to live paycheck to paycheck, but it doesn't have to be difficult. 
+
+* Linking to your bank account is NOT going to help you. You need to manually input data, so you
+  are forced to become more aware of your spending habits. 
+
+* This program can help you save big by starting small. 
+
+* While most projects think of the ideal customer as one who trys a product and continues to use
+  it forever, we are different. We want to teach you how to live P2P so, one day, you won't have to.  
+
+===== Other Sections =====
+* Explain version and how to download program. 
+
+* How to use program section. 
+
+* TODO section
