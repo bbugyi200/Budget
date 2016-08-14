@@ -15,5 +15,6 @@ The program can be started by running `python start.py`.
 If you have any comments or questions about this software, its dependencies, or how you can contribute, please email me at bryan_bugyi@mymail.rcbc.edu.
 
 ##Screenshot of v1
+![Image cannot be found!](img/v1_screenshot.png)
 
 
