@@ -30,10 +30,13 @@ These grievances, however, do not expose the worst of the problems. Most persona
 
 This is where Paycheck2Paycheck steps in. We are not as much concerned with getting you through the month. We will settle on getting you to your next paycheck. Not only is this essential for the true paycheck to paycheck consumer, but it is also very helpful in regards to building consumer spending awareness. These are the two key goals that separate Paycheck2Paycheck from most other mainstream personal finance applications: budgeting goals on a per paycheck basis and elevated consumer spending awareness. 
 
-# Running the Budget Program
+# I am a developer. How do I run this program?
 This program requires that you have Python3 installed on your machine.
 
 The program can be started by running `python start.py`.
+
+# I am NOT a developer. How do I run this program?
+If you do not intend on contributing to this project and would just like to try out the software, the easiest approach is probably to go to this project's [releases](https://github.com/bbugyi200/Paycheck2Paycheck/releases) and follow the instructions provided there to download this program.
 
 # How can I contribute?
 
