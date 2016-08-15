@@ -32,6 +32,7 @@ X Package into first version release (i.e. Create frozen binary)
 * Get some kind of feedback loop started.
 
 ----- Version 2 ----- (Only to be persued if you can attract initial users)
+* Investigate the competition
 * Add date column to the 'Expense List'
 * Allow the user to sort the columns of the 'Expense List'
 * Migrate all buffer frame setups to the 'style.py' file

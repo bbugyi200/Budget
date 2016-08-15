@@ -2,9 +2,9 @@
 
 Paycheck2Paycheck is a platform independent budgeting program specifically designed to manage your money one paycheck at a time.
 
-# Why?
+# Can't my current budgeting software do that?
 
-I am very enthusiastic about money management. But when it comes to budgeting software, I have never quite found the right match for me. In my eyes, they all seemed to be flawed in one way or the other. 
+Maybe. But probably not. You see, I am very enthusiastic about money management. But when it comes to budgeting software, I have never quite found the right match for me. In my eyes, they all seemed to be flawed in one way or the other. 
 
 -----------------------------------------
 ##### I have tried smartphone apps that allow you to track your spendings as they happen.
@@ -21,6 +21,10 @@ Wow. This is great... At least, it seemed great. The problem here is that keepin
 Now this I liked a lot at first. But it was all to difficult to change the way the spreadsheet operated. And when I decided to switch operating systems, I found that those spreadsheets, the ones I had spent hours customizing to my liking, no longer worked the way they should. Now I'll admit, spreadsheets are an OK option for your personal finances; however, they can become way too much work and, as you make them more complicated, are prone to serious reliability issues. 
 
 ----------------------------------------
+
+These grievances, however, do not expose the worst of the problems. Most personal finance programs force you to set monthly budgets. What about those of us that live paycheck to paycheck? We don't have much in savings. We don't necessarily know how much we'll make in income this month. And, most importantly, we can't afford to go over our budget before the next payday! 
+
+This is where Paycheck2Paycheck steps in. We are not so much concerned with getting you through the month; we will settle on getting you to your next paycheck. 
 
 # How can I contribute?
 
