@@ -14,7 +14,11 @@ through my receipts or online banking statements, and manually entering all of t
 
 ##### I have tried powerful budgeting software that linked into my banking information and did all of the work for me.
 
-Wow. This is great... At least, it seemed great. The problem here is that keeping track of my spendings now just became <em>too</em> easy. If I don't force myself to look at all of my receipts (or online statements) on a regular basis, my mind simply does not register them. Sure, my spendings are being <em>tracked</em>, but am is this software really making me more aware of my spending habits? Not really. Not for me at least. This is especially true when most of my transactions have been made via credit or debit cards. I think it is imperative that I review these expenses myself, otherwise it can be all too easy to just keep spending away. 
+Wow. This is great... At least, it seemed great. The problem here is that keeping track of my spendings now just became way <em>too</em> easy. If I don't force myself to look at all of my receipts (or online statements) on a regular basis, my mind simply does not register them. Sure, my spendings are being <em>tracked</em>, but is this software really making me more aware of my spending habits? Not really. Not for me at least. This is especially true when most of my transactions have been made via credit or debit cards. I think it is imperative that I review these expenses myself, otherwise it can be all too easy to just keep spending away and deal with the consequences later. 
+
+##### I have tried creating my own spreadsheets and customizing them to track my spendings
+
+Now this I liked a lot at first. But it was all to difficult to change the way the spreadsheet operated. And when I switched operating systems, I found that those spreadsheets, that I had spent hours customizing to my liking, no longer worked the way they should. Now I'll admit, spreadsheets are an OK option for your personal finances; however, they can be way too much work and become less and less reliable the more complicated they become. 
 
 ----------------------------------------
 
