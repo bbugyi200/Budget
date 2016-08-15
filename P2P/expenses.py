@@ -27,7 +27,7 @@ class Expense:
     def __init__(self, expense_type, value, notes):
         self.expense_type = expense_type
         # It is important to convert to float here.
-        # This will produce a ValueError exception if 'value' is not numeric
+        # This will produce a ValueError exception if 'value' is not nummeric
         self.value = Money(float(value))
         self.notes = notes
 
