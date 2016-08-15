@@ -32,7 +32,7 @@ X Package into first version release (i.e. Create frozen binary)
 * Get some kind of feedback loop started.
 
 ===== README Updates =====
-* Explain version and how to download program. 
+* Add table of contents and main title
 * How to use program section. 
 * TODO section
 

@@ -1,14 +1,21 @@
-# What is it and what does it do?
-
+# Paycheck2Paycheck
 Paycheck2Paycheck is a platform independent budgeting program specifically designed to manage your money one paycheck at a time. It is written in Python and uses the Tkinter GUI framework.
 
-# Why does it do it?
+##Table of Contents
+* [Product Goal](#goal)
+* [Installing/Running Program](#install)
+* [Contributions](#contribute)
+* [Questions or Comments](#questions)
+
+<a name="goal" />
+## What is the goal of this product?
 
 By allowing you to set budgeting goals on a short term basis (more specifically, a single pay period) Paycheck2Paycheck enables you to think big by working small. If you are in debt or are truly living paycheck to paycheck, it is imperative that that you control your expenses on a micro level. This means focusing on maximizing the potential of your available funds in the given pay period, as opposed to fixating on set monthly, quarterly, or yearly budget goals. Not only is this a more manageable approach, but it is also one of the best ways to become more aware of your spending habits, which is the ultimate goal of this product. 
 
-# Can't my current budgeting software do that?
+<a name="other_budget_software" />
+### Can't my current budgeting software do that?
 
-Maybe, but probably not. You see, I am very enthusiastic about money management. But when it comes to budgeting software, I have never quite found the right match for me. For my purposes, they all seemed to be flawed in one way or the other. 
+Maybe, but probably not. You see, I am very enthusiastic about money management, but when it comes to budgeting software, I have never quite found the right match for me. For my purposes, they all seemed to be flawed in one way or the other: 
 
 -----------------------------------------
 ##### I have tried smartphone apps that allow you to track your spendings as they happen in real-time.
@@ -30,21 +37,26 @@ These grievances, however, do not expose what is, in my opinion, the biggest sho
 
 This is where Paycheck2Paycheck steps in. We are not as much concerned with getting you through the month. We will settle on getting you to your next paycheck. Not only is this essential for the true paycheck to paycheck consumer, but it is also very helpful in regards to building consumer spending awareness. These are the two key visions that separate Paycheck2Paycheck from most other mainstream personal finance applications: budgeting goals on a per paycheck basis and an emphasis on elevating consumer spending awareness. 
 
-# I am a developer. How do I run this program?
+<a name="install"/>
+## How do I install and/or run this program?
+
+#### I am a developer. How do I run this program?
 This application requires that you have Python3 installed on your machine.
 
 The main program can be started by running `python start.py`.
 
-# I am NOT a developer. How do I run this program?
-If you do not intend on contributing to this project and would just like to try out the software, the easiest approach is to go to this project's [releases](https://github.com/bbugyi200/Paycheck2Paycheck/releases) and follow the instructions provided there to install Paycheck2Paycheck.
+#### I am NOT a developer. How do I run this program?
+If you do not intend on contributing to this project and would instead just like to try out the software, the easiest approach is to go to this project's [releases](https://github.com/bbugyi200/Paycheck2Paycheck/releases) and follow the instructions provided there to install Paycheck2Paycheck.
 
-# How can I contribute?
+<a name="contribute" />
+## How can I contribute?
 
 I would gladly accept outside contributions to this project. If you would like to contribute, please email me at bryan_bugyi@mymail.rcbc.edu.
 
-#Where can I submit my questions or comments?
+<a name="questions" />
+## Where can I submit my questions or comments?
 If you have any comments or questions about this software, its dependencies, or how you can contribute, please email me at bryan_bugyi@mymail.rcbc.edu.
 
-#Screenshot of Version 1.0
+## Screenshot of Version 1.0
 ![Image cannot be found!](img/v1_screenshot.png)
 
