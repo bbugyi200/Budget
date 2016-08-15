@@ -1,6 +1,10 @@
-# What is it?
+# What does it do?
 
 Paycheck2Paycheck is a platform independent budgeting program specifically designed to manage your money one paycheck at a time.
+
+# Why does it do it?
+
+By allowing you to set budgeting goals on a short term basis (more specifically, a single pay period) Paycheck2Paycheck enables you to think big by working small. If you are in debt or are truly living paycheck to paycheck, it is imperative that that you control your expenses on a micro level. This means focussing on maximizing the potential of the funds you have in the given pay period, as opposed to focussing on set monthly, quarterly, or yearly budget goals. Not only is this a more manageable approach, but it is also the best way to become better aware of your spending habits, which is the ultimate goal of this product. 
 
 # Can't my current budgeting software do that?
 
