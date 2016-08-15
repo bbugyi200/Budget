@@ -4,13 +4,13 @@ Paycheck2Paycheck is a platform independent budgeting program specifically desig
 
 # Can't my current budgeting software do that?
 
-Maybe. But probably not. You see, I am very enthusiastic about money management. But when it comes to budgeting software, I have never quite found the right match for me. In my eyes, they all seemed to be flawed in one way or the other. 
+Maybe, but probably not. You see, I am very enthusiastic about money management. But when it comes to budgeting software, I have never quite found the right match for me. For my purposes, they all seemed to be flawed in one way or the other. 
 
 -----------------------------------------
-##### I have tried smartphone apps that allow you to track your spendings as they happen.
+##### I have tried smartphone apps that allow you to track your spendings as they happen in real-time.
 
-But what if I'm in a rush (aren't we all)? When using these apps, I always found myself going
-through my receipts or online banking statements, and manually entering all of the day's (or week's) data at once. This was fine, but if I'm going to sit down at my computer and input all of this data at once, why not use an application on my computer? Why am I using my smartphone?
+But what if I'm in a rush (aren't we all)? While using these apps, I always found myself going
+through my receipts or online banking statements and manually entering all of the day's (or week's) data at once. This was fine, but if I'm going to sit down at my computer and input all of this data at once, why not use an application on my computer? Why am I using my smartphone?
 
 ##### I have tried powerful budgeting software that linked into my banking information and did all of the work for me.
 
@@ -24,7 +24,7 @@ Now this I liked a lot at first. But it was all to difficult to change the way t
 
 These grievances, however, do not expose the worst of the problems. Most personal finance programs force you to set monthly budgets. What about those of us that live paycheck to paycheck? We don't have much in savings. We don't necessarily know how much we'll make in income this month. And, most importantly, we can't afford to go over our budget before the next payday! 
 
-This is where Paycheck2Paycheck steps in. We are not so much concerned with getting you through the month; we will settle on getting you to your next paycheck. 
+This is where Paycheck2Paycheck steps in. We are not so much concerned with getting you through the month; we will settle on getting you to your next paycheck. Not only is this essential for the true paycheck to paycheck consumer, but it is also very helpful in regards to building consumer spending awareness. These are the two key goals that separate Paycheck2Paycheck from most other mainstream personal finance applications. Budgeting goals on a per paycheck basis and elevated consumer spending awareness. 
 
 # How can I contribute?
 
