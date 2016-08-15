@@ -31,6 +31,11 @@ X Package into first version release (i.e. Create frozen binary)
 * Get a few customers on board.
 * Get some kind of feedback loop started.
 
+===== README Updates =====
+* Explain version and how to download program. 
+* How to use program section. 
+* TODO section
+
 ----- Version 2 ----- (Only to be persued if you can attract initial users)
 * Investigate the competition
 * Add date column to the 'Expense List'
