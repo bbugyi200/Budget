@@ -36,7 +36,7 @@ This program requires that you have Python3 installed on your machine.
 The program can be started by running `python start.py`.
 
 # I am NOT a developer. How do I run this program?
-If you do not intend on contributing to this project and would just like to try out the software, the easiest approach is probably to go to this project's [releases](https://github.com/bbugyi200/Paycheck2Paycheck/releases) and follow the instructions provided there to download this program.
+If you do not intend on contributing to this project and would just like to try out this software, the easiest approach is to go to this project's [releases](https://github.com/bbugyi200/Paycheck2Paycheck/releases) and follow the instructions provided there to install Paycheck2Paycheck.
 
 # How can I contribute?
 
