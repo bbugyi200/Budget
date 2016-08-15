@@ -448,7 +448,7 @@ class BudgetGUI(B_GUI_Setup):
         topFrame.grid(row=0)
 
         StartPPLabel = tk.Label(topFrame,
-                                text="Start of PayPeriod",
+                                text="Payday Date",
                                 font=fonts.title())
         StartPPLabel.grid(row=0, columnspan=5)
 
