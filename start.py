@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 from P2P.GUI.main import BudgetGUI
 import tkinter as tk
 
