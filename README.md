@@ -24,7 +24,7 @@ Now this I liked a lot, at first. But it was all to difficult to change the way 
 
 These grievances, however, do not expose the worst of the problems. Most personal finance programs force you to set MONTHLY BUDGETS! What about those of us that live paycheck to paycheck? We do not have much in savings. We do not necessarily know how much we will make in income this month. And, most importantly, we can NOT afford to go over our budget before the next payday! 
 
-This is where Paycheck2Paycheck steps in. We are not so much concerned with getting you through the month; we will settle on getting you to your next paycheck. Not only is this essential for the true paycheck to paycheck consumer, but it is also very helpful in regards to building consumer spending awareness. These are the two key goals that separate Paycheck2Paycheck from most other mainstream personal finance applications. Budgeting goals on a per paycheck basis and elevated consumer spending awareness. 
+This is where Paycheck2Paycheck steps in. We are not so much concerned with getting you through the month; we will settle on getting you to your next paycheck. Not only is this essential for the true paycheck to paycheck consumer, but it is also very helpful in regards to building consumer spending awareness. These are the two key goals that separate Paycheck2Paycheck from most other mainstream personal finance applications: budgeting goals on a per paycheck basis and elevated consumer spending awareness. 
 
 # How can I contribute?
 
