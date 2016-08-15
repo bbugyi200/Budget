@@ -13,7 +13,7 @@ from .. import bdates
 from .. import payperiod
 from . import style as sty
 
-TITLE = 'Paycheck to Paycheck'
+TITLE = 'Paycheck2Paycheck'
 fonts = sty.Fonts()
 
 
@@ -142,19 +142,10 @@ class B_GUI_Setup:
         BTitle_bbuffer.grid(row=row); row += 1
 
         # The dynamic textvariables
-        self.SDText = tk.StringVar()
         self.Lab_initial_text = tk.StringVar()
         self.Lab_remaining_text = tk.StringVar()
         self.SL_text = tk.StringVar()
         self.RL_text = tk.StringVar()
-
-        # Shows the Pay-Period start date
-        startDateLabel = tk.Label(frame, textvariable=self.SDText)
-        startDateLabel.grid(row=row); row += 1
-
-        # Adds veritical buffer
-        SD_bbuffer = tk.Frame(frame, height=10)
-        SD_bbuffer.grid(row=row); row += 1
 
         self.set_dynamic_data()
 
@@ -178,15 +169,13 @@ class B_GUI_Setup:
         """ Used to update or initially set the data in the Budget Data
         column.
         """
-        self.SDText.set('Pay Period: ' +
-                        '{0}'.format(self.PP.StartDate))
-        self.Lab_initial_text.set('Initial Funds: ' +
+        self.Lab_initial_text.set('PAYCHECK: ' +
                                   '{0:.2f}'.format(float(self.PP.initial)))
-        self.Lab_remaining_text.set('Remaining Funds: ' +
+        self.Lab_remaining_text.set('REMAINING: ' +
                                     '{0:.2f}'.format(float(self.PP.remaining)))
-        self.SL_text.set('Spending Limit: ' +
+        self.SL_text.set('SPENDING LIMIT: ' +
                          '{0:.2f}'.format(float(self.PP.initialBud)))
-        self.RL_text.set('Remaining Limit: ' +
+        self.RL_text.set('REMAINING LIMIT: ' +
                          '{0:.2f}'.format(float(self.PP.remainingBud)))
 
     def _createExpenseForm(self, frame):
