@@ -1,6 +1,6 @@
-# What does it do?
+# What is it and what does it do?
 
-Paycheck2Paycheck is a platform independent budgeting program specifically designed to manage your money one paycheck at a time.
+Paycheck2Paycheck is a platform independent budgeting program specifically designed to manage your money one paycheck at a time. It is written in Python and uses the Tkinter GUI framework.
 
 # Why does it do it?
 
@@ -26,17 +26,17 @@ Now this I liked a lot, at first. But it was all to difficult to change the way 
 
 ----------------------------------------
 
-These grievances, however, do not expose the worst of the problems. Most personal finance programs force you to set MONTHLY BUDGETS! What about those of us that live paycheck to paycheck? We do not have much in savings. We do not necessarily know how much we will make in income this month. And, most importantly, we can NOT afford to go over our budget before the next payday! 
+These grievances, however, do not expose what is, in my opinion, the biggest shortcoming shared by the most popular budgeting applications: They force you to set MONTHLY BUDGETS! What about those of us that live paycheck to paycheck? We do not have much in savings. We do not necessarily know how much we will make in income this month. And, most importantly, we can NOT afford to go over our budget before the next payday! 
 
-This is where Paycheck2Paycheck steps in. We are not as much concerned with getting you through the month. We will settle on getting you to your next paycheck. Not only is this essential for the true paycheck to paycheck consumer, but it is also very helpful in regards to building consumer spending awareness. These are the two key goals that separate Paycheck2Paycheck from most other mainstream personal finance applications: budgeting goals on a per paycheck basis and elevated consumer spending awareness. 
+This is where Paycheck2Paycheck steps in. We are not as much concerned with getting you through the month. We will settle on getting you to your next paycheck. Not only is this essential for the true paycheck to paycheck consumer, but it is also very helpful in regards to building consumer spending awareness. These are the two key visions that separate Paycheck2Paycheck from most other mainstream personal finance applications: budgeting goals on a per paycheck basis and an emphasis on elevating consumer spending awareness. 
 
 # I am a developer. How do I run this program?
-This program requires that you have Python3 installed on your machine.
+This application requires that you have Python3 installed on your machine.
 
-The program can be started by running `python start.py`.
+The main program can be started by running `python start.py`.
 
 # I am NOT a developer. How do I run this program?
-If you do not intend on contributing to this project and would just like to try out this software, the easiest approach is to go to this project's [releases](https://github.com/bbugyi200/Paycheck2Paycheck/releases) and follow the instructions provided there to install Paycheck2Paycheck.
+If you do not intend on contributing to this project and would just like to try out the software, the easiest approach is to go to this project's [releases](https://github.com/bbugyi200/Paycheck2Paycheck/releases) and follow the instructions provided there to install Paycheck2Paycheck.
 
 # How can I contribute?
 
