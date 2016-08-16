@@ -5,6 +5,7 @@ Paycheck2Paycheck is a platform independent budgeting program specifically desig
 * [Product Goal](#goal)
 * [Installing/Running Program](#install)
 * [User Guide](#guide)
+* [Screenshots](#screenshot)
 * [Contributions](#contribute)
 * [Questions or Comments](#questions)
 
@@ -26,11 +27,11 @@ through my receipts or online banking statements and manually entering all of th
 
 ##### I have tried powerful budgeting software that linked into my banking information and did all of the work for me.
 
-Wow. This is great... At least, it seemed great. The problem here is that keeping track of my spendings now just became way <em>too</em> easy. If I don't force myself to look at all of my receipts (or online statements) on a regular basis, my mind simply does not register them. Sure, my spendings are being <em>tracked</em>, but is this software really making me more aware of my spending habits? Not really. Not for me at least. This is especially true when most of my transactions have been made via credit or debit cards. I think it is imperative that I review these expenses myself, otherwise it can be all too easy to just keep spending away and deal with the consequences later. 
+Wow. This is great... At least, it seemed great. The problem here is that keeping track of my spendings now just became way <em>too</em> easy. If I don't force myself to look at all of my receipts (or online statements) on a regular basis, my mind simply does not register them. Sure, my spendings are being tracked, but is this software really making me more aware of my spending habits? Not really, not for me at least. This is especially true when most of my transactions have been made via credit or debit cards. I think it is absolutely necessary that I review these expenses myself, otherwise it can become all too tempting to just keep spending away and deal with the consequences later. 
 
 ##### I have tried using spreadsheets and customizing them to track my spendings.
 
-Now this I liked a lot, at first. But it was all to difficult to change the way the spreadsheet operated. And when I decided to switch operating systems, I found that those spreadsheets, the ones I had spent hours customizing to my liking, no longer worked the way they should. Now I'll admit, spreadsheets are an OK option for your personal finances; however, they can become way too much work and, as you make them more complicated, are prone to serious reliability issues. 
+Now this I liked a lot, at first. But it was all to difficult to change the way these spreadsheets operated. And when I decided to switch operating systems, I found that those spreadsheets, the ones I had spent hours customizing to my liking, no longer worked the way they should. Now I'll admit, spreadsheets are an OK option for your personal finances; however, they can quickly become more work than they are worth and, as they begin to become more complicated, are prone to serious reliability issues. 
 
 ----------------------------------------
 
@@ -52,6 +53,21 @@ If you do not intend on contributing to this project and would instead just like
 <a name="guide" />
 ## User Guide
 
+#### First Use
+When you start Paycheck2Paycheck for the first time, you will be asked to setup your first pay-period. Enter in the payday date (the date your received your paycheck), the paycheck's value, and your spending limit (this is how much money you *expect* to spend before your next paycheck). When you are finished, hit the **Submit** button.
+
+![first_use screenshot](img/first_use.png)
+
+#### Creating a new pay-period
+You can create a new pay-period by selecting **File >> New Pay-Period** and then filling in the requested information about the new pay period.
+
+#### Miscellaneous
+* The current version of Paycheck2Paycheck does NOT include a **Save** button. Your data is saved automatically after every change.
+* You can access previous pay-periods by going to **Pay Periods** and then selecting the pay-period that you would like to load. 
+
+<a name="screenshot" />
+## Screenshot of Version 1.0
+![Image cannot be found!](img/v1_screenshot.png)
 
 <a name="contribute" />
 ## How can I contribute?
@@ -62,7 +78,4 @@ I would gladly accept outside contributions to this project. If you would like t
 ## Where can I submit my questions or comments?
 If you have any comments or questions about this software, its dependencies, or how you can contribute, please email me at bryan_bugyi@mymail.rcbc.edu.
 
-
-## Screenshot of Version 1.0
-![Image cannot be found!](img/v1_screenshot.png)
 

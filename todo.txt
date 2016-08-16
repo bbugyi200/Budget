@@ -27,16 +27,13 @@ X Come up with a better repo name
 X Package into first version release (i.e. Create frozen binary)
 X Update README to really reflect the overarching vision behind this project
 * Create windows EXE file 
-* Get a few customers on board.
 * Get some kind of feedback loop started.
+* Get a few customers on board.
 
-===== README Updates =====
-X Add table of contents and main title
-* How to use program section. 
-* TODO section
 
------ Version 2 ----- (Only to be persued if you can attract initial users)
+----- Version 2 -----
 * Investigate the competition
+* Add TODO section to the README
 * Add date column to the 'Expense List'
 * Allow the user to sort the columns of the 'Expense List'
 * Migrate all buffer frame setups to the 'style.py' file
