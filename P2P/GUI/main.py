@@ -443,6 +443,7 @@ class BudgetGUI(B_GUI_Setup):
         """
 
         self.NPP_root = tk.Tk()
+        self.NPP_root.title('New Pay-Period')
 
         topFrame = tk.Frame(self.NPP_root)
         topFrame.grid(row=0)
@@ -473,19 +474,27 @@ class BudgetGUI(B_GUI_Setup):
         rightFrame = tk.Frame(self.NPP_root)
         rightFrame.grid(row=1, column=1)
 
+        # Adds space between date entries and paycheck/limit entries
+        middleBuffer = tk.Frame(rightFrame, width=10)
+        middleBuffer.grid(column=0)
+
         paycheck_label = tk.Label(rightFrame, text='Paycheck Value: ')
-        paycheck_label.grid(row=0)
+        paycheck_label.grid(row=0, column=1)
         self.paycheck_entry = tk.Entry(rightFrame)
-        self.paycheck_entry.grid(row=0, column=1)
+        self.paycheck_entry.grid(row=0, column=2)
 
         # Prompts the user for the budgeted spending limit for this pay-period
         slimit = tk.Label(rightFrame, text='Spending Limit: ')
-        slimit.grid(row=1)
+        slimit.grid(row=1, column=1)
         self.slimit_entry = tk.Entry(rightFrame)
-        self.slimit_entry.grid(row=1, column=1)
+        self.slimit_entry.grid(row=1, column=2)
 
         bottomFrame = tk.Frame(self.NPP_root)
-        bottomFrame.grid(row=2)
+        bottomFrame.grid(row=2, columnspan=5)
+
+        # Adds space between submit button and top Entry boxes
+        submitBuffer = tk.Frame(bottomFrame, height=10)
+        submitBuffer.pack(side='top')
 
         submit_button = tk.Button(bottomFrame,
                                   text='Submit',

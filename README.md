@@ -4,6 +4,7 @@ Paycheck2Paycheck is a platform independent budgeting program specifically desig
 ##Table of Contents
 * [Product Goal](#goal)
 * [Installing/Running Program](#install)
+* [User Guide](#guide)
 * [Contributions](#contribute)
 * [Questions or Comments](#questions)
 
@@ -48,6 +49,10 @@ The main program can be started by running `python start.py`.
 #### I am NOT a developer. How do I run this program?
 If you do not intend on contributing to this project and would instead just like to try out the software, the easiest approach is to go to this project's [releases](https://github.com/bbugyi200/Paycheck2Paycheck/releases) and follow the instructions provided there to install Paycheck2Paycheck.
 
+<a name="guide" />
+## User Guide
+
+
 <a name="contribute" />
 ## How can I contribute?
 
@@ -56,6 +61,7 @@ I would gladly accept outside contributions to this project. If you would like t
 <a name="questions" />
 ## Where can I submit my questions or comments?
 If you have any comments or questions about this software, its dependencies, or how you can contribute, please email me at bryan_bugyi@mymail.rcbc.edu.
+
 
 ## Screenshot of Version 1.0
 ![Image cannot be found!](img/v1_screenshot.png)
