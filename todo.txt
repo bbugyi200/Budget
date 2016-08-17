@@ -32,6 +32,7 @@ X Update README to really reflect the overarching vision behind this project
 
 
 ----- Version 2 -----
+* Change PayPeriod object to Paycheck object. This is more appropriate. 
 * Investigate the competition
 * Add TODO section to the README
 * Add date column to the 'Expense List'

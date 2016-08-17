@@ -31,7 +31,7 @@ class B_GUI_Setup:
         # If the 'data/' folder is empty, a default PayPeriod is created
         # and subsequently the 'FirstUse()' function is later called.
         except NoData:
-            self.PP = payperiod.PayPeriod(0, 'First Pay Period', 0)
+            self.PP = payperiod.PayPeriod(0, 'First Paycheck', 0)
 
         self.master = master
         master.title(TITLE + ' - (' + self.PP.StartDate + ')')
@@ -87,7 +87,7 @@ class B_GUI_Setup:
 
         # Recognizes that there is no payperiod data and asks user to setup
         # first payperiod.
-        if self.PP.StartDate == 'First Pay Period':
+        if self.PP.StartDate == 'First Paycheck':
             self.FirstUse()
 
         master.mainloop()
@@ -107,12 +107,12 @@ class B_GUI_Setup:
 
         fileMenu = tk.Menu(menu)
         menu.add_cascade(label='File', menu=fileMenu)
-        fileMenu.add_command(label='New Pay Period..', command=self.newPP)
+        fileMenu.add_command(label='New Paycheck', command=self.newPP)
         fileMenu.add_separator()
         fileMenu.add_command(label='Quit', command=master.quit)
 
         viewMenu = tk.Menu(menu)
-        menu.add_cascade(label='Pay Periods', menu=viewMenu)
+        menu.add_cascade(label='Paychecks', menu=viewMenu)
 
         for date in bdates.getPP_files()[-1:-10:-1]:
             viewMenu.add_command(label=date, command=self._GetPPFactory(date))
@@ -128,7 +128,7 @@ class B_GUI_Setup:
 
     def budget_data(self, frame):
         """ Used to create the 'initial' and 'remaining' fields of the given
-        pay period.
+        Paycheck.
         """
         row = 0
 
@@ -283,7 +283,7 @@ class B_GUI_Setup:
         SubmitButton.grid()
 
     def _showExpenses(self, frame):
-        """ Displays all of this pay period's expenses. """
+        """ Displays all of this Paycheck's expenses. """
 
         # If the ExpenseFrame exists, it will be destroyed
         try:
@@ -439,11 +439,11 @@ class BudgetGUI(B_GUI_Setup):
 
     def newPP(self):
         """ Creates a new GUI window that prompts the user for the new
-        pay period's information.
+        Paycheck's information.
         """
 
         self.NPP_root = tk.Tk()
-        self.NPP_root.title('New Pay-Period')
+        self.NPP_root.title('New Paycheck')
 
         topFrame = tk.Frame(self.NPP_root)
         topFrame.grid(row=0)
@@ -483,7 +483,7 @@ class BudgetGUI(B_GUI_Setup):
         self.paycheck_entry = tk.Entry(rightFrame)
         self.paycheck_entry.grid(row=0, column=2)
 
-        # Prompts the user for the budgeted spending limit for this pay-period
+        # Prompts the user for the budgeted spending limit for this Paycheck
         slimit = tk.Label(rightFrame, text='Spending Limit: ')
         slimit.grid(row=1, column=1)
         self.slimit_entry = tk.Entry(rightFrame)
@@ -561,6 +561,6 @@ class BudgetGUI(B_GUI_Setup):
         him to setup his first PayPeriod.
         """
         message = "Welcome to the Budget Program!" \
-                  "\n\nLet's setup your first pay period!"
+                  "\n\nLet's setup your first Paycheck!"
         tkinter.messagebox.showinfo("WELCOME!", message)
         self.newPP()

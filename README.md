@@ -12,7 +12,7 @@ Paycheck2Paycheck is a platform independent budgeting program specifically desig
 <a name="goal" />
 ## What is the goal of this product?
 
-By allowing you to set budgeting goals on a short term basis (more specifically, a single pay period) Paycheck2Paycheck enables you to think big by working small. If you are in debt or are truly living paycheck to paycheck, it is imperative that that you control your expenses on a micro level. This means focusing on maximizing the potential of your available funds in the given pay period, as opposed to fixating on set monthly, quarterly, or yearly budget goals. Not only is this a more manageable approach, but it is also one of the best ways to become more aware of your spending habits, which is the ultimate goal of this product. 
+By allowing you to set budgeting goals on a short term basis (more specifically, a single paycheck) Paycheck2Paycheck enables you to think big by working small. If you are in debt or are truly living paycheck to paycheck, it is imperative that that you control your expenses on a micro level. This means focusing on maximizing the potential of your available funds in the given pay period, as opposed to fixating on set monthly, quarterly, or yearly budget goals. Not only is this a more manageable approach, but it is also one of the best ways to become more aware of your spending habits, which is the ultimate goal of this product. 
 
 <a name="other_budget_software" />
 ### Can't my current budgeting software do that?
@@ -54,16 +54,16 @@ If you do not intend on contributing to this project and would instead just like
 ## User Guide
 
 #### First Use
-When you start Paycheck2Paycheck for the first time, you will be asked to setup your first pay-period. Enter in the payday date (the date your received your paycheck), the paycheck's value, and your spending limit (this is how much money you *expect* to spend before your next paycheck). When you are finished, hit the **Submit** button.
+When you start Paycheck2Paycheck for the first time, you will be asked to setup your first Paycheck. Enter in the payday date (the date your received your paycheck), the paycheck's value, and your spending limit (this is how much money you *expect* to spend before your next paycheck). When you are finished, hit the **Submit** button.
 
 ![first_use screenshot](img/first_use.png)
 
-#### Creating a new pay-period
-You can create a new pay-period by selecting **File >> New Pay-Period** and then filling in the requested information about the new pay period.
+#### Starting a new Paycheck
+You can start a new Paycheck at any time by selecting **File >> New Paycheck** and then filling in the requested information about the new Paycheck.
 
 #### Miscellaneous
 * The current version of Paycheck2Paycheck does NOT include a **Save** button. Your data is saved automatically after every change.
-* You can access previous pay-periods by going to **Pay Periods** and then selecting the pay-period that you would like to load. 
+* You can access previous Paychecks by going to **Paychecks** and then selecting the Paycheck that you would like to load. 
 
 <a name="screenshot" />
 ## Screenshot of Version 1.0
