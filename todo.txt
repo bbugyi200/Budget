@@ -28,10 +28,10 @@ X Package into first version release (i.e. Create frozen binary)
 X Update README to really reflect the overarching vision behind this project
 
 === MONTHLY BUDGET UPDATE ===
-* Change the name of the repo.
-* Comment out README. Under construction. 
+X Comment out README. Under construction. 
 * Remodel the database to be more robust and adaptable.
 * Change from PayPeriod model to Monthly model.
+* Change the name of the repo.
 * Update the first release. (windows will not be included)
 * Find a way to make the program installable via 'sudo apt-get'
 * Update the README.
