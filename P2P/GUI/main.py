@@ -7,11 +7,21 @@ stored in this module.
 import tkinter as tk
 import tkinter.ttk as ttk
 import tkinter.messagebox
-from .. import bdata
-from ..bdata import NoData
-from .. import bdates
-from .. import payperiod
-from . import style as sty
+
+debug = True
+
+if not debug:
+    from .. import bdata
+    from ..bdata import NoData
+    from .. import bdates
+    from .. import payperiod
+    from . import style as sty
+else:
+    import data
+    import dates
+    import payperiod
+    import style as sty
+
 
 TITLE = 'Paycheck2Paycheck'
 fonts = sty.Fonts()
@@ -537,7 +547,6 @@ class BudgetGUI(B_GUI_Setup):
         """ This function is called when the user presses the
         Expense form's 'Delete Selected' button.
         """
-        debug = False
         index = None
         try:
             # Sets index to the offset of the selected item in the expense list

@@ -4,7 +4,14 @@ This module focuses on objects that represent more holistic models
 of a single pay cycle.
 """
 
-from . import expenses
+debug = True
+
+if not debug:
+    from . import expenses
+    from . import data
+else:
+    import expenses
+    import data
 
 
 class PP_Base:
@@ -61,16 +68,22 @@ class Expense_List:
     """
     def __init__(self):
         self.allExpenses = []
+        self.LoadExpenses()
 
-    def add_expense(self, expense_type, value, notes):
-        expense_type = expense_type.replace(' ', '_')
-        exp_obj = getattr(expenses, expense_type)
-        expense = exp_obj(value, notes)
+    def LoadExpenses(self):
+        for Expense in data.getAllExpenses():
+            key, date, etype, value, notes = Expense
+            self.add_expense(key, date, etype, value, notes)
+
+    def add_expense(self, key, date, expense_type, value, notes):
+        expense = expenses.Expense(key, date, expense_type, value, notes)
         self.allExpenses.append(expense)
 
     def remove_expense(self, index):
         try:
+            key = self.allExpenses[index].key
             self.allExpenses.pop(index)
+            data.deleteExpense(key)
         except ValueError:
             print(index)
 
@@ -85,5 +98,5 @@ class Expense_List:
 
 
 if __name__ == '__main__':
-    P = PayPeriod(1200)
-    P.add_expense('Food', 150)
+    E = Expense_List()
+    print(E.get())

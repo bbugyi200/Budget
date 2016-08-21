@@ -1,12 +1,11 @@
 import sqlite3
 import os
-import P2P.dates as dates
+import dates
+
+debug = True
 
 DB = 'data/' + dates.getDB()
-DB = 'data/example.db'
-
-
-TypeDictionary = dict()
+if debug: DB = '/home/bryan/My_Projects/P2P/data/example.db'
 
 
 def createETypeTable():
@@ -15,7 +14,7 @@ def createETypeTable():
     c = conn.cursor()
 
     c.execute('''CREATE TABLE Exp_Types
-                 (ID INTEGER PRIMARY KEY AUTOINCREMENT,
+                 (ID INTEGER PRIMARY KEY,
                   type TEXT,
                   parent INTEGER);''')
     conn.commit()
@@ -27,9 +26,9 @@ def createBaseETypes():
     c = conn.cursor()
 
     baseTypes = ['Food', 'Monthly Bills', 'Miscellaneous', 'Entertainment']
-    for i, etype in enumerate(baseTypes, 1):
-        TypeDictionary[etype] = i
-        c.execute('''INSERT INTO Exp_Types VALUES (?, ?, ?)''', (i, etype, 0))
+    for etype in baseTypes:
+        c.execute('''INSERT INTO Exp_Types VALUES (?, ?, ?)''',
+                  (None, etype, None))
 
     conn.commit()
     conn.close()
@@ -40,7 +39,8 @@ def createExpensesTable():
     c = conn.cursor()
 
     c.execute('''CREATE TABLE Expenses
-                 (Date TEXT,
+                 (ID INTEGER PRIMARY KEY,
+                  Date TEXT,
                   Exp_ID INTEGER,
                   Price REAL,
                   Notes TEXT,
@@ -51,12 +51,26 @@ def createExpensesTable():
 
 
 def insertExpense(date, exp_type, price, notes):
+
     conn = sqlite3.connect(DB)
     c = conn.cursor()
 
-    exp_id = TypeDictionary[exp_type]
-    expense_data = (date, exp_id, price, notes)
-    c.execute('''INSERT INTO Expenses VALUES (?, ?, ?, ?)''', expense_data)
+    c.execute("""SELECT ID FROM Exp_Types
+                 WHERE type = ?;""", (exp_type,))
+    exp_id = c.fetchone()[0]
+    if debug: print('insertExpense ~ ExpID: ', exp_id)
+    expense_data = (None, date, exp_id, price, notes)
+    c.execute('''INSERT INTO Expenses VALUES (?, ?, ?, ?, ?)''', expense_data)
+
+    conn.commit()
+    conn.close()
+
+
+def deleteExpense(index):
+    conn = sqlite3.connect(DB)
+    c = conn.cursor()
+
+    c.execute('''DELETE FROM Expenses WHERE ID=?''', (index,))
 
     conn.commit()
     conn.close()
@@ -66,10 +80,20 @@ def getAllExpenses():
     conn = sqlite3.connect(DB)
     c = conn.cursor()
 
-    for row in c.execute('''SELECT * FROM Expenses'''):
-        print(row)
+    expense_list = []
+    for row in c.execute('''SELECT Expenses.ID, Expenses.Date, Exp_Types.type,
+                            Expenses.Price, Expenses.Notes
+                            FROM Expenses
+                            INNER JOIN Exp_Types
+                            ON Expenses.Exp_ID=Exp_Types.ID'''):
+
+        expense_list.append(row)
 
     conn.close()
+
+    if debug: print('getAllExpenses: ', expense_list)
+
+    return expense_list
 
 
 if not os.path.isfile(DB):
@@ -83,5 +107,10 @@ if __name__ == '__main__':
                   exp_type='Food',
                   price=22.50,
                   notes='Wawa')
+
+    insertExpense(date='8-20-16',
+                  exp_type='Monthly Bills',
+                  price=140.16,
+                  notes='Verizon')
 
     getAllExpenses()
