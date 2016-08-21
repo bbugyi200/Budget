@@ -27,9 +27,14 @@ X Come up with a better repo name
 X Package into first version release (i.e. Create frozen binary)
 X Update README to really reflect the overarching vision behind this project
 
+=== DATABASE REMODEL ===
+X Model database tables on paper
+X Research how to use 'sqlite3'
+* Fix bdates.py file so that it is using the month instead of the payperiod
+* Implement data.py file as replacement for bdata.py
+
 === MONTHLY BUDGET UPDATE ===
 X Comment out README. Under construction. 
-* Remodel the database to be more robust and adaptable.
 * Change from PayPeriod model to Monthly model.
 * Change the name of the repo.
 * Update the first release. (windows will not be included)
