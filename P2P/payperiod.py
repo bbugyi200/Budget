@@ -68,10 +68,11 @@ class Expense_List:
     """
     def __init__(self):
         self.allExpenses = []
+        self.DB = data.SQLDB()
         self.LoadExpenses()
 
     def LoadExpenses(self):
-        for Expense in data.getAllExpenses():
+        for Expense in self.DB.getAllExpenses():
             key, date, etype, value, notes = Expense
             self.add_expense(key, date, etype, value, notes)
 
@@ -83,7 +84,7 @@ class Expense_List:
         try:
             key = self.allExpenses[index].key
             self.allExpenses.pop(index)
-            data.deleteExpense(key)
+            self.DB.deleteExpense(key)
         except ValueError:
             print(index)
 
