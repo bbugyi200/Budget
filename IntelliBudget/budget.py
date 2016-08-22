@@ -41,15 +41,24 @@ class Budget:
             self.Limit = float(limit)
             self.remainingLimit = float(limit)
 
+    def updateLimits(self, limit):
+        limit = float(limit)
+        diff = self.Limit - self.remainingLimit
+        rem = limit - diff
+
+        self.Limit = limit
+        self.remainingLimit = rem
+        self.DB.UpdateBudgetLimit(limit, rem=rem, exp_type='ALL', both=True)
+
     def add_expense(self, date, expense_type, value, notes):
         self.remainingLimit -= float(value)
-        self.DB.UpdateBudgetRemLimit(self.remainingLimit, 'ALL')
+        self.DB.UpdateBudgetLimit(self.remainingLimit, 'ALL')
         self.expenses.add_expense(date, expense_type, value, notes)
 
     def remove_expense(self, index):
         value = self.expenses[index].value
         self.remainingLimit += float(value)
-        self.DB.UpdateBudgetRemLimit(self.remainingLimit, 'ALL')
+        self.DB.UpdateBudgetLimit(self.remainingLimit, 'ALL')
         self.expenses.remove_expense(index)
 
     def close(self):

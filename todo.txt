@@ -41,9 +41,11 @@ X Locate and restore Exp_Attrs
 X Comment out README. Under construction. 
 X Change the name of the repo.
 X Give the user the option to go back to a prior month.
+* Force user to enter in Limits when a new database is created.
 * Cleanup main.py code 
 * Change the dropdown option for the 'Expense Type' to pull from the SQL 
   database.
+* Add MONTH constant and put current month in title bar.
 * Cleanup 'debug' code and make sure that production DB works as expected.
 * Comment all changes and merge in Monthly branch
 * Update the README.

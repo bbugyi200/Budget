@@ -102,6 +102,8 @@ class B_GUI_Setup:
 
         fileMenu = tk.Menu(menu)
         menu.add_cascade(label='File', menu=fileMenu)
+        fileMenu.add_command(label='Update Limits', command=self.newLimits)
+        fileMenu.add_separator()
         fileMenu.add_command(label='Quit', command=master.quit)
 
         viewMenu = tk.Menu(menu)
@@ -372,8 +374,8 @@ class B_GUI_Setup:
     def SubmitFuncBind(self):
         assert False, "The SubmitFuncBind function must be overloaded!"
 
-    def newPP(self):
-        assert False, "The newPP function must be overloaded!"
+    def newLimits(self):
+        assert False, "The newLimits function must be overloaded!"
 
     def refresh_screen(self):
         assert False, "The refresh_screen function must be overloaded!"
@@ -421,60 +423,34 @@ class BudgetGUI(B_GUI_Setup):
         """
         self.SubmitFunc()
 
-    def newPP(self):
+    def newLimits(self):
         """ Creates a new GUI window that prompts the user for the new
         Paycheck's information.
         """
 
-        self.NPP_root = tk.Tk()
-        self.NPP_root.title('New Paycheck')
+        self.NewMonthRoot = tk.Tk()
+        self.NewMonthRoot.title('MONTH - Limit Form')
 
-        topFrame = tk.Frame(self.NPP_root)
-        topFrame.grid(row=0)
+        TopFrame = tk.Frame(self.NewMonthRoot)
+        TopFrame.grid(row=0)
 
-        StartPPLabel = tk.Label(topFrame,
-                                text="Payday Date",
-                                font=fonts.title())
-        StartPPLabel.grid(row=0, columnspan=5)
+        row = 0
+        WindowTitle = tk.Label(TopFrame,
+                               text="Spending Limits",
+                               font=fonts.title())
+        WindowTitle.grid(row=row, columnspan=5); row += 1
 
-        leftFrame = tk.Frame(self.NPP_root)
-        leftFrame.grid(row=1)
+        WindowTitleBuffer = tk.Frame(TopFrame, height=10)
+        WindowTitleBuffer.grid(row=row); row += 1
 
-        month_label = tk.Label(leftFrame, text="Month: ")
-        month_label.grid(row=1)
-        self.month_entry = tk.Entry(leftFrame)
-        self.month_entry.grid(row=1, column=1)
+        TLimLabel = tk.Label(TopFrame, text="Total Limit: ")
+        TLimLabel.grid(row=row)
 
-        day_label = tk.Label(leftFrame, text="Day: ")
-        day_label.grid(row=2)
-        self.day_entry = tk.Entry(leftFrame)
-        self.day_entry.grid(row=2, column=1)
+        self.TLimEntry = tk.Entry(TopFrame)
+        self.TLimEntry.grid(row=row, column=1); row += 1
 
-        year_label = tk.Label(leftFrame, text="Year: ")
-        year_label.grid(row=3)
-        self.year_entry = tk.Entry(leftFrame)
-        self.year_entry.grid(row=3, column=1)
-
-        rightFrame = tk.Frame(self.NPP_root)
-        rightFrame.grid(row=1, column=1)
-
-        # Adds space between date entries and paycheck/limit entries
-        middleBuffer = tk.Frame(rightFrame, width=10)
-        middleBuffer.grid(column=0)
-
-        paycheck_label = tk.Label(rightFrame, text='Paycheck Value: ')
-        paycheck_label.grid(row=0, column=1)
-        self.paycheck_entry = tk.Entry(rightFrame)
-        self.paycheck_entry.grid(row=0, column=2)
-
-        # Prompts the user for the budgeted spending limit for this Paycheck
-        slimit = tk.Label(rightFrame, text='Spending Limit: ')
-        slimit.grid(row=1, column=1)
-        self.slimit_entry = tk.Entry(rightFrame)
-        self.slimit_entry.grid(row=1, column=2)
-
-        bottomFrame = tk.Frame(self.NPP_root)
-        bottomFrame.grid(row=2, columnspan=5)
+        bottomFrame = tk.Frame(self.NewMonthRoot)
+        bottomFrame.grid(row=1, columnspan=5)
 
         # Adds space between submit button and top Entry boxes
         submitBuffer = tk.Frame(bottomFrame, height=10)
@@ -482,34 +458,22 @@ class BudgetGUI(B_GUI_Setup):
 
         submit_button = tk.Button(bottomFrame,
                                   text='Submit',
-                                  command=self._SubmitNewPP,
+                                  command=self.SubmitNewLimits,
                                   font=fonts.button())
         submit_button.pack()
 
-        self.NPP_root.mainloop()
+        self.NewMonthRoot.mainloop()
 
-    # def _SubmitNewPP(self):
-        # """ This function is called when the user submits the NewPP
-        # information.
-        # """
-        # M, D, Y = (self.month_entry.get(),
-                   # self.day_entry.get(),
-                   # self.year_entry.get())
+    def SubmitNewLimits(self):
+        """ This function is called when the user submits the NewPP
+        information.
+        """
+        TotalLimit = self.TLimEntry.get()
 
-        # M, D, Y = int(M), int(D), int(Y[-2:])
+        self.Budget.updateLimits(TotalLimit)
 
-        # StartDate = '{0:02d}-{1:02d}-{2}'.format(M, D, Y)
-
-        # NEWPP = payperiod.PayPeriod(self.paycheck_entry.get(),
-                                    # StartDate=StartDate,
-                                    # budgeted=self.slimit_entry.get())
-
-        # bdata.SavePP(NEWPP)
-        # self.Budget = NEWPP
-
-        # self.refresh_screen()
-
-        # self.NPP_root.destroy()
+        self.refresh_screen()
+        self.NewMonthRoot.destroy()
 
     def refresh_screen(self):
         """ This function is used to refresh the main GUI window. """

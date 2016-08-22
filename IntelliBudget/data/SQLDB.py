@@ -77,12 +77,21 @@ class Budgets(Base):
 
         self.conn.commit()
 
-    def UpdateBudgetRemLimit(self, price, exp_type):
+    def UpdateBudgetLimit(self, value, exp_type, rem=None, both=False):
         exp_id = self.getExpID(exp_type)
-        values = (price, exp_id)
-        self.c.execute('''UPDATE BudgetData
-                          SET Remaining=?
-                          WHERE Exp_ID=?;''', values)
+
+        if both:
+            values = (value, rem, exp_id)
+            self.c.execute('''UPDATE BudgetData
+                              SET Initial=?, Remaining=?
+                              WHERE Exp_ID=?''', values)
+        else:
+            values = (value, exp_id)
+            self.c.execute('''UPDATE BudgetData
+                              SET Remaining=?
+                              WHERE Exp_ID=?;''', values)
+
+        self.conn.commit()
 
     def getBudgetLimits(self, exp_type):
         exp_id = self.getExpID(exp_type)
