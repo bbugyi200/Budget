@@ -5,7 +5,18 @@ debug = True
 
 
 class Base:
-    def __init__(self):
+    def __init__(self, DB=DB):
+        if DB[-3:] == '.db':
+            pass
+        else:
+            DB = DB + '.db'
+
+        if DB[:5] == 'data/':
+            pass
+        else:
+            DB = 'data/' + DB
+
+        if debug: print('Base ~ DB: ', DB)
         self.conn = sqlite3.connect(DB)
         self.c = self.conn.cursor()
 
@@ -14,6 +25,9 @@ class Base:
                      WHERE type=?;""", (exp_type,))
         exp_id = self.c.fetchone()[0]
         return exp_id
+
+    def close(self):
+        self.conn.close()
 
 
 class Expenses(Base):

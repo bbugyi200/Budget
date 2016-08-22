@@ -2,9 +2,9 @@ import sqlite3
 import os
 from .. import dates
 
-debug = True
+debug = False
 
-DB = 'data/' + dates.getDB()
+DB = dates.getMonthlyDB()
 if debug:
     DB = '/home/bryan/My_Projects/IntelliBudget/data/example.db'
 

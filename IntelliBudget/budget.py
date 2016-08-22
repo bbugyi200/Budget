@@ -13,20 +13,23 @@ else:
     import expenses
     import data.SQLDB as SQLDB
 
-DB = SQLDB()
-
 
 class NoneNotAllowed(Exception): pass
 
 
 class Budget:
     """ Budget object is used to handle budget operations. """
-    def __init__(self, limit=None):
+    def __init__(self, limit=None, DB=None):
+        if not DB:
+            self.DB = SQLDB()
+        else:
+            self.DB = SQLDB(DB)
+
         self.getLimit(limit)
-        self.expenses = Expense_List()
+        self.expenses = Expense_List(self.DB)
 
     def getLimit(self, limit):
-        Limits = DB.getBudgetLimits('ALL')
+        Limits = self.DB.getBudgetLimits('ALL')
         if debug: print('Budget ~ Limits: ', Limits, end='\n\n')
         if Limits:
             self.Limit, self.remainingLimit = Limits[0]
@@ -34,20 +37,23 @@ class Budget:
             raise NoneNotAllowed('''You must pass in a value for "limit" on
                                     the first load of a monthly budget!''')
         else:
-            DB.insertBudgetData(limit, exp_type='ALL')
+            self.DB.insertBudgetData(limit, exp_type='ALL')
             self.Limit = float(limit)
             self.remainingLimit = float(limit)
 
     def add_expense(self, date, expense_type, value, notes):
         self.remainingLimit -= float(value)
-        DB.UpdateBudgetRemLimit(self.remainingLimit, 'ALL')
+        self.DB.UpdateBudgetRemLimit(self.remainingLimit, 'ALL')
         self.expenses.add_expense(date, expense_type, value, notes)
 
     def remove_expense(self, index):
         value = self.expenses[index].value
         self.remainingLimit += float(value)
-        DB.UpdateBudgetRemLimit(self.remainingLimit, 'ALL')
+        self.DB.UpdateBudgetRemLimit(self.remainingLimit, 'ALL')
         self.expenses.remove_expense(index)
+
+    def close(self):
+        self.DB.close()
 
 
 class Expense_List:
@@ -57,18 +63,19 @@ class Expense_List:
     as a way to seperate the 'expense' operations that take place each
     Budget from other Budget related operations.
     """
-    def __init__(self):
+    def __init__(self, DB):
         self.allExpenses = []
+        self.DB = DB
         self.LoadExpenses()
 
     def LoadExpenses(self):
-        for Expense in DB.getAllExpenses():
+        for Expense in self.DB.getAllExpenses():
             key, date, etype, value, notes = Expense
             self.add_expense(date, etype, value, notes, key=key)
 
     def add_expense(self, date, expense_type, value, notes, key=None):
         if not key:
-            key = DB.insertExpense(date, expense_type, value, notes)
+            key = self.DB.insertExpense(date, expense_type, value, notes)
 
         expense = expenses.Expense(key, date, expense_type, value, notes)
         self.allExpenses.append(expense)
@@ -77,7 +84,7 @@ class Expense_List:
         try:
             key = self.allExpenses[index].key
             self.allExpenses.pop(index)
-            DB.deleteExpense(key)
+            self.DB.deleteExpense(key)
         except ValueError:
             print(index)
 

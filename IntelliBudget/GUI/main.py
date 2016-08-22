@@ -12,6 +12,7 @@ debug = False
 
 if not debug:
     from .. import budget
+    from .. import dates
     from . import style as sty
 else:
     import budget
@@ -34,6 +35,8 @@ class B_GUI_Setup:
 
         self.master = master
         master.title(TITLE)
+
+        self._createMenu(master)
 
         row = 0
 
@@ -92,31 +95,31 @@ class B_GUI_Setup:
         TT_bbuffer = tk.Frame(frame, height=20)
         TT_bbuffer.pack(side='bottom')
 
-    # def _createMenu(self, master):
-        # """ Creates dropdown menus on the top of the window """
-        # menu = tk.Menu(master)
-        # master.config(menu=menu)
+    def _createMenu(self, master):
+        """ Creates dropdown menus on the top of the window """
+        menu = tk.Menu(master)
+        master.config(menu=menu)
 
-        # fileMenu = tk.Menu(menu)
-        # menu.add_cascade(label='File', menu=fileMenu)
-        # fileMenu.add_command(label='New Paycheck', command=self.newPP)
-        # fileMenu.add_separator()
-        # fileMenu.add_command(label='Quit', command=master.quit)
+        fileMenu = tk.Menu(menu)
+        menu.add_cascade(label='File', menu=fileMenu)
+        fileMenu.add_command(label='Quit', command=master.quit)
 
-        # viewMenu = tk.Menu(menu)
-        # menu.add_cascade(label='Paychecks', menu=viewMenu)
+        viewMenu = tk.Menu(menu)
+        menu.add_cascade(label='Archives', menu=viewMenu)
 
-        # for date in bdates.getPP_files()[-1:-10:-1]:
-            # viewMenu.add_command(label=date, command=self._GetPPFactory(date))
+        for month in dates.getDBFiles():
+            viewMenu.add_command(label=month,
+                                 command=self._GetBudgetFactory(month))
 
-    # def _GetPPFactory(self, date):
-        # """ Returns a function ('GetPP') that changes the PP object and then
-        # refreshes the screen.
-        # """
-        # def GetPP():
-            # self.Budget = bdata.GetPayPeriod(date)
-            # self.refresh_screen()
-        # return GetPP
+    def _GetBudgetFactory(self, month):
+        """ Returns a function ('GetPP') that changes the PP object and then
+        refreshes the screen.
+        """
+        def GetBudget():
+            self.Budget.close()
+            self.Budget = budget.Budget(DB=month)
+            self.refresh_screen()
+        return GetBudget
 
     def budget_data(self, frame):
         """ Used to create the 'initial' and 'remaining' fields of the given

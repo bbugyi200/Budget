@@ -40,9 +40,14 @@ X Make sure that there is a method to retrieve budget data.
 X Locate and restore Exp_Attrs
 X Comment out README. Under construction. 
 X Change the name of the repo.
+X Give the user the option to go back to a prior month.
 * Cleanup main.py code 
+* Change the dropdown option for the 'Expense Type' to pull from the SQL 
+  database.
 * Cleanup 'debug' code and make sure that production DB works as expected.
+* Comment all changes and merge in Monthly branch
 * Update the README.
+* Add TODO section of README for most current todo list items
 * Update the first release. (windows will not be included)
 * Find a way to make the program installable via 'sudo apt-get'
 * Get some kind of feedback loop started.
@@ -50,7 +55,6 @@ X Change the name of the repo.
 
 
 ----- Version 2 -----
-* Give the user the option to go back to a prior month.
 * Change PayPeriod object to Paycheck object. This is more appropriate. 
 * Investigate the competition
 * Add TODO section to the README
