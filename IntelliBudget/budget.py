@@ -40,11 +40,13 @@ class Budget:
 
     def add_expense(self, date, expense_type, value, notes):
         self.remainingLimit -= float(value)
+        DB.UpdateBudgetRemLimit(self.remainingLimit, 'ALL')
         self.expenses.add_expense(date, expense_type, value, notes)
 
     def remove_expense(self, index):
         value = self.expenses[index].value
         self.remainingLimit += float(value)
+        DB.UpdateBudgetRemLimit(self.remainingLimit, 'ALL')
         self.expenses.remove_expense(index)
 
 
@@ -62,15 +64,11 @@ class Expense_List:
     def LoadExpenses(self):
         for Expense in DB.getAllExpenses():
             key, date, etype, value, notes = Expense
-            self.add_expense(date, etype, value, notes, key=key, new=False)
+            self.add_expense(date, etype, value, notes, key=key)
 
-    def add_expense(self, date, expense_type, value, notes, key=None,
-                    new=True):
-        if new:
+    def add_expense(self, date, expense_type, value, notes, key=None):
+        if not key:
             key = DB.insertExpense(date, expense_type, value, notes)
-        elif not key:
-            raise NoneNotAllowed("""You must pass in a key to use 'add_expense'
-                                    with new expenses!""")
 
         expense = expenses.Expense(key, date, expense_type, value, notes)
         self.allExpenses.append(expense)

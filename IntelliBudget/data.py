@@ -6,8 +6,7 @@ debug = True
 
 DB = 'data/' + dates.getDB()
 if debug:
-    DB = '/home/bryan/My_Projects/P2P/data/example.db'
-    DB = r'H:\\PP\\data\\example.db'
+    DB = '/home/bryan/My_Projects/IntelliBudget/data/example.db'
 
 
 class InitSQLDB:
@@ -116,8 +115,14 @@ class SQLDB:
 
         self.conn.commit()
 
+    def UpdateBudgetRemLimit(self, price, exp_type):
+        exp_id = self.getExpID(exp_type)
+        values = (price, exp_id)
+        self.c.execute('''UPDATE BudgetData
+                          SET Remaining=?
+                          WHERE Exp_ID=?;''', values)
+
     def getBudgetLimits(self):
-        # 0 is the key for 'ALL'
         self.c.execute("""SELECT Initial, Remaining
                           FROM BudgetData
                           WHERE Exp_ID=1;""")

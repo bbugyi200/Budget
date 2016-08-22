@@ -391,8 +391,8 @@ class BudgetGUI(B_GUI_Setup):
         """
         try:
             self.Budget.add_expense('DATE', self.expense_choice.get(),
-                                self.ValueEntry.get(),
-                                self.NotesEntry.get())
+                                    self.ValueEntry.get(),
+                                    self.NotesEntry.get())
 
             self.ValueEntry.delete(0, 'end')
             self.NotesEntry.delete(0, 'end')
