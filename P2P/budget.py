@@ -4,7 +4,7 @@ This module focuses on objects that represent more holistic models
 of a single pay cycle.
 """
 
-debug = True
+debug = False
 
 if not debug:
     from . import expenses
@@ -22,10 +22,10 @@ class NoneNotAllowed(Exception): pass
 class Budget:
     """ Budget object is used to handle budget operations. """
     def __init__(self, limit=None):
-        self.getLimit()
+        self.getLimit(limit)
         self.expenses = Expense_List()
 
-    def getLimit(self):
+    def getLimit(self, limit):
         Limits = DB.getBudgetLimits()
         if debug: print('Budget ~ Limits: ', Limits, end='\n\n')
         if Limits:
@@ -37,7 +37,6 @@ class Budget:
             DB.insertBudgetData(limit, exp_type='ALL')
             self.Limit = float(limit)
             self.remainingLimit = float(limit)
-
 
     def add_expense(self, date, expense_type, value, notes):
         self.remainingLimit -= float(value)
