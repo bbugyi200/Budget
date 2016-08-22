@@ -64,7 +64,8 @@ class Expense_List:
             key, date, etype, value, notes = Expense
             self.add_expense(date, etype, value, notes, key=key, new=False)
 
-    def add_expense(self, date, expense_type, value, notes, key=None, new=True):
+    def add_expense(self, date, expense_type, value, notes, key=None,
+                    new=True):
         if new:
             key = DB.insertExpense(date, expense_type, value, notes)
         elif not key:

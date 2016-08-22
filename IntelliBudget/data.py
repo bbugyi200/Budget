@@ -1,14 +1,14 @@
 import sqlite3
 import os
 from . import dates
-import collections
 
 debug = True
 
 DB = 'data/' + dates.getDB()
-if debug: 
+if debug:
     DB = '/home/bryan/My_Projects/P2P/data/example.db'
     DB = r'H:\\PP\\data\\example.db'
+
 
 class InitSQLDB:
     """ InitSQLDB initializes the SQLite database. """
@@ -30,10 +30,15 @@ class InitSQLDB:
         self.conn.commit()
 
     def createBaseETypes(self):
-        baseTypes = ['ALL', 'Food', 'Monthly Bills', 'Miscellaneous', 'Entertainment']
+        baseTypes = ['ALL',
+                     'Food',
+                     'Monthly Bills',
+                     'Miscellaneous',
+                     'Entertainment']
+
         for etype in baseTypes:
-            self.c.execute('''INSERT INTO ExpTypes VALUES (?, ?, ?)''',
-                      (None, etype, None))
+            values = (None, etype, None)
+            self.c.execute('''INSERT INTO ExpTypes VALUES (?, ?, ?)''', values)
 
         self.conn.commit()
 
@@ -73,7 +78,8 @@ class SQLDB:
         exp_id = self.getExpID(exp_type)
         if debug: print('insertExpense ~ ExpID: ', exp_id)
         expense_data = (None, date, exp_id, price, notes)
-        self.c.execute('''INSERT INTO Expenses VALUES (?, ?, ?, ?, ?)''', expense_data)
+        self.c.execute('''INSERT INTO Expenses VALUES (?, ?, ?, ?, ?)''',
+                       expense_data)
 
         key = self.c.lastrowid
         if debug: print("insertExpense ~ key: ", key)
@@ -114,7 +120,7 @@ class SQLDB:
         # 0 is the key for 'ALL'
         self.c.execute("""SELECT Initial, Remaining
                           FROM BudgetData
-                          WHERE Exp_ID=1;""") 
+                          WHERE Exp_ID=1;""")
         return self.c.fetchall()
 
 
