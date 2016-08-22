@@ -12,14 +12,18 @@ debug = False
 
 if not debug:
     from .. import budget
+    from ..budget import NoneNotAllowed
     from .. import dates
     from . import style as sty
 else:
     import budget
+    from budget import NoneNotAllowed
+    import dates
     import style as sty
 
 
 TITLE = 'IntelliBudget'
+MONTH = 'MONTH'
 fonts = sty.Fonts()
 
 
@@ -31,7 +35,13 @@ class B_GUI_Setup:
     """
 
     def __init__(self, master):
-        self.Budget = budget.Budget(1000)
+        FIRST_USE = False
+
+        try:
+            self.Budget = budget.Budget()
+        except NoneNotAllowed:
+            FIRST_USE = True
+            self.Budget = budget.Budget(0)
 
         self.master = master
         master.title(TITLE)
@@ -84,6 +94,17 @@ class B_GUI_Setup:
         self.submit_frame = tk.Frame(self.frame3)
         self.submit_frame.grid(row=1, column=1)
         self._createSubmit(self.submit_frame)
+
+        if FIRST_USE:
+            message = "It looks like this is your first time using {0} in " \
+                      "the month of {1}! \n\nBefore you get started, let's " \
+                      "setup this month's spending limits!"
+
+            message = message.format(TITLE, MONTH)
+
+            tkinter.messagebox.showinfo("FIRST USE IN " + MONTH + "!!!",
+                                        message)
+            self.newLimits()
 
         master.mainloop()
 
