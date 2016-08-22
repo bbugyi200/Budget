@@ -8,12 +8,12 @@ debug = False
 
 if not debug:
     from . import expenses
-    from . import data
+    from .data.SQLDB import SQLDB
 else:
     import expenses
-    import data
+    import data.SQLDB as SQLDB
 
-DB = data.SQLDB()
+DB = SQLDB()
 
 
 class NoneNotAllowed(Exception): pass
@@ -26,7 +26,7 @@ class Budget:
         self.expenses = Expense_List()
 
     def getLimit(self, limit):
-        Limits = DB.getBudgetLimits()
+        Limits = DB.getBudgetLimits('ALL')
         if debug: print('Budget ~ Limits: ', Limits, end='\n\n')
         if Limits:
             self.Limit, self.remainingLimit = Limits[0]
