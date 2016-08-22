@@ -4,7 +4,7 @@ This module focuses on objects that represent more holistic models
 of a single pay cycle.
 """
 
-debug = True
+debug = False
 
 if not debug:
     from . import expenses

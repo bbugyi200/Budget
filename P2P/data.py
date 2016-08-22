@@ -1,6 +1,6 @@
 import sqlite3
 import os
-import dates
+from . import dates
 import collections
 
 debug = True

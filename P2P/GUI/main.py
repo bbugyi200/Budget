@@ -8,22 +8,21 @@ import tkinter as tk
 import tkinter.ttk as ttk
 import tkinter.messagebox
 
-debug = True
+debug = False
 
 if not debug:
-    from .. import bdata
-    from ..bdata import NoData
-    from .. import bdates
-    from .. import payperiod
+    from .. import data
+    from .. import dates
+    from .. import budget
     from . import style as sty
 else:
     import data
     import dates
-    import payperiod
+    import budget
     import style as sty
 
 
-TITLE = 'Paycheck2Paycheck'
+TITLE = 'IntelliBudget'
 fonts = sty.Fonts()
 
 
@@ -35,18 +34,10 @@ class B_GUI_Setup:
     """
 
     def __init__(self, master):
-        try:
-            self.Budget = budget.Budget()
-
-        # If the 'data/' folder is empty, a default PayPeriod is created
-        # and subsequently the 'FirstUse()' function is later called.
-        except NoData:
-            self.Budget = payperiod.PayPeriod(0, 'First Paycheck', 0)
+        self.Budget = budget.Budget(1000)
 
         self.master = master
-        master.title(TITLE + ' - (' + self.Budget.StartDate + ')')
-
-        self._createMenu(master)
+        master.title(TITLE)
 
         row = 0
 
@@ -95,11 +86,6 @@ class B_GUI_Setup:
         self.submit_frame.grid(row=1, column=1)
         self._createSubmit(self.submit_frame)
 
-        # Recognizes that there is no payperiod data and asks user to setup
-        # first payperiod.
-        if self.Budget.StartDate == 'First Paycheck':
-            self.FirstUse()
-
         master.mainloop()
 
     def _createTopTitle(self, frame):
@@ -110,31 +96,31 @@ class B_GUI_Setup:
         TT_bbuffer = tk.Frame(frame, height=20)
         TT_bbuffer.pack(side='bottom')
 
-    def _createMenu(self, master):
-        """ Creates dropdown menus on the top of the window """
-        menu = tk.Menu(master)
-        master.config(menu=menu)
+    # def _createMenu(self, master):
+        # """ Creates dropdown menus on the top of the window """
+        # menu = tk.Menu(master)
+        # master.config(menu=menu)
 
-        fileMenu = tk.Menu(menu)
-        menu.add_cascade(label='File', menu=fileMenu)
-        fileMenu.add_command(label='New Paycheck', command=self.newPP)
-        fileMenu.add_separator()
-        fileMenu.add_command(label='Quit', command=master.quit)
+        # fileMenu = tk.Menu(menu)
+        # menu.add_cascade(label='File', menu=fileMenu)
+        # fileMenu.add_command(label='New Paycheck', command=self.newPP)
+        # fileMenu.add_separator()
+        # fileMenu.add_command(label='Quit', command=master.quit)
 
-        viewMenu = tk.Menu(menu)
-        menu.add_cascade(label='Paychecks', menu=viewMenu)
+        # viewMenu = tk.Menu(menu)
+        # menu.add_cascade(label='Paychecks', menu=viewMenu)
 
-        for date in bdates.getPP_files()[-1:-10:-1]:
-            viewMenu.add_command(label=date, command=self._GetPPFactory(date))
+        # for date in bdates.getPP_files()[-1:-10:-1]:
+            # viewMenu.add_command(label=date, command=self._GetPPFactory(date))
 
-    def _GetPPFactory(self, date):
-        """ Returns a function ('GetPP') that changes the PP object and then
-        refreshes the screen.
-        """
-        def GetPP():
-            self.Budget = bdata.GetPayPeriod(date)
-            self.refresh_screen()
-        return GetPP
+    # def _GetPPFactory(self, date):
+        # """ Returns a function ('GetPP') that changes the PP object and then
+        # refreshes the screen.
+        # """
+        # def GetPP():
+            # self.Budget = bdata.GetPayPeriod(date)
+            # self.refresh_screen()
+        # return GetPP
 
     def budget_data(self, frame):
         """ Used to create the 'initial' and 'remaining' fields of the given
@@ -179,14 +165,10 @@ class B_GUI_Setup:
         """ Used to update or initially set the data in the Budget Data
         column.
         """
-        self.Lab_initial_text.set('PAYCHECK: ' +
-                                  '{0:.2f}'.format(float(self.Budget.initial)))
+        self.Lab_initial_text.set('LIMIT: ' +
+                                  '{0:.2f}'.format(float(self.Budget.Limit)))
         self.Lab_remaining_text.set('REMAINING: ' +
-                                    '{0:.2f}'.format(float(self.Budget.remaining)))
-        self.SL_text.set('SPENDING LIMIT: ' +
-                         '{0:.2f}'.format(float(self.Budget.initialBud)))
-        self.RL_text.set('REMAINING LIMIT: ' +
-                         '{0:.2f}'.format(float(self.Budget.remainingBud)))
+                                    '{0:.2f}'.format(float(self.Budget.remainingLimit)))
 
     def _createExpenseForm(self, frame):
         """ Creates the form that the user uses to input a new expense into
@@ -322,11 +304,6 @@ class B_GUI_Setup:
         self.ExpenseFrame = tk.Frame(self.outer_expense_frame)
         self.ExpenseFrame.pack(fill='both')
 
-        Exp_Attrs = self.Budget.expenses.get()
-
-        # Debugging Assistance
-        assert True, print(Exp_Attrs)
-
         # Scrollbar for expense list
         scrollbar = tk.Scrollbar(self.ExpenseFrame)
         scrollbar.pack(side='right', fill='y')
@@ -403,9 +380,6 @@ class B_GUI_Setup:
     def DeleteSelected(self):
         assert False, "The DeleteSelected function must be overloaded!"
 
-    def FirstUse(self):
-        assert False, "The FirstUse function must be overloaded!"
-
 
 class BudgetGUI(B_GUI_Setup):
     """ BudgetGUI Class
@@ -418,7 +392,7 @@ class BudgetGUI(B_GUI_Setup):
         is pressed.
         """
         try:
-            self.Budget.add_expense(self.expense_choice.get(),
+            self.Budget.add_expense('DATE', self.expense_choice.get(),
                                 self.ValueEntry.get(),
                                 self.NotesEntry.get())
 
@@ -426,7 +400,6 @@ class BudgetGUI(B_GUI_Setup):
             self.NotesEntry.delete(0, 'end')
 
             self.refresh_screen()
-            bdata.SavePP(self.Budget)
 
         except AttributeError:
             tkinter.messagebox.showinfo("ERROR",
@@ -514,32 +487,32 @@ class BudgetGUI(B_GUI_Setup):
 
         self.NPP_root.mainloop()
 
-    def _SubmitNewPP(self):
-        """ This function is called when the user submits the NewPP
-        information.
-        """
-        M, D, Y = (self.month_entry.get(),
-                   self.day_entry.get(),
-                   self.year_entry.get())
+    # def _SubmitNewPP(self):
+        # """ This function is called when the user submits the NewPP
+        # information.
+        # """
+        # M, D, Y = (self.month_entry.get(),
+                   # self.day_entry.get(),
+                   # self.year_entry.get())
 
-        M, D, Y = int(M), int(D), int(Y[-2:])
+        # M, D, Y = int(M), int(D), int(Y[-2:])
 
-        StartDate = '{0:02d}-{1:02d}-{2}'.format(M, D, Y)
+        # StartDate = '{0:02d}-{1:02d}-{2}'.format(M, D, Y)
 
-        NEWPP = payperiod.PayPeriod(self.paycheck_entry.get(),
-                                    StartDate=StartDate,
-                                    budgeted=self.slimit_entry.get())
+        # NEWPP = payperiod.PayPeriod(self.paycheck_entry.get(),
+                                    # StartDate=StartDate,
+                                    # budgeted=self.slimit_entry.get())
 
-        bdata.SavePP(NEWPP)
-        self.Budget = NEWPP
+        # bdata.SavePP(NEWPP)
+        # self.Budget = NEWPP
 
-        self.refresh_screen()
+        # self.refresh_screen()
 
-        self.NPP_root.destroy()
+        # self.NPP_root.destroy()
 
     def refresh_screen(self):
         """ This function is used to refresh the main GUI window. """
-        self.master.title(TITLE + ' - (' + self.Budget.StartDate + ')')
+        self.master.title(TITLE)
         self.set_dynamic_data()
         self._showExpenses(self.frame2)
 
@@ -558,18 +531,8 @@ class BudgetGUI(B_GUI_Setup):
             # Deletes the expense at the specified index
             self.Budget.remove_expense(index)
             self.refresh_screen()
-            bdata.SavePP(self.Budget)
 
         # Does nothing if 'Delete Selected' button is clicked when no item is
         # selected.
         except TypeError:
             if debug: raise
-
-    def FirstUse(self):
-        """ This function welcomes a new user to the program and then prompts
-        him to setup his first PayPeriod.
-        """
-        message = "Welcome to the Budget Program!" \
-                  "\n\nLet's setup your first Paycheck!"
-        tkinter.messagebox.showinfo("WELCOME!", message)
-        self.newPP()

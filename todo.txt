@@ -36,8 +36,8 @@ X Break data.py down into an Object-Oriented model. This will allow for better
   organization.
 X Remodel payperiod.py file
 X Add table to SQLite that will handle Budget information.
-* Make sure that there is a method to retrieve budget data. (perhaps use named
-  tuple?)
+X Make sure that there is a method to retrieve budget data.
+* Locate and restore Exp_Attrs
 * Remodel main.py
 
 === MONTHLY BUDGET UPDATE ===
