@@ -11,13 +11,9 @@ import tkinter.messagebox
 debug = False
 
 if not debug:
-    from .. import data
-    from .. import dates
     from .. import budget
     from . import style as sty
 else:
-    import data
-    import dates
     import budget
     import style as sty
 
@@ -319,6 +315,8 @@ class B_GUI_Setup:
         # Without this loop, the headings will not actually show.
         for c in dataCols:
             self.tree.heading(c, text=c)
+
+        Exp_Attrs = self.Budget.expenses.get()
 
         # Inserts each expense into the Treeview object
         for item in Exp_Attrs:
