@@ -12,7 +12,7 @@ class Money:
     def __init__(self, val):
         self.val = float(val)
 
-    def __str__(self):
+    def __repr__(self):
         return '${0:.2f}'.format(self.val)
 
     def __float__(self):

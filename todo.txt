@@ -34,7 +34,11 @@ X Fix bdates.py file so that it is using the month instead of the payperiod
 X Implement data.py file as replacement for bdata.py
 X Break data.py down into an Object-Oriented model. This will allow for better
   organization.
-* Remodel payperiod.py file
+X Remodel payperiod.py file
+X Add table to SQLite that will handle Budget information.
+* Make sure that there is a method to retrieve budget data. (perhaps use named
+  tuple?)
+* Remodel main.py
 
 === MONTHLY BUDGET UPDATE ===
 X Comment out README. Under construction. 

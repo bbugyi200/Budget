@@ -36,15 +36,15 @@ class B_GUI_Setup:
 
     def __init__(self, master):
         try:
-            self.PP = bdata.GetPayPeriod()
+            self.Budget = budget.Budget()
 
         # If the 'data/' folder is empty, a default PayPeriod is created
         # and subsequently the 'FirstUse()' function is later called.
         except NoData:
-            self.PP = payperiod.PayPeriod(0, 'First Paycheck', 0)
+            self.Budget = payperiod.PayPeriod(0, 'First Paycheck', 0)
 
         self.master = master
-        master.title(TITLE + ' - (' + self.PP.StartDate + ')')
+        master.title(TITLE + ' - (' + self.Budget.StartDate + ')')
 
         self._createMenu(master)
 
@@ -97,7 +97,7 @@ class B_GUI_Setup:
 
         # Recognizes that there is no payperiod data and asks user to setup
         # first payperiod.
-        if self.PP.StartDate == 'First Paycheck':
+        if self.Budget.StartDate == 'First Paycheck':
             self.FirstUse()
 
         master.mainloop()
@@ -132,7 +132,7 @@ class B_GUI_Setup:
         refreshes the screen.
         """
         def GetPP():
-            self.PP = bdata.GetPayPeriod(date)
+            self.Budget = bdata.GetPayPeriod(date)
             self.refresh_screen()
         return GetPP
 
@@ -180,13 +180,13 @@ class B_GUI_Setup:
         column.
         """
         self.Lab_initial_text.set('PAYCHECK: ' +
-                                  '{0:.2f}'.format(float(self.PP.initial)))
+                                  '{0:.2f}'.format(float(self.Budget.initial)))
         self.Lab_remaining_text.set('REMAINING: ' +
-                                    '{0:.2f}'.format(float(self.PP.remaining)))
+                                    '{0:.2f}'.format(float(self.Budget.remaining)))
         self.SL_text.set('SPENDING LIMIT: ' +
-                         '{0:.2f}'.format(float(self.PP.initialBud)))
+                         '{0:.2f}'.format(float(self.Budget.initialBud)))
         self.RL_text.set('REMAINING LIMIT: ' +
-                         '{0:.2f}'.format(float(self.PP.remainingBud)))
+                         '{0:.2f}'.format(float(self.Budget.remainingBud)))
 
     def _createExpenseForm(self, frame):
         """ Creates the form that the user uses to input a new expense into
@@ -322,7 +322,7 @@ class B_GUI_Setup:
         self.ExpenseFrame = tk.Frame(self.outer_expense_frame)
         self.ExpenseFrame.pack(fill='both')
 
-        Exp_Attrs = self.PP.expenses.get()
+        Exp_Attrs = self.Budget.expenses.get()
 
         # Debugging Assistance
         assert True, print(Exp_Attrs)
@@ -418,7 +418,7 @@ class BudgetGUI(B_GUI_Setup):
         is pressed.
         """
         try:
-            self.PP.add_expense(self.expense_choice.get(),
+            self.Budget.add_expense(self.expense_choice.get(),
                                 self.ValueEntry.get(),
                                 self.NotesEntry.get())
 
@@ -426,7 +426,7 @@ class BudgetGUI(B_GUI_Setup):
             self.NotesEntry.delete(0, 'end')
 
             self.refresh_screen()
-            bdata.SavePP(self.PP)
+            bdata.SavePP(self.Budget)
 
         except AttributeError:
             tkinter.messagebox.showinfo("ERROR",
@@ -531,7 +531,7 @@ class BudgetGUI(B_GUI_Setup):
                                     budgeted=self.slimit_entry.get())
 
         bdata.SavePP(NEWPP)
-        self.PP = NEWPP
+        self.Budget = NEWPP
 
         self.refresh_screen()
 
@@ -539,7 +539,7 @@ class BudgetGUI(B_GUI_Setup):
 
     def refresh_screen(self):
         """ This function is used to refresh the main GUI window. """
-        self.master.title(TITLE + ' - (' + self.PP.StartDate + ')')
+        self.master.title(TITLE + ' - (' + self.Budget.StartDate + ')')
         self.set_dynamic_data()
         self._showExpenses(self.frame2)
 
@@ -556,9 +556,9 @@ class BudgetGUI(B_GUI_Setup):
                     index = i
 
             # Deletes the expense at the specified index
-            self.PP.remove_expense(index)
+            self.Budget.remove_expense(index)
             self.refresh_screen()
-            bdata.SavePP(self.PP)
+            bdata.SavePP(self.Budget)
 
         # Does nothing if 'Delete Selected' button is clicked when no item is
         # selected.
