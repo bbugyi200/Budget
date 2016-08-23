@@ -95,11 +95,12 @@ class B_GUI_Setup:
         self.submit_frame.grid(row=1, column=1)
         self._createSubmit(self.submit_frame)
 
+        # Asks user to setup limits if this is the first time the program's
+        # been run this month.
         if FIRST_USE:
             message = "It looks like this is your first time using {0} in " \
                       "the month of {1}! \n\nBefore you get started, let's " \
                       "setup this month's spending limits!"
-
             message = message.format(TITLE, MONTH)
 
             tkinter.messagebox.showinfo("FIRST USE IN " + MONTH + "!!!",
@@ -135,9 +136,7 @@ class B_GUI_Setup:
                                  command=self._GetBudgetFactory(month))
 
     def _GetBudgetFactory(self, month):
-        """ Returns a function ('GetPP') that changes the PP object and then
-        refreshes the screen.
-        """
+        """ Returns a function that creates a new budget. """
         def GetBudget():
             self.Budget.close()
             self.Budget = budget.Budget(DB=month)
@@ -145,9 +144,7 @@ class B_GUI_Setup:
         return GetBudget
 
     def budget_data(self, frame):
-        """ Used to create the 'initial' and 'remaining' fields of the given
-        Paycheck.
-        """
+        """ Renders all of the Budget Data. """
         row = 0
 
         text = "Budget Data"
@@ -297,7 +294,7 @@ class B_GUI_Setup:
         SubmitButton.grid()
 
     def _showExpenses(self, frame):
-        """ Displays all of this Paycheck's expenses. """
+        """ Displays all of this Month's expenses. """
 
         # If the ExpenseFrame exists, it will be destroyed
         try:
@@ -385,25 +382,6 @@ class B_GUI_Setup:
 
         Create_Delete_Button()
 
-    ########################
-    #   Abstract Methods   #
-    ########################
-
-    def SubmitFunc(self):
-        assert False, "The SubmitFunc function must be overloaded!"
-
-    def SubmitFuncBind(self):
-        assert False, "The SubmitFuncBind function must be overloaded!"
-
-    def newLimits(self):
-        assert False, "The newLimits function must be overloaded!"
-
-    def refresh_screen(self):
-        assert False, "The refresh_screen function must be overloaded!"
-
-    def DeleteSelected(self):
-        assert False, "The DeleteSelected function must be overloaded!"
-
 
 class BudgetGUI(B_GUI_Setup):
     """ BudgetGUI Class
@@ -446,11 +424,11 @@ class BudgetGUI(B_GUI_Setup):
 
     def newLimits(self):
         """ Creates a new GUI window that prompts the user for the new
-        Paycheck's information.
+        Budget information.
         """
 
         self.NewMonthRoot = tk.Tk()
-        self.NewMonthRoot.title('MONTH - Limit Form')
+        self.NewMonthRoot.title(MONTH + ' - Limit Form')
 
         TopFrame = tk.Frame(self.NewMonthRoot)
         TopFrame.grid(row=0)
