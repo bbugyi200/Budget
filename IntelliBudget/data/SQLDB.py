@@ -1,8 +1,6 @@
 import sqlite3
 from .InitSQLDB import DB
 
-debug = True
-
 
 class Base:
     def __init__(self, DB=DB):
@@ -16,7 +14,6 @@ class Base:
         else:
             DB = 'data/' + DB
 
-        if debug: print('Base ~ DB: ', DB)
         self.conn = sqlite3.connect(DB)
         self.c = self.conn.cursor()
 
@@ -34,13 +31,11 @@ class Expenses(Base):
     """ Holds all expense related database operations. """
     def insertExpense(self, date, exp_type, price, notes):
         exp_id = self.getExpID(exp_type)
-        if debug: print('insertExpense ~ ExpID: ', exp_id)
         expense_data = (None, date, exp_id, price, notes)
         self.c.execute('''INSERT INTO Expenses VALUES (?, ?, ?, ?, ?)''',
                        expense_data)
 
         key = self.c.lastrowid
-        if debug: print("insertExpense ~ key: ", key)
 
         self.conn.commit()
 
@@ -61,8 +56,6 @@ class Expenses(Base):
 
             expense_list.append(row)
 
-        if debug: print('getAllExpenses: ', expense_list)
-
         return expense_list
 
 
@@ -77,16 +70,16 @@ class Budgets(Base):
 
         self.conn.commit()
 
-    def UpdateBudgetLimit(self, value, exp_type, rem=None, both=False):
+    def UpdateBudgetLimit(self, remaining, exp_type, initial=None):
         exp_id = self.getExpID(exp_type)
 
-        if both:
-            values = (value, rem, exp_id)
+        if initial:
+            values = (initial, remaining, exp_id)
             self.c.execute('''UPDATE BudgetData
                               SET Initial=?, Remaining=?
                               WHERE Exp_ID=?''', values)
         else:
-            values = (value, exp_id)
+            values = (remaining, exp_id)
             self.c.execute('''UPDATE BudgetData
                               SET Remaining=?
                               WHERE Exp_ID=?;''', values)
