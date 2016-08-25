@@ -43,6 +43,7 @@ X Change the name of the repo.
 X Give the user the option to go back to a prior month.
 X Force user to enter in Limits when a new database is created.
 X Cleanup main.py code 
+* Refactor GUI files
 * Change the dropdown option for the 'Expense Type' to pull from the SQL 
   database.
 * Maybe set all other expense types to have 'ALL' as a parent and then use this

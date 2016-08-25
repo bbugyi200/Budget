@@ -1,7 +1,4 @@
-""" style.py
-
-Holds GUI fonts and formatting relevant information.
-"""
+""" Holds GUI fonts and formatting relevant information. """
 
 # Default width and height for buffer between frames
 width = 25

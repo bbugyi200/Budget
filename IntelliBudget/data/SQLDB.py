@@ -91,7 +91,11 @@ class Budgets(Base):
         self.c.execute("""SELECT Initial, Remaining
                           FROM BudgetData
                           WHERE Exp_ID=?;""", (exp_id,))
-        return self.c.fetchall()
+        limits = self.c.fetchall()
+        if limits:
+            return limits[0]
+        else:
+            return None
 
 
 class SQLDB(Expenses, Budgets): pass

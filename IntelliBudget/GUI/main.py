@@ -1,8 +1,4 @@
-""" GUI.py
-
-All classes and functions that are related to the tkinter GUI should be
-stored in this module.
-"""
+""" Main GUI file. Launches all other widgets. """
 
 import tkinter as tk
 import tkinter.ttk as ttk
@@ -11,6 +7,8 @@ import tkinter.messagebox
 from . import style as sty
 from .constants import TITLE, MONTH, fonts, debug
 from .menu import Menu
+from .budgetdata import BudgetData
+from .newlimits import NewLimits
 
 from .. import budget
 from ..budget import NoneNotAllowed
@@ -40,17 +38,16 @@ class Main(tk.Frame):
         self.TopTitle(self.topFrame)
 
         # frame1 is the leftmost frame
-        self.frame1 = tk.Frame(self, width=700, height=200)
-        self.frame1.grid(row=row, column=0)
+        frame1 = tk.Frame(self, width=700, height=200)
+        frame1.grid(row=row, column=0)
 
-        self.frame1_Lbuffer = tk.Frame(self.frame1, width=sty.width)
-        self.frame1_Lbuffer.grid()
-        self.frame1_Rbuffer = tk.Frame(self.frame1, width=sty.width)
-        self.frame1_Rbuffer.grid(column=100)
+        frame1_Lbuffer = tk.Frame(frame1, width=sty.width)
+        frame1_Lbuffer.grid()
+        frame1_Rbuffer = tk.Frame(frame1, width=sty.width)
+        frame1_Rbuffer.grid(column=100)
 
-        self.data_frame = tk.Frame(self.frame1)
-        self.data_frame.grid(row=0, column=1)
-        self.budget_data(self.data_frame)
+        self.BD = BudgetData(frame1, self.Budget)
+        self.BD.grid(row=0, column=1)
 
         self.frame2 = tk.Frame(self)
         self.frame2.grid(row=row, column=1)
@@ -89,7 +86,8 @@ class Main(tk.Frame):
 
             tkinter.messagebox.showinfo("FIRST USE IN " + MONTH + "!!!",
                                         message)
-            self.newLimits()
+            NL = NewLimits(self)
+            NL.Make()
 
     def TopTitle(self, frame):
         TopTitle = tk.Label(frame,
@@ -99,51 +97,6 @@ class Main(tk.Frame):
         TT_bbuffer = tk.Frame(frame, height=20)
         TT_bbuffer.pack(side='bottom')
 
-    def budget_data(self, frame):
-        """ Renders all of the Budget Data. """
-        row = 0
-
-        text = "Budget Data"
-        BudgetDataTitle = tk.Label(frame, text=text,
-                                   font=fonts.title())
-        BudgetDataTitle.grid(row=row); row += 1
-
-        # Bottom buffer space between title and the rest of the data
-        BTitle_bbuffer = tk.Frame(frame, height=5)
-        BTitle_bbuffer.grid(row=row); row += 1
-
-        # The dynamic textvariables
-        self.Lab_initial_text = tk.StringVar()
-        self.Lab_remaining_text = tk.StringVar()
-        self.SL_text = tk.StringVar()
-        self.RL_text = tk.StringVar()
-
-        self.set_dynamic_data()
-
-        self.Lab_initial = tk.Label(frame, textvariable=self.Lab_initial_text)
-        self.Lab_initial.grid(row=row); row += 1
-
-        self.Lab_remaining = tk.Label(frame,
-                                      textvariable=self.Lab_remaining_text)
-        self.Lab_remaining.grid(row=row); row += 1
-
-        # Spending Limit Top Buffer
-        SL_Tbuffer = tk.Frame(frame, height=10)
-        SL_Tbuffer.grid(row=row); row += 1
-
-        spending_limit = tk.Label(frame, textvariable=self.SL_text)
-        spending_limit.grid(row=row); row += 1
-        remaining_limit = tk.Label(frame, textvariable=self.RL_text)
-        remaining_limit.grid(row=row); row += 1
-
-    def set_dynamic_data(self):
-        """ Used to update or initially set the data in the Budget Data
-        column.
-        """
-        self.Lab_initial_text.set('LIMIT: ' +
-                                  '{0:.2f}'.format(float(self.Budget.Limit)))
-        self.Lab_remaining_text.set('REMAINING: ' +
-                                    '{0:.2f}'.format(float(self.Budget.remainingLimit)))
 
     def ExpenseForm(self, frame):
         """ Creates the form that the user uses to input a new expense into
@@ -374,7 +327,7 @@ class Main(tk.Frame):
     def refresh_screen(self):
         """ This function is used to refresh the main GUI window. """
         self.master.title(TITLE)
-        self.set_dynamic_data()
+        self.BD.set_dynamic_data()
         self._showExpenses(self.frame2)
 
     def DeleteSelected(self):

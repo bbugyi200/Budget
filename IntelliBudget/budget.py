@@ -32,7 +32,7 @@ class Budget:
         Limits = self.DB.getBudgetLimits('ALL')
         if debug: print('Budget ~ Limits: ', Limits, end='\n\n')
         if Limits:
-            self.Limit, self.remainingLimit = Limits[0]
+            self.Limit, self.remainingLimit = Limits
         elif limit is None:
             raise NoneNotAllowed('''You must pass in a value for "limit" on
                                     the first load of a monthly budget!''')
