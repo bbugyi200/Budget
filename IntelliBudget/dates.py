@@ -31,8 +31,7 @@ def getMonthlyDB(File=None):
 
 
 def getDBFiles():
-    path = '/home/bryan/My_Projects/IntelliBudget/data/'
-    files = [f for f in os.listdir(path) if f[-3:] == '.db']
+    files = [f for f in os.listdir('data/') if f[-3:] == '.db']
 
     if 'example.db' in files:
         files.remove('example.db')
