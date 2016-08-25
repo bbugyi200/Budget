@@ -1,7 +1,6 @@
 """ Main GUI file. Launches all other widgets. """
 
 import tkinter as tk
-import tkinter.ttk as ttk
 import tkinter.messagebox
 
 from . import style as sty
@@ -9,6 +8,7 @@ from .constants import TITLE, MONTH, fonts, debug
 from .menu import Menu
 from .budgetdata import BudgetData
 from .newlimits import NewLimits
+from .expensedisplay import ExpenseDisplay
 
 from .. import budget
 from ..budget import NoneNotAllowed
@@ -42,17 +42,18 @@ class Main(tk.Frame):
         frame1.grid(row=row, column=0)
 
         frame1_Lbuffer = tk.Frame(frame1, width=sty.width)
-        frame1_Lbuffer.grid()
+        frame1_Lbuffer.pack(side='left')
         frame1_Rbuffer = tk.Frame(frame1, width=sty.width)
-        frame1_Rbuffer.grid(column=100)
+        frame1_Rbuffer.pack(side='right')
 
         self.BD = BudgetData(frame1, self.Budget)
-        self.BD.grid(row=0, column=1)
+        self.BD.pack()
 
         self.frame2 = tk.Frame(self)
         self.frame2.grid(row=row, column=1)
 
-        self._showExpenses(self.frame2)
+        self.ED = ExpenseDisplay(self.frame2, self)
+        self.ED.pack()
 
         self.frame3 = tk.Frame(self, width=200, height=200)
         self.frame3.grid(row=row, column=2)
@@ -202,94 +203,6 @@ class Main(tk.Frame):
                                  font=fonts.button())
         SubmitButton.grid()
 
-    def _showExpenses(self, frame):
-        """ Displays all of this Month's expenses. """
-
-        # If the ExpenseFrame exists, it will be destroyed
-        try:
-            self.outer_expense_frame.destroy()
-        except AttributeError:
-            pass
-
-        # outer_expense_frame is created so the delete button frames can be
-        # seperated visually from the expense list frame.
-        self.outer_expense_frame = tk.Frame(frame)
-        self.outer_expense_frame.pack()
-
-        def createTitle(frame):
-            title_Bbuffer = tk.Frame(frame, height=5)
-
-            title_text = "Expense List"
-            self.Lab_PayPeriod = tk.Label(frame,
-                                          text=title_text,
-                                          font=fonts.title())
-
-            self.Lab_PayPeriod.pack(side='top')
-            title_Bbuffer.pack(side='top')
-
-        createTitle(self.outer_expense_frame)
-
-        self.ExpenseFrame = tk.Frame(self.outer_expense_frame)
-        self.ExpenseFrame.pack(fill='both')
-
-        # Scrollbar for expense list
-        scrollbar = tk.Scrollbar(self.ExpenseFrame)
-        scrollbar.pack(side='right', fill='y')
-
-        # Columns for expense list
-        dataCols = ['Expense Type', 'Cost', 'Notes']
-
-        self.tree = ttk.Treeview(self.ExpenseFrame,
-                                 columns=dataCols,
-                                 show='headings')
-
-        # Sets the headings in the expense list.
-        # Without this loop, the headings will not actually show.
-        for c in dataCols:
-            self.tree.heading(c, text=c)
-
-        Exp_Attrs = self.Budget.expenses.get()
-
-        # Inserts each expense into the Treeview object
-        for item in Exp_Attrs:
-            self.tree.insert('', 'end', values=item)
-
-        # 'yscroll' option must be set to scrollbar set object
-        self.tree['yscroll'] = scrollbar.set
-
-        self.tree.pack(side='left', fill='both')
-
-        # Associates scrollbar with the Treeview object
-        scrollbar.config(command=self.tree.yview)
-
-        def Create_Delete_Button():
-            """ Creates a delete button and adds extra vertical space
-            between the button and the expense list
-            """
-
-            # Outer frame that hold delete button and buffer space
-            outer_delete_frame = tk.Frame(self.outer_expense_frame)
-            outer_delete_frame.pack(side='bottom')
-
-            # Buffer space between the button and the expense list
-            delete_Tbuffer = tk.Frame(outer_delete_frame, height=sty.height)
-            delete_Tbuffer.pack(side='top')
-
-            delete_Bbuffer = tk.Frame(outer_delete_frame, height=sty.height)
-            delete_Bbuffer.pack(side='bottom')
-
-            # This frame will hold the actual delete button
-            delete_frame = tk.Frame(outer_delete_frame)
-            delete_frame.pack()
-
-            delete_button = tk.Button(delete_frame,
-                                      text='Delete Selected',
-                                      activebackground=sty.abcolor,
-                                      command=self.DeleteSelected,
-                                      font=fonts.button())
-            delete_button.pack()
-
-        Create_Delete_Button()
 
     def SubmitFunc(self):
         """ This function is called if the Expense form's 'Submit' button
@@ -328,25 +241,4 @@ class Main(tk.Frame):
         """ This function is used to refresh the main GUI window. """
         self.master.title(TITLE)
         self.BD.set_dynamic_data()
-        self._showExpenses(self.frame2)
-
-    def DeleteSelected(self):
-        """ This function is called when the user presses the
-        Expense form's 'Delete Selected' button.
-        """
-        index = None
-        try:
-            # Sets index to the offset of the selected item in the expense list
-            for i, item in enumerate(self.tree.get_children()):
-                if debug: print(self.tree.get_children())
-                if item == self.tree.focus():
-                    index = i
-
-            # Deletes the expense at the specified index
-            self.Budget.remove_expense(index)
-            self.refresh_screen()
-
-        # Does nothing if 'Delete Selected' button is clicked when no item is
-        # selected.
-        except TypeError:
-            if debug: raise
+        self.ED.Make()

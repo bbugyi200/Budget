@@ -46,6 +46,7 @@ X Cleanup main.py code
 * Refactor GUI files
 * Change the dropdown option for the 'Expense Type' to pull from the SQL 
   database.
+* Activate 'date' column of each expense that is submitted. 
 * Maybe set all other expense types to have 'ALL' as a parent and then use this
   to control which limits are deducted when expenses are added.
 * Add MONTH constant and put current month in title bar.
