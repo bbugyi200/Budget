@@ -1,11 +1,11 @@
-#!/usr/bin/python3
+#!/usr/bin/python3.4
 
-from IntelliBudget.GUI.main import BudgetGUI
+from IntelliBudget.GUI.main import Main
 import tkinter as tk
 
 root = tk.Tk()
 
-BG = BudgetGUI(root)
-BG.pack()
+M = Main(root)
+M.pack(side='top', fill='both', expand=True)
 
 root.mainloop()

@@ -8,32 +8,15 @@ import tkinter as tk
 import tkinter.ttk as ttk
 import tkinter.messagebox
 
-debug = False
+from . import style as sty
+from .constants import TITLE, MONTH, fonts, debug
+from .menu import Menu
 
-if not debug:
-    from .. import budget
-    from ..budget import NoneNotAllowed
-    from .. import dates
-    from . import style as sty
-else:
-    import budget
-    from budget import NoneNotAllowed
-    import dates
-    import style as sty
+from .. import budget
+from ..budget import NoneNotAllowed
 
 
-TITLE = 'IntelliBudget'
-MONTH = 'MONTH'
-fonts = sty.Fonts()
-
-
-class B_GUI_Setup(tk.Frame):
-    """ B_GUI_Setup Class
-
-    This class contains all of the methods that are used for the initial
-    setup of the main Budget GUI window.
-    """
-
+class Main(tk.Frame):
     def __init__(self, master):
         tk.Frame.__init__(self, master)
         FIRST_USE = False
@@ -47,14 +30,14 @@ class B_GUI_Setup(tk.Frame):
         self.master = master
         self.master.title(TITLE)
 
-        self._createMenu()
+        Menu(self)
 
         row = 0
 
         self.topFrame = tk.Frame(self)
         self.topFrame.grid(row=row, columnspan=5); row += 1
 
-        self._createTopTitle(self.topFrame)
+        self.TopTitle(self.topFrame)
 
         # frame1 is the leftmost frame
         self.frame1 = tk.Frame(self, width=700, height=200)
@@ -88,7 +71,7 @@ class B_GUI_Setup(tk.Frame):
         # frame3 is used for the Expense form
         self.form_frame = tk.Frame(self.frame3)
         self.form_frame.grid(row=0, column=1)
-        self._createExpenseForm(self.form_frame)
+        self.ExpenseForm(self.form_frame)
 
         # frame3 is used for Submit button.
         # Spacing is added by creating multiple inner frames within frame3.
@@ -108,39 +91,13 @@ class B_GUI_Setup(tk.Frame):
                                         message)
             self.newLimits()
 
-    def _createTopTitle(self, frame):
+    def TopTitle(self, frame):
         TopTitle = tk.Label(frame,
                             text=TITLE,
                             font='Verdana 40 underline')
         TopTitle.pack(side='top')
         TT_bbuffer = tk.Frame(frame, height=20)
         TT_bbuffer.pack(side='bottom')
-
-    def _createMenu(self):
-        """ Creates dropdown menus on the top of the window """
-        menu = tk.Menu(self)
-        self.master.config(menu=menu)
-
-        fileMenu = tk.Menu(menu)
-        menu.add_cascade(label='File', menu=fileMenu)
-        fileMenu.add_command(label='Update Limits', command=self.newLimits)
-        fileMenu.add_separator()
-        fileMenu.add_command(label='Quit', command=self.quit)
-
-        viewMenu = tk.Menu(menu)
-        menu.add_cascade(label='Archives', menu=viewMenu)
-
-        for month in dates.getDBFiles():
-            viewMenu.add_command(label=month,
-                                 command=self._GetBudgetFactory(month))
-
-    def _GetBudgetFactory(self, month):
-        """ Returns a function that creates a new budget. """
-        def GetBudget():
-            self.Budget.close()
-            self.Budget = budget.Budget(DB=month)
-            self.refresh_screen()
-        return GetBudget
 
     def budget_data(self, frame):
         """ Renders all of the Budget Data. """
@@ -188,7 +145,7 @@ class B_GUI_Setup(tk.Frame):
         self.Lab_remaining_text.set('REMAINING: ' +
                                     '{0:.2f}'.format(float(self.Budget.remainingLimit)))
 
-    def _createExpenseForm(self, frame):
+    def ExpenseForm(self, frame):
         """ Creates the form that the user uses to input a new expense into
         the database.
         """
@@ -381,13 +338,6 @@ class B_GUI_Setup(tk.Frame):
 
         Create_Delete_Button()
 
-
-class BudgetGUI(B_GUI_Setup):
-    """ BudgetGUI Class
-
-    Contains all of the "dynamic" functionality of the GUI.
-    """
-
     def SubmitFunc(self):
         """ This function is called if the Expense form's 'Submit' button
         is pressed.
@@ -420,58 +370,6 @@ class BudgetGUI(B_GUI_Setup):
         argument.
         """
         self.SubmitFunc()
-
-    def newLimits(self):
-        """ Creates a new GUI window that prompts the user for the new
-        Budget information.
-        """
-
-        # Toplevel can be used just like tk.Tk() but it associates the
-        # new widget to the original master.
-        self.NewMonthRoot = tk.Toplevel(master=self)
-        self.NewMonthRoot.title(MONTH + ' - Limit Form')
-
-        TopFrame = tk.Frame(self.NewMonthRoot)
-        TopFrame.grid(row=0)
-
-        row = 0
-        WindowTitle = tk.Label(TopFrame,
-                               text="Spending Limits",
-                               font=fonts.title())
-        WindowTitle.grid(row=row, columnspan=5); row += 1
-
-        WindowTitleBuffer = tk.Frame(TopFrame, height=10)
-        WindowTitleBuffer.grid(row=row); row += 1
-
-        TLimLabel = tk.Label(TopFrame, text="Total Limit: ")
-        TLimLabel.grid(row=row)
-
-        self.TLimEntry = tk.Entry(TopFrame)
-        self.TLimEntry.grid(row=row, column=1); row += 1
-
-        bottomFrame = tk.Frame(self.NewMonthRoot)
-        bottomFrame.grid(row=1, columnspan=5)
-
-        # Adds space between submit button and top Entry boxes
-        submitBuffer = tk.Frame(bottomFrame, height=10)
-        submitBuffer.pack(side='top')
-
-        submit_button = tk.Button(bottomFrame,
-                                  text='Submit',
-                                  command=self.SubmitNewLimits,
-                                  font=fonts.button())
-        submit_button.pack()
-
-    def SubmitNewLimits(self):
-        """ This function is called when the user submits the NewPP
-        information.
-        """
-        TotalLimit = self.TLimEntry.get()
-
-        self.Budget.updateLimits(TotalLimit)
-
-        self.refresh_screen()
-        self.NewMonthRoot.destroy()
 
     def refresh_screen(self):
         """ This function is used to refresh the main GUI window. """
