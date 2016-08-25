@@ -27,7 +27,7 @@ MONTH = 'MONTH'
 fonts = sty.Fonts()
 
 
-class B_GUI_Setup:
+class B_GUI_Setup(tk.Frame):
     """ B_GUI_Setup Class
 
     This class contains all of the methods that are used for the initial
@@ -35,6 +35,7 @@ class B_GUI_Setup:
     """
 
     def __init__(self, master):
+        tk.Frame.__init__(self, master)
         FIRST_USE = False
 
         try:
@@ -44,19 +45,19 @@ class B_GUI_Setup:
             self.Budget = budget.Budget(0)
 
         self.master = master
-        master.title(TITLE)
+        self.master.title(TITLE)
 
-        self._createMenu(master)
+        self._createMenu()
 
         row = 0
 
-        self.topFrame = tk.Frame(master)
+        self.topFrame = tk.Frame(self)
         self.topFrame.grid(row=row, columnspan=5); row += 1
 
         self._createTopTitle(self.topFrame)
 
         # frame1 is the leftmost frame
-        self.frame1 = tk.Frame(master, width=700, height=200)
+        self.frame1 = tk.Frame(self, width=700, height=200)
         self.frame1.grid(row=row, column=0)
 
         self.frame1_Lbuffer = tk.Frame(self.frame1, width=sty.width)
@@ -68,12 +69,12 @@ class B_GUI_Setup:
         self.data_frame.grid(row=0, column=1)
         self.budget_data(self.data_frame)
 
-        self.frame2 = tk.Frame(master)
+        self.frame2 = tk.Frame(self)
         self.frame2.grid(row=row, column=1)
 
         self._showExpenses(self.frame2)
 
-        self.frame3 = tk.Frame(master, width=200, height=200)
+        self.frame3 = tk.Frame(self, width=200, height=200)
         self.frame3.grid(row=row, column=2)
 
         # Left buffer for fframe3
@@ -107,8 +108,6 @@ class B_GUI_Setup:
                                         message)
             self.newLimits()
 
-        master.mainloop()
-
     def _createTopTitle(self, frame):
         TopTitle = tk.Label(frame,
                             text=TITLE,
@@ -117,16 +116,16 @@ class B_GUI_Setup:
         TT_bbuffer = tk.Frame(frame, height=20)
         TT_bbuffer.pack(side='bottom')
 
-    def _createMenu(self, master):
+    def _createMenu(self):
         """ Creates dropdown menus on the top of the window """
-        menu = tk.Menu(master)
-        master.config(menu=menu)
+        menu = tk.Menu(self)
+        self.master.config(menu=menu)
 
         fileMenu = tk.Menu(menu)
         menu.add_cascade(label='File', menu=fileMenu)
         fileMenu.add_command(label='Update Limits', command=self.newLimits)
         fileMenu.add_separator()
-        fileMenu.add_command(label='Quit', command=master.quit)
+        fileMenu.add_command(label='Quit', command=self.quit)
 
         viewMenu = tk.Menu(menu)
         menu.add_cascade(label='Archives', menu=viewMenu)
@@ -427,7 +426,9 @@ class BudgetGUI(B_GUI_Setup):
         Budget information.
         """
 
-        self.NewMonthRoot = tk.Tk()
+        # Toplevel can be used just like tk.Tk() but it associates the
+        # new widget to the original master.
+        self.NewMonthRoot = tk.Toplevel(master=self)
         self.NewMonthRoot.title(MONTH + ' - Limit Form')
 
         TopFrame = tk.Frame(self.NewMonthRoot)
@@ -460,8 +461,6 @@ class BudgetGUI(B_GUI_Setup):
                                   command=self.SubmitNewLimits,
                                   font=fonts.button())
         submit_button.pack()
-
-        self.NewMonthRoot.mainloop()
 
     def SubmitNewLimits(self):
         """ This function is called when the user submits the NewPP

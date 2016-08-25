@@ -5,4 +5,7 @@ import tkinter as tk
 
 root = tk.Tk()
 
-BudgetGUI(root)
+BG = BudgetGUI(root)
+BG.pack()
+
+root.mainloop()
