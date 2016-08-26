@@ -1,9 +1,10 @@
-""" Renders a new window which prompts the user for limit information. 
-    The limit information is then updated accordingly. 
+""" Renders a new window which prompts the user for limit information.
+    The limit information is then updated accordingly.
 """
 
 import tkinter as tk
 from .constants import MONTH, fonts
+
 
 class NewLimits(tk.Toplevel):
     def __init__(self, parent):

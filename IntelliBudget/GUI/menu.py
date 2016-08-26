@@ -1,10 +1,7 @@
 """ Renders the top menu bar for the GUI. """
 
 import tkinter as tk
-
-from .constants import MONTH, fonts
 from .newlimits import NewLimits
-
 from .. import dates
 from .. import budget
 

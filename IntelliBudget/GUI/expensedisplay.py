@@ -6,6 +6,7 @@ import tkinter.ttk as ttk
 from . import style as sty
 from .constants import fonts, debug
 
+
 class ExpenseDisplay(tk.Frame):
     def __init__(self, parent, master):
         tk.Frame.__init__(self, parent)
@@ -61,7 +62,7 @@ class ExpenseDisplay(tk.Frame):
         # Associates scrollbar with the Treeview object
         scrollbar.config(command=self.tree.yview)
 
-        self.DeleteButton()
+        self.CreateDeleteButton()
 
     def Title(self):
         title_Bbuffer = tk.Frame(self.outer, height=5)
@@ -74,7 +75,7 @@ class ExpenseDisplay(tk.Frame):
         self.Lab_PayPeriod.pack(side='top')
         title_Bbuffer.pack(side='top')
 
-    def DeleteButton(self):
+    def CreateDeleteButton(self):
         """ Creates a delete button and adds extra vertical space
         between the button and the expense list
         """
