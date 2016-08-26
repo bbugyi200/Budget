@@ -2,15 +2,8 @@
 
 import tkinter as tk
 import tkinter.messagebox
-from .constants import fonts
+from .constants import fonts, Field, addBuffer
 from . import style as sty
-
-
-class Field:
-    """ Enables all widgets related to the same field to share their own
-        namespace.
-    """
-    pass
 
 
 class ExpenseForm(tk.Frame):
@@ -39,53 +32,51 @@ class ExpenseForm(tk.Frame):
         text = "New Expense"
         ExpenseFormTitle = tk.Label(self.topFrame, text=text,
                                     font=fonts.title())
-        ExpenseFormTitle.grid(row=row, columnspan=2); row += 1
+        ExpenseFormTitle.pack(side='top')
 
-        # Bottom buffer space between expense form title and the actual form
-        ETitle_bbuffer = tk.Frame(self.topFrame, height=5)
-        ETitle_bbuffer.grid(row=row); row += 1
+        addBuffer(self.topFrame, side='top', height=5)
 
         self.expense_choice = tk.StringVar(self.topFrame)
 
         # Setting the default value
         self.expense_choice.set('Food')
 
-        self.ExpenseOptions = tk.OptionMenu(self.topFrame,
-                                            self.expense_choice,
-                                            *OPTIONS)
-
-        self.DropdownConfigs()
-
         # Dropdown width and expense width, respectively
         dwidth = 115
         ewidth = 18
 
-        ExpenseType = Field()
-        ExpenseType.label = tk.Label(self.topFrame, text='Expense Type: ')
-        ExpenseType.label.grid(row=row, column=0)
-        self.ExpenseOptions.grid(row=row, column=1)
-        row += 1
+        FormFrame = tk.Frame(self.topFrame)
+        FormFrame.pack(side='top')
+        FormFrame.row = 0
+
+        self.ExpenseType = Field()
+        self.ExpenseType.label = tk.Label(FormFrame, text='Expense Type: ')
+        self.ExpenseType.label.grid(row=FormFrame.row, column=0)
+        self.ExpenseType.OptionMenu = tk.OptionMenu(FormFrame,
+                                            self.expense_choice,
+                                            *OPTIONS)
+        self.ExpenseType.OptionMenu.grid(row=FormFrame.row, column=1)
+        self.DropdownConfigs()
+        FormFrame.row += 1
 
         self.Amount = Field()
-        self.Amount.label = tk.Label(self.topFrame, text='Amount: ')
-        self.Amount.label.grid(row=row, column=0)
-
-        self.Amount.entry = tk.Entry(self.topFrame)
+        self.Amount.label = tk.Label(FormFrame, text='Amount: ')
+        self.Amount.label.grid(row=FormFrame.row, column=0)
+        self.Amount.entry = tk.Entry(FormFrame)
         self.Amount.entry.bind('<Return>', self.SubmitFuncBind)
-        self.Amount.entry.grid(row=row, column=1)
-        row += 1
+        self.Amount.entry.grid(row=FormFrame.row, column=1)
+        FormFrame.row += 1
 
         self.Notes = Field()
-        self.Notes.label = tk.Label(self.topFrame, text='Notes: ')
-        self.Notes.label.grid(row=row, column=0)
-
-        self.Notes.entry = tk.Entry(self.topFrame)
+        self.Notes.label = tk.Label(FormFrame, text='Notes: ')
+        self.Notes.label.grid(row=FormFrame.row, column=0)
+        self.Notes.entry = tk.Entry(FormFrame)
         self.Notes.entry.bind('<Return>', self.SubmitFuncBind)
-        self.Notes.entry.grid(row=row, column=1)
-        row += 1
+        self.Notes.entry.grid(row=FormFrame.row, column=1)
+        FormFrame.row += 1
 
         # Set widths of all entrys and dropdowns
-        self.ExpenseOptions.config(width=dwidth)
+        self.ExpenseType.OptionMenu.config(width=dwidth)
         self.Amount.entry.config(width=ewidth)
         self.Notes.entry.config(width=ewidth)
 
@@ -97,29 +88,22 @@ class ExpenseForm(tk.Frame):
         arrow = tk.PhotoImage(file='img/arrow.gif')
 
         # Config options for the dropdown expense box
-        self.ExpenseOptions.config(indicatoron=0,
+        self.ExpenseType.OptionMenu.config(indicatoron=0,
                                    activebackground=sty.abcolor,
                                    compound='right',
                                    image=arrow)
 
         # Needed or the image will not appear
-        self.ExpenseOptions.image = arrow
+        self.ExpenseType.OptionMenu.image = arrow
 
         # Config options for the menu items in the dropdown expense box
-        self.ExpenseOptions['menu'].config(activebackground=sty.abcolor)
+        self.ExpenseType.OptionMenu['menu'].config(activebackground=sty.abcolor)
 
     def CreateSubmitButton(self):
         """ Creates the Expense form Submit button """
 
-        # submit_Tbuffer is used to create vertical space between the submit
-        # button and the expense form.
-        submit_Tbuffer = tk.Frame(self.bottomFrame, height=15)
-        submit_Tbuffer.pack(side='top')
-
-        # submit_Lbuffer is used to create horizontal space between the submit
-        # button and the expense list.
-        submit_Lbuffer = tk.Frame(self.bottomFrame, width=100)
-        submit_Lbuffer.pack(side='left')
+        addBuffer(self.bottomFrame, side='top', height=15)
+        addBuffer(self.bottomFrame, side='left', width=100)
 
         SubmitButton = tk.Button(self.bottomFrame,
                                  text='Submit',
@@ -141,11 +125,6 @@ class ExpenseForm(tk.Frame):
             self.Notes.entry.delete(0, 'end')
 
             self.master.refresh_screen()
-
-        except AttributeError:
-            tkinter.messagebox.showinfo("ERROR",
-                                        "You must select an expense type!")
-            raise
 
         # Catches error if user enters string into 'Value' entrybox
         except ValueError:

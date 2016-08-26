@@ -3,7 +3,7 @@
 """
 
 import tkinter as tk
-from .constants import MONTH, fonts
+from .constants import MONTH, fonts, Field, addBuffer
 
 
 class NewLimits(tk.Toplevel):
@@ -18,39 +18,40 @@ class NewLimits(tk.Toplevel):
 
         self.title(MONTH + ' - Limit Form')
 
-        TopFrame = tk.Frame(self)
-        TopFrame.grid(row=0)
+        topFrame = tk.Frame(self)
+        topFrame.pack(side='top')
 
-        row = 0
-        WindowTitle = tk.Label(TopFrame,
+        WindowTitle = tk.Label(topFrame,
                                text="Spending Limits",
                                font=fonts.title())
-        WindowTitle.grid(row=row, columnspan=5); row += 1
+        WindowTitle.pack(side='top')
 
-        WindowTitleBuffer = tk.Frame(TopFrame, height=10)
-        WindowTitleBuffer.grid(row=row); row += 1
+        addBuffer(topFrame, side='top', height=10)
 
-        TLimLabel = tk.Label(TopFrame, text="Total Limit: ")
-        TLimLabel.grid(row=row)
+        FormField = tk.Frame(topFrame)
+        FormField.pack(side='top')
+        FormField.row = 0
 
-        self.TLimEntry = tk.Entry(TopFrame)
-        self.TLimEntry.grid(row=row, column=1); row += 1
+        self.TotalLimit = Field()
+        self.TotalLimit.label = tk.Label(FormField, text="Total Limit: ")
+        self.TotalLimit.label.grid(row=FormField.row, column=0)
+        self.TotalLimit.entry = tk.Entry(FormField)
+        self.TotalLimit.entry.grid(row=FormField.row, column=1)
+        FormField.row += 1
 
         bottomFrame = tk.Frame(self)
-        bottomFrame.grid(row=1, columnspan=5)
+        bottomFrame.pack(side='top')
 
-        # Adds space between submit button and top Entry boxes
-        submitBuffer = tk.Frame(bottomFrame, height=10)
-        submitBuffer.pack(side='top')
+        addBuffer(bottomFrame, side='top', height=10)
 
-        submit_button = tk.Button(bottomFrame,
+        SubmitButton = tk.Button(bottomFrame,
                                   text='Submit',
                                   command=self.Submit,
                                   font=fonts.button())
-        submit_button.pack()
+        SubmitButton.pack(side='top')
 
     def Submit(self):
-        TotalLimit = self.TLimEntry.get()
+        TotalLimit = self.TotalLimit.entry.get()
 
         self.parent.Budget.updateLimits(TotalLimit)
 

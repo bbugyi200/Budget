@@ -1,4 +1,4 @@
-""" Contains all constant variables that need to be available to two or more
+""" Contains all constant objects that need to be available to two or more
     other GUI modules.
 """
 
@@ -10,6 +10,12 @@ MONTH = 'MONTH'
 fonts = sty.Fonts()
 debug = True
 
+
+class Field():
+    """ Enables all widgets related to the same field to share their own
+        namespace.
+    """
+    pass
 
 def addBuffer(frame, side, height=sty.height, width=sty.width):
     if side == 'RL':
