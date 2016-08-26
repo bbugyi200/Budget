@@ -23,9 +23,9 @@ class InitSQLDB:
 
     def createETypeTable(self):
         self.c.execute('''CREATE TABLE ExpTypes
-                     (ID INTEGER PRIMARY KEY,
-                      type TEXT,
-                      parent INTEGER);''')
+                       (ID INTEGER PRIMARY KEY,
+                       type TEXT,
+                       parent INTEGER);''')
         self.conn.commit()
 
     def createBaseETypes(self):

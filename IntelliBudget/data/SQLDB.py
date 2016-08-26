@@ -7,12 +7,12 @@ class Base:
         if DB[-3:] == '.db':
             pass
         else:
-            DB = DB + '.db'
+            DB = ''.join([DB, '.db'])
 
         if DB[:5] == 'data/':
             pass
         else:
-            DB = 'data/' + DB
+            DB = ''.join(['data/', DB])
 
         self.conn = sqlite3.connect(DB)
         self.c = self.conn.cursor()
@@ -91,6 +91,7 @@ class Budgets(Base):
         self.c.execute("""SELECT Initial, Remaining
                           FROM BudgetData
                           WHERE Exp_ID=?;""", (exp_id,))
+
         limits = self.c.fetchall()
         if limits:
             return limits[0]
