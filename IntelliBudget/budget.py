@@ -32,7 +32,7 @@ class Budget:
         Limits = self.DB.getBudgetLimits('ALL')
         if debug: print('Budget ~ Limits: ', Limits, end='\n\n')
         if Limits:
-            self.Limit, self.remainingLimit = Limits[0]
+            self.Limit, self.remainingLimit = Limits
         elif limit is None:
             raise NoneNotAllowed('''You must pass in a value for "limit" on
                                     the first load of a monthly budget!''')
@@ -43,12 +43,13 @@ class Budget:
 
     def updateLimits(self, limit):
         limit = float(limit)
+        initial = limit
         diff = self.Limit - self.remainingLimit
-        rem = limit - diff
+        remaining = limit - diff
 
         self.Limit = limit
-        self.remainingLimit = rem
-        self.DB.UpdateBudgetLimit(limit, rem=rem, exp_type='ALL', both=True)
+        self.remainingLimit = remaining
+        self.DB.UpdateBudgetLimit(remaining, initial=initial, exp_type='ALL')
 
     def add_expense(self, date, expense_type, value, notes):
         self.remainingLimit -= float(value)
