@@ -6,6 +6,13 @@ from .constants import fonts
 from . import style as sty
 
 
+class Field:
+    """ Enables all widgets related to the same field to share their own
+        namespace.
+    """
+    pass
+
+
 class ExpenseForm(tk.Frame):
     def __init__(self, parent, master):
         tk.Frame.__init__(self, parent)
@@ -53,32 +60,34 @@ class ExpenseForm(tk.Frame):
         dwidth = 115
         ewidth = 18
 
-        Lab_Expense_Type = tk.Label(self.topFrame, text='Expense Type: ')
-        Lab_Expense_Type.grid(row=row, column=0)
+        ExpenseType = Field()
+        ExpenseType.label = tk.Label(self.topFrame, text='Expense Type: ')
+        ExpenseType.label.grid(row=row, column=0)
         self.ExpenseOptions.grid(row=row, column=1)
         row += 1
 
-        # Amount Label
-        Lab_Amount = tk.Label(self.topFrame, text='Amount: ')
-        Lab_Amount.grid(row=row, column=0)
+        self.Amount = Field()
+        self.Amount.label = tk.Label(self.topFrame, text='Amount: ')
+        self.Amount.label.grid(row=row, column=0)
 
-        self.AmountEntry = tk.Entry(self.topFrame)
-        self.AmountEntry.bind('<Return>', self.SubmitFuncBind)
-        self.AmountEntry.grid(row=row, column=1)
+        self.Amount.entry = tk.Entry(self.topFrame)
+        self.Amount.entry.bind('<Return>', self.SubmitFuncBind)
+        self.Amount.entry.grid(row=row, column=1)
         row += 1
 
-        Lab_Notes = tk.Label(self.topFrame, text='Notes: ')
-        Lab_Notes.grid(row=row, column=0)
+        self.Notes = Field()
+        self.Notes.label = tk.Label(self.topFrame, text='Notes: ')
+        self.Notes.label.grid(row=row, column=0)
 
-        self.NotesEntry = tk.Entry(self.topFrame)
-        self.NotesEntry.bind('<Return>', self.SubmitFuncBind)
-        self.NotesEntry.grid(row=row, column=1)
+        self.Notes.entry = tk.Entry(self.topFrame)
+        self.Notes.entry.bind('<Return>', self.SubmitFuncBind)
+        self.Notes.entry.grid(row=row, column=1)
         row += 1
 
         # Set widths of all entrys and dropdowns
         self.ExpenseOptions.config(width=dwidth)
-        self.AmountEntry.config(width=ewidth)
-        self.NotesEntry.config(width=ewidth)
+        self.Amount.entry.config(width=ewidth)
+        self.Notes.entry.config(width=ewidth)
 
         self.CreateSubmitButton()
 
@@ -125,11 +134,11 @@ class ExpenseForm(tk.Frame):
         """
         try:
             self.master.Budget.add_expense('DATE', self.expense_choice.get(),
-                                           self.AmountEntry.get(),
-                                           self.NotesEntry.get())
+                                           self.Amount.entry.get(),
+                                           self.Notes.entry.get())
 
-            self.AmountEntry.delete(0, 'end')
-            self.NotesEntry.delete(0, 'end')
+            self.Amount.entry.delete(0, 'end')
+            self.Notes.entry.delete(0, 'end')
 
             self.master.refresh_screen()
 

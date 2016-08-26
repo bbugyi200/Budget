@@ -49,7 +49,7 @@ X Give the user the option to go back to a prior month.
 X Force user to enter in Limits when a new database is created.
 X Cleanup main.py code 
 X Refactor GUI files
-* Change the dropdown option for the 'Expense Type' to pull from the SQL 
+* Change the drop-down option for the 'Expense Type' to pull from the SQL 
   database.
 * Activate 'date' column of each expense that is submitted. 
 * Maybe set all other expense types to have 'ALL' as a parent and then use this
