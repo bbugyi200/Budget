@@ -4,7 +4,7 @@ import tkinter as tk
 import tkinter.messagebox
 
 from . import style as sty
-from .constants import TITLE, MONTH, fonts, debug
+from .constants import TITLE, MONTH
 from .menu import Menu
 from .budgetdata import BudgetData
 from .newlimits import NewLimits
@@ -18,6 +18,7 @@ from ..budget import NoneNotAllowed
 class Main(tk.Frame):
     def __init__(self, master):
         tk.Frame.__init__(self, master)
+
         FIRST_USE = False
 
         try:
@@ -31,16 +32,14 @@ class Main(tk.Frame):
 
         Menu(self)
 
-        row = 0
-
         self.topFrame = tk.Frame(self)
-        self.topFrame.grid(row=row, columnspan=5); row += 1
+        self.topFrame.pack(side='top')
 
         self.TopTitle(self.topFrame)
 
         # frame1 is the leftmost frame
         frame1 = tk.Frame(self, width=700, height=200)
-        frame1.grid(row=row, column=0)
+        frame1.pack(side='left')
 
         frame1_Lbuffer = tk.Frame(frame1, width=sty.width)
         frame1_Lbuffer.pack(side='left')
@@ -51,13 +50,13 @@ class Main(tk.Frame):
         self.BD.pack()
 
         frame2 = tk.Frame(self)
-        frame2.grid(row=row, column=1)
+        frame2.pack(side='left')
 
         self.ED = ExpenseDisplay(frame2, self)
         self.ED.pack()
 
         frame3 = tk.Frame(self, width=200, height=200)
-        frame3.grid(row=row, column=2)
+        frame3.pack(side='left')
 
         # Left buffer for fframe3
         frame3_Lbuffer = tk.Frame(frame3, width=sty.width)
