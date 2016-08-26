@@ -32,7 +32,7 @@ class InitSQLDB:
         baseTypes = ['ALL',
                      'Food',
                      'Monthly Bills',
-                     'Miscellaneous',
+                     'Other',
                      'Entertainment']
 
         for etype in baseTypes:

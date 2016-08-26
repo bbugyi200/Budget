@@ -57,6 +57,16 @@ class Expenses(Base):
             expense_list.append(row)
 
         return expense_list
+    
+    def getExpenseTypes(self):
+        expense_types = []
+        for etype in self.c.execute('''SELECT type FROM ExpTypes'''):
+            etype = etype[0]
+            if etype == 'ALL':
+                pass
+            else:
+                expense_types.append(etype)
+        return expense_types
 
 
 class Budgets(Base):

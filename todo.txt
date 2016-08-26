@@ -49,13 +49,13 @@ X Give the user the option to go back to a prior month.
 X Force user to enter in Limits when a new database is created.
 X Cleanup main.py code 
 X Refactor GUI files
-* Change the drop-down option for the 'Expense Type' to pull from the SQL 
+X Change the drop-down option for the 'Expense Type' to pull from the SQL 
   database.
 * Activate 'date' column of each expense that is submitted. 
-* Maybe set all other expense types to have 'ALL' as a parent and then use this
-  to control which limits are deducted when expenses are added.
 * Add MONTH constant and put current month in title bar.
 * Cleanup 'debug' code and make sure that production DB works as expected.
+* Maybe set all other expense types to have 'ALL' as a parent and then use this
+  to control which limits are deducted when expenses are added.
 * Comment all changes and merge in Monthly branch
 * Update the README.
 * Add TODO section of README for most current todo list items

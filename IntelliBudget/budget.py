@@ -9,9 +9,6 @@ debug = False
 if not debug:
     from . import expenses
     from .data.SQLDB import SQLDB
-else:
-    import expenses
-    import data.SQLDB as SQLDB
 
 
 class NoneNotAllowed(Exception): pass
@@ -27,6 +24,18 @@ class Budget:
 
         self.getLimit(limit)
         self.expenses = Expense_List(self.DB)
+
+    def __getattr__(self, method):
+        """ __getattr__ is called when unknown attribute is qualified. 
+        
+        Checks if 'method' is an attribute of the database object and, if so,
+        calls 'method'.
+        """
+        if hasattr(self.DB, method):
+            function = getattr(self.DB, method)
+            return function()
+        else:
+            pass
 
     def getLimit(self, limit):
         Limits = self.DB.getBudgetLimits('ALL')
@@ -61,9 +70,6 @@ class Budget:
         self.remainingLimit += float(value)
         self.DB.UpdateBudgetLimit(self.remainingLimit, 'ALL')
         self.expenses.remove_expense(index)
-
-    def close(self):
-        self.DB.close()
 
 
 class Expense_List:
@@ -110,8 +116,4 @@ class Expense_List:
 
 if __name__ == '__main__':
     B = Budget()
-
-    def InsertData():
-        B.add_expense('8-21-16', 'Food', 22.15, 'Wawa')
-        B.add_expense('8-21-16', 'Monthly Bills', 141.17, 'Verizon')
-        B.add_expense('8-21-16', 'Entertainment', 24.50, 'Movies')
+    B.getExpenseTypes

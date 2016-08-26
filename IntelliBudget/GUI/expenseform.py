@@ -25,21 +25,12 @@ class ExpenseForm(tk.Frame):
         the database.
         """
 
-        OPTIONS = ['Food', 'Entertainment', 'Monthly Bills', 'Fuel', 'Other']
-
-        row = 0
-
         text = "New Expense"
         ExpenseFormTitle = tk.Label(self.topFrame, text=text,
                                     font=fonts.title())
         ExpenseFormTitle.pack(side='top')
 
         addBuffer(self.topFrame, side='top', height=5)
-
-        self.expense_choice = tk.StringVar(self.topFrame)
-
-        # Setting the default value
-        self.expense_choice.set('Food')
 
         # Dropdown width and expense width, respectively
         dwidth = 115
@@ -48,6 +39,11 @@ class ExpenseForm(tk.Frame):
         FormFrame = tk.Frame(self.topFrame)
         FormFrame.pack(side='top')
         FormFrame.row = 0
+
+        # Setup for the ExpenseType OptionMenu
+        OPTIONS = self.master.Budget.getExpenseTypes
+        self.expense_choice = tk.StringVar()
+        self.expense_choice.set('Food')  # Setting the default value
 
         self.ExpenseType = Field()
         self.ExpenseType.label = tk.Label(FormFrame, text='Expense Type: ')
