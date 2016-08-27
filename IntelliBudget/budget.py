@@ -22,33 +22,31 @@ class Budget:
         else:
             self.DB = SQLDB(DB)
 
-        self.getLimit(limit)
+        self.getLimits(limit)
         self.expenses = Expense_List(self.DB)
 
     def __getattr__(self, method):
-        """ __getattr__ is called when unknown attribute is qualified. 
-        
-        Checks if 'method' is an attribute of the database object and, if so,
-        calls 'method'.
+        """ __getattr__ is called when unknown attribute is qualified.
+
+        Checks if the method is an attribute of the database object and, if so,
+        returns the method .
         """
         if hasattr(self.DB, method):
-            function = getattr(self.DB, method)
-            return function()
+            return getattr(self.DB, method)
         else:
             pass
 
-    def getLimit(self, limit):
+    def getLimits(self, value=None):
         Limits = self.DB.getBudgetLimits('ALL')
-        if debug: print('Budget ~ Limits: ', Limits, end='\n\n')
         if Limits:
             self.Limit, self.remainingLimit = Limits
-        elif limit is None:
+        elif value is None:
             raise NoneNotAllowed('''You must pass in a value for "limit" on
                                     the first load of a monthly budget!''')
         else:
-            self.DB.insertBudgetData(limit, exp_type='ALL')
-            self.Limit = float(limit)
-            self.remainingLimit = float(limit)
+            self.DB.insertBudgetData(value, exp_type='ALL')
+            self.Limit = float(value)
+            self.remainingLimit = float(value)
 
     def updateLimits(self, limit):
         limit = float(limit)

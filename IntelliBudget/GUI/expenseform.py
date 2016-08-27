@@ -41,7 +41,7 @@ class ExpenseForm(tk.Frame):
         FormFrame.row = 0
 
         # Setup for the ExpenseType OptionMenu
-        OPTIONS = self.master.Budget.getExpenseTypes
+        OPTIONS = self.master.Budget.getExpenseTypes()
         self.expense_choice = tk.StringVar()
         self.expense_choice.set('Food')  # Setting the default value
 
@@ -49,8 +49,8 @@ class ExpenseForm(tk.Frame):
         self.ExpenseType.label = tk.Label(FormFrame, text='Expense Type: ')
         self.ExpenseType.label.grid(row=FormFrame.row, column=0)
         self.ExpenseType.OptionMenu = tk.OptionMenu(FormFrame,
-                                            self.expense_choice,
-                                            *OPTIONS)
+                                                    self.expense_choice,
+                                                    *OPTIONS)
         self.ExpenseType.OptionMenu.grid(row=FormFrame.row, column=1)
         self.DropdownConfigs()
         FormFrame.row += 1
@@ -85,9 +85,9 @@ class ExpenseForm(tk.Frame):
 
         # Config options for the dropdown expense box
         self.ExpenseType.OptionMenu.config(indicatoron=0,
-                                   activebackground=sty.abcolor,
-                                   compound='right',
-                                   image=arrow)
+                                           activebackground=sty.abcolor,
+                                           compound='right',
+                                           image=arrow)
 
         # Needed or the image will not appear
         self.ExpenseType.OptionMenu.image = arrow

@@ -57,7 +57,7 @@ class Expenses(Base):
             expense_list.append(row)
 
         return expense_list
-    
+
     def getExpenseTypes(self):
         expense_types = []
         for etype in self.c.execute('''SELECT type FROM ExpTypes'''):

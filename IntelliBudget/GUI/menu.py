@@ -3,7 +3,6 @@
 import tkinter as tk
 from .newlimits import NewLimits
 from .. import dates
-from .. import budget
 
 
 class Menu():
@@ -35,6 +34,6 @@ class Menu():
         """ Returns a function that creates a new budget. """
         def GetBudget():
             self.parent.Budget.close()
-            self.parent.Budget = budget.Budget(DB=month)
+            self.parent.Budget.__init__(DB=month)
             self.parent.refresh_screen()
         return GetBudget
