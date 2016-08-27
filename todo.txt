@@ -27,6 +27,7 @@ X Come up with a better repo name
 X Package into first version release (i.e. Create frozen binary)
 X Update README to really reflect the overarching vision behind this project
 * Finish MONTHLY BUDGET UPDATE
+* Activate 'date' column of each expense that is submitted. 
 * Update the first release. (windows will not be included)
 * Find a way to make the program installable via 'sudo apt-get'
 * Get some kind of feedback loop started.
@@ -51,8 +52,7 @@ X Cleanup main.py code
 X Refactor GUI files
 X Change the drop-down option for the 'Expense Type' to pull from the SQL 
   database.
-* Activate 'date' column of each expense that is submitted. 
-* Add MONTH constant and put current month in title bar.
+X Add MONTH constant and put current month in title bar.
 * Cleanup 'debug' code and make sure that production DB works as expected.
 * Maybe set all other expense types to have 'ALL' as a parent and then use this
   to control which limits are deducted when expenses are added.

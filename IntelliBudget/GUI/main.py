@@ -3,13 +3,14 @@
 import tkinter as tk
 import tkinter.messagebox
 
-from .constants import TITLE, MONTH, addBuffer
+from .constants import TITLE, addBuffer
 from .menu import Menu
 from .budgetdata import BudgetData
 from .newlimits import NewLimits
 from .expensedisplay import ExpenseDisplay
 from .expenseform import ExpenseForm
 
+from ..dates import getMonth
 from .. import budget
 from ..budget import NoneNotAllowed
 
@@ -27,7 +28,8 @@ class Main(tk.Frame):
             self.Budget = budget.Budget(0)
 
         self.master = master
-        self.master.title(TITLE)
+
+        self.SetWindowTitle()
 
         Menu(self)
 
@@ -70,15 +72,21 @@ class Main(tk.Frame):
         message = "It looks like this is your first time using {0} in " \
                   "the month of {1}! \n\nBefore you get started, let's " \
                   "setup this month's spending limits!"
-        message = message.format(TITLE, MONTH)
+        message = message.format(TITLE, getMonth())
 
-        tkinter.messagebox.showinfo("FIRST USE IN " + MONTH + "!!!",
+        tkinter.messagebox.showinfo("FIRST USE IN " + getMonth() + "!!!",
                                     message)
         NL = NewLimits(self)
         NL.Make()
 
-    def refresh_screen(self):
+    def SetWindowTitle(self, month=None):
+        self.MONTH = getMonth(month)
+        WindowTitle = ''.join([TITLE, ' - ({0})'])
+        WindowTitle = WindowTitle.format(self.MONTH)
+        self.master.title(WindowTitle)
+
+    def refresh_screen(self, month=None):
         """ This function is used to refresh the main GUI window. """
-        self.master.title(TITLE)
+        self.SetWindowTitle(month)
         self.BD.set_dynamic_data()
         self.ED.Make()

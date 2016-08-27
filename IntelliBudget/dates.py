@@ -6,8 +6,21 @@ This module holds all functions that relate to dates and their formatting.
 import datetime
 import os
 
-MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug',
-          'Sep', 'Oct', 'Nov', 'Dec']
+today = datetime.date.today()
+
+MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July',
+          'August', 'September', 'October', 'November', 'December']
+
+SHORT_MONTHS = [M[:3] for M in MONTHS]
+
+
+def getMonth(month=None):
+    if month:
+        index = SHORT_MONTHS.index(month[:3])
+        return MONTHS[index]
+    else:
+        index = today.month - 1
+        return MONTHS[index]
 
 
 def getMonthlyDB(File=None):
@@ -22,10 +35,9 @@ def getMonthlyDB(File=None):
         return F
 
     else:
-        d = datetime.date.today()
-
-        month = MONTHS[d.month - 1]
-        year = d.strftime('%y')
+        index = today.month - 1
+        month = MONTHS[index][:3]
+        year = today.strftime('%y')
 
         return ''.join(['data/', month, '-', year, '.db'])
 
@@ -42,7 +54,7 @@ def getDBFiles():
         year = int(F[-2:])
 
         month = F[:3]
-        month = MONTHS.index(month)
+        month = SHORT_MONTHS.index(month)
 
         return (year * 100) + month
 

@@ -3,7 +3,7 @@
 """
 
 import tkinter as tk
-from .constants import MONTH, fonts, Field, addBuffer
+from .constants import fonts, Field, addBuffer
 
 
 class NewLimits(tk.Toplevel):
@@ -16,7 +16,7 @@ class NewLimits(tk.Toplevel):
         """
         tk.Toplevel.__init__(self, master=self.parent)
 
-        self.title(MONTH + ' - Limit Form')
+        self.title(self.parent.MONTH + ' - Limit Form')
 
         topFrame = tk.Frame(self)
         topFrame.pack(side='top')
@@ -45,9 +45,9 @@ class NewLimits(tk.Toplevel):
         addBuffer(bottomFrame, side='top', height=10)
 
         SubmitButton = tk.Button(bottomFrame,
-                                  text='Submit',
-                                  command=self.Submit,
-                                  font=fonts.button())
+                                 text='Submit',
+                                 command=self.Submit,
+                                 font=fonts.button())
         SubmitButton.pack(side='top')
 
     def Submit(self):

@@ -6,7 +6,6 @@ import tkinter as tk
 from . import style as sty
 
 TITLE = 'IntelliBudget'
-MONTH = 'MONTH'
 fonts = sty.Fonts()
 debug = True
 
@@ -16,6 +15,7 @@ class Field():
         namespace.
     """
     pass
+
 
 def addBuffer(frame, side, height=sty.height, width=sty.width):
     if side == 'RL':

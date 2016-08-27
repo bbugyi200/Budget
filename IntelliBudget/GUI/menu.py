@@ -35,5 +35,5 @@ class Menu():
         def GetBudget():
             self.parent.Budget.close()
             self.parent.Budget.__init__(DB=month)
-            self.parent.refresh_screen()
+            self.parent.refresh_screen(month)
         return GetBudget
