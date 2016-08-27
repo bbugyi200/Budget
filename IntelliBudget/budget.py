@@ -4,11 +4,8 @@ This module focuses on objects that represent more holistic models
 of a single pay cycle.
 """
 
-debug = False
-
-if not debug:
-    from . import expenses
-    from .data.SQLDB import SQLDB
+from . import expenses
+from .data.SQLDB import SQLDB
 
 
 class NoneNotAllowed(Exception): pass
@@ -29,7 +26,7 @@ class Budget:
         """ __getattr__ is called when unknown attribute is qualified.
 
         Checks if the method is an attribute of the database object and, if so,
-        returns the method .
+        returns the method.
         """
         if hasattr(self.DB, method):
             return getattr(self.DB, method)

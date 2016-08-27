@@ -19,8 +19,9 @@ class ExpenseDisplay(tk.Frame):
         # If the ExpenseFrame exists, it will be destroyed
         try:
             self.outer.destroy()
-        except AttributeError:
-            if debug: pass
+        except AttributeError as e:
+            if debug: print(e.__class__, ':: ', e)
+            else: pass
 
         # outer is created so the delete button frames can be
         # seperated visually from the expense list frame.
@@ -119,5 +120,6 @@ class ExpenseDisplay(tk.Frame):
 
         # Does nothing if 'Delete Selected' button is clicked when no item is
         # selected.
-        except TypeError:
-            if debug: pass
+        except TypeError as e:
+            if debug: print(e.__class__, ':: ', e)
+            else: pass

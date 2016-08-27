@@ -26,14 +26,6 @@ X Allow user to set planned budget goals
 X Come up with a better repo name
 X Package into first version release (i.e. Create frozen binary)
 X Update README to really reflect the overarching vision behind this project
-* Finish MONTHLY BUDGET UPDATE
-* Activate 'date' column of each expense that is submitted. 
-* Update the first release. (windows will not be included)
-* Find a way to make the program installable via 'sudo apt-get'
-* Get some kind of feedback loop started.
-* Get a few customers on board.
-
-=== MONTHLY BUDGET UPDATE ===
 X Model database tables on paper
 X Research how to use 'sqlite3'
 X Fix bdates.py file so that it is using the month instead of the payperiod
@@ -53,12 +45,17 @@ X Refactor GUI files
 X Change the drop-down option for the 'Expense Type' to pull from the SQL 
   database.
 X Add MONTH constant and put current month in title bar.
-* Cleanup 'debug' code and make sure that production DB works as expected.
+X Cleanup 'debug' code and make sure that production DB works as expected.
+X Comment all changes and merge in Monthly branch
+* Activate 'date' column of each expense that is submitted. 
 * Maybe set all other expense types to have 'ALL' as a parent and then use this
   to control which limits are deducted when expenses are added.
-* Comment all changes and merge in Monthly branch
 * Update the README.
 * Add TODO section of README for most current todo list items
+* Update the first release. (windows will not be included)
+* Find a way to make the program installable via 'sudo apt-get'
+* Get some kind of feedback loop started.
+* Get a few customers on board.
 
 
 ----- Version 2 -----
