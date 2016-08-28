@@ -2,11 +2,7 @@ import sqlite3
 import os
 from .. import dates
 
-debug = False
-
 DB = dates.getMonthlyDB()
-if debug:
-    DB = '/home/bryan/My_Projects/IntelliBudget/data/example.db'
 
 
 class InitSQLDB:
@@ -36,7 +32,11 @@ class InitSQLDB:
                      'Entertainment']
 
         for etype in baseTypes:
-            values = (None, etype, None)
+            if etype == 'ALL':
+                values = (None, etype, None)
+            else:
+                # ExpID of 'ALL' = 1
+                values = (None, etype, 1)
             self.c.execute('''INSERT INTO ExpTypes VALUES (?, ?, ?)''', values)
 
         self.conn.commit()

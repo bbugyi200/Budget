@@ -1,6 +1,6 @@
 ----- Version 1 -----
-* Maybe set all other expense types to have 'ALL' as a parent and then use this
-  to control which limits are deducted when expenses are added.
+* Add other Expense Types to list of Limits (use Parent type recursively to determine which limits
+  to deduct from after an expense is added)
 * Update the README.
 * Add TODO section of README for most current todo list items
 * Update the first release. (windows will not be included)
@@ -48,5 +48,5 @@
 * Add quote of the day about money!
 * Add Savings tracker. It will be just like the one you use for college, 
   updatable on a monthly basis. 
-* Add '$$$ Awareness Meeter.' You would need to give the user an option to
+* Add '$$$ Awareness Meter.' You would need to give the user an option to
   mark pay-period as 'Completed' or 'Not Completed'
