@@ -26,21 +26,39 @@ X Allow user to set planned budget goals
 X Come up with a better repo name
 X Package into first version release (i.e. Create frozen binary)
 X Update README to really reflect the overarching vision behind this project
-
-=== MONTHLY BUDGET UPDATE ===
+X Model database tables on paper
+X Research how to use 'sqlite3'
+X Fix bdates.py file so that it is using the month instead of the payperiod
+X Implement data.py file as replacement for bdata.py
+X Break data.py down into an Object-Oriented model. This will allow for better
+  organization.
+X Remodel payperiod.py file
+X Add table to SQLite that will handle Budget information.
+X Make sure that there is a method to retrieve budget data.
+X Locate and restore Exp_Attrs
 X Comment out README. Under construction. 
-* Remodel the database to be more robust and adaptable.
-* Change from PayPeriod model to Monthly model.
-* Change the name of the repo.
+X Change the name of the repo.
+X Give the user the option to go back to a prior month.
+X Force user to enter in Limits when a new database is created.
+X Cleanup main.py code 
+X Refactor GUI files
+X Change the drop-down option for the 'Expense Type' to pull from the SQL 
+  database.
+X Add MONTH constant and put current month in title bar.
+X Cleanup 'debug' code and make sure that production DB works as expected.
+X Comment all changes and merge in Monthly branch
+* Activate 'date' column of each expense that is submitted. 
+* Maybe set all other expense types to have 'ALL' as a parent and then use this
+  to control which limits are deducted when expenses are added.
+* Update the README.
+* Add TODO section of README for most current todo list items
 * Update the first release. (windows will not be included)
 * Find a way to make the program installable via 'sudo apt-get'
-* Update the README.
 * Get some kind of feedback loop started.
 * Get a few customers on board.
 
 === MONTHLY BUDGET UPDATE ===
 * The database and save+restore model are the epicenter of my budget program
-
 
 
 ----- Version 2 -----
