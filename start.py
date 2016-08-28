@@ -1,4 +1,4 @@
-#!/usr/bin/python3.4
+#!/usr/bin/python3
 
 from IntelliBudget.GUI.main import Main
 import tkinter as tk
