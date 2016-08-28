@@ -2,8 +2,9 @@
 
 import tkinter as tk
 import tkinter.messagebox
-from .constants import fonts, Field, addBuffer
+from .constants import fonts, Field, addBuffer, debug
 from . import style as sty
+from .. import dates
 
 
 class ExpenseForm(tk.Frame):
@@ -113,7 +114,10 @@ class ExpenseForm(tk.Frame):
         is pressed.
         """
         try:
-            self.master.Budget.add_expense('DATE', self.expense_choice.get(),
+            # Today's date
+            date = dates.today.strftime('%m-%d-%y')
+
+            self.master.Budget.add_expense(date, self.expense_choice.get(),
                                            self.Amount.entry.get(),
                                            self.Notes.entry.get())
 

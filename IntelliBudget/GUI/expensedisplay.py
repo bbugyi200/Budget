@@ -38,7 +38,7 @@ class ExpenseDisplay(tk.Frame):
         scrollbar.pack(side='right', fill='y')
 
         # Columns for expense list
-        dataCols = ['Expense Type', 'Cost', 'Notes']
+        dataCols = ['Date', 'Expense Type', 'Cost', 'Notes']
 
         self.tree = ttk.Treeview(self.ExpenseFrame,
                                  columns=dataCols,

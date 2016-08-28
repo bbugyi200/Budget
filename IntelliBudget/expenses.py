@@ -34,7 +34,7 @@ class Expense:
         self.notes = notes
 
     def get(self):
-        return (self.expense_type, self.value, self.notes)
+        return (self.date, self.expense_type, self.value, self.notes)
 
 
 if __name__ == '__main__':
