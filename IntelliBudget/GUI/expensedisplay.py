@@ -1,6 +1,7 @@
 """ Renders the display of all of the user's current expenses. """
 
 import tkinter as tk
+from tkinter.font import Font
 import tkinter.ttk as ttk
 
 from . import style as sty
@@ -44,16 +45,43 @@ class ExpenseDisplay(tk.Frame):
                                  columns=dataCols,
                                  show='headings')
 
-        # Sets the headings in the expense list.
-        # Without this loop, the headings will not actually show.
-        for c in dataCols:
-            self.tree.heading(c, text=c)
-
         Exp_Attrs = self.master.Budget.expenses.get()
 
+        # maxWidths is used to store the max width of each column in the
+        # TreeView object.
+        maxWidths = dict()
+
+        # Loop sets max for each column to 0, so each max has starting value
+        for col in dataCols:
+            maxWidths[col] = 0
+
+        # Defines the font that the TreeView elements will use
+        treeFont = Font(self.ExpenseFrame, 'Times', "12")
+
         # Inserts each expense into the Treeview object
-        for item in Exp_Attrs:
-            self.tree.insert('', 'end', values=item)
+        for values in Exp_Attrs:
+            self.tree.insert('', 'end', values=values, tag='expense')
+
+            # This loop finds the width of the largest string in each column.
+            for col, item in zip(dataCols, values):
+                stringWidth = treeFont.measure(item)
+                if stringWidth > maxWidths[col]:
+                    maxWidths[col] = stringWidth
+
+        # This loop serves two functions:
+        # 1 - Sets the headings in the expense list.
+        #     Without this loop, the headings will not actually show.
+        #
+        # 2 - Sets the width of each column based on the largest string within
+        #     each column.
+        for col in dataCols:
+            self.tree.heading(col, text=col)
+            extra = 100
+            MAX = maxWidths[col] + extra
+            self.tree.column(col, width=MAX)
+
+        # Sets the font of the TreeView elements
+        self.tree.tag_configure('expense', font=treeFont)
 
         # 'yscroll' option must be set to scrollbar set object
         self.tree['yscroll'] = scrollbar.set
