@@ -13,13 +13,14 @@ class NoneNotAllowed(Exception): pass
 
 class Budget:
     """ Budget object is used to handle budget operations. """
-    def __init__(self, limit=None, DB=None):
+    def __init__(self, value=None, DB=None):
         if not DB:
             self.DB = SQLDB()
         else:
             self.DB = SQLDB(DB)
 
-        self.getLimits(limit)
+        self.Limits = dict()
+        self.getLimits(value)
         self.expenses = Expense_List(self.DB)
 
     def __getattr__(self, method):
@@ -34,37 +35,46 @@ class Budget:
             pass
 
     def getLimits(self, value=None):
-        Limits = self.DB.getBudgetLimits('ALL')
-        if Limits:
-            self.Limit, self.remainingLimit = Limits
-        elif value is None:
-            raise NoneNotAllowed('''You must pass in a value for "limit" on
-                                    the first load of a monthly budget!''')
-        else:
-            self.DB.insertBudgetData(value, exp_type='ALL')
-            self.Limit = float(value)
-            self.remainingLimit = float(value)
+        for etype in self.DB.getExpenseTypes():
+            Limits = self.DB.getBudgetLimits(etype)
+            if Limits:
+                self.Limits[etype] = Limits
+            elif value is None:
+                raise NoneNotAllowed('''You must pass in a value for "value" on
+                                        the first load of a monthly budget!''')
+            else:
+                value = float(value)
+                self.DB.insertBudgetData(value, exp_type=etype)
+                self.Limits[etype] = (value, value)
 
-    def updateLimits(self, limit):
-        limit = float(limit)
-        initial = limit
-        diff = self.Limit - self.remainingLimit
-        remaining = limit - diff
+    def updateLimits(self, value, etype):
+        orig_initial, orig_remaining = self.Limits[etype]
 
-        self.Limit = limit
-        self.remainingLimit = remaining
-        self.DB.UpdateBudgetLimit(remaining, initial=initial, exp_type='ALL')
+        value = float(value)
+        new_initial = value
+        diff = orig_initial - orig_remaining
+        new_remaining = value - diff
 
-    def add_expense(self, date, expense_type, value, notes):
-        self.remainingLimit -= float(value)
-        self.DB.UpdateBudgetLimit(self.remainingLimit, 'ALL')
-        self.expenses.add_expense(date, expense_type, value, notes)
+        self.Limits[etype] = (new_initial, new_remaining)
+        self.DB.UpdateBudgetLimit(new_remaining, initial=new_initial, exp_type=etype)
+
+    def add_expense(self, date, etype, value, notes):
+        orig_initial, orig_remaining = self.Limits[etype]
+        new_remaining = orig_remaining - float(value)
+        self.Limits[etype] = (orig_initial, new_remaining)
+
+        self.DB.UpdateBudgetLimit(new_remaining, etype)
+        self.expenses.add_expense(date, etype, value, notes)
 
     def remove_expense(self, index):
         value = self.expenses[index].value
-        self.remainingLimit += float(value)
-        self.DB.UpdateBudgetLimit(self.remainingLimit, 'ALL')
+        etype = self.expenses[index].expense_type
+
+        orig_initial, orig_remaining = self.Limits[etype]
+        new_remaining = orig_remaining + float(value)
+        self.DB.UpdateBudgetLimit(new_remaining, etype)
         self.expenses.remove_expense(index)
+        self.Limits[etype] = (orig_initial, new_remaining)
 
 
 class Expense_List:

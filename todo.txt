@@ -1,6 +1,6 @@
 ----- Version 1 -----
-* Add other Expense Types to list of Limits (use Parent type recursively to determine which limits
-  to deduct from after an expense is added)
+* Fix the window size of the newlimits window
+* Add extensive comments to every function 
 * Update the README.
 * Add TODO section of README for most current todo list items
 * Update the first release. (windows will not be included)

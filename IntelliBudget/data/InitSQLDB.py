@@ -25,17 +25,17 @@ class InitSQLDB:
         self.conn.commit()
 
     def createBaseETypes(self):
-        baseTypes = ['ALL',
+        baseTypes = ['TOTAL',
                      'Food',
                      'Monthly Bills',
                      'Other',
                      'Entertainment']
 
         for etype in baseTypes:
-            if etype == 'ALL':
+            if etype == 'TOTAL':
                 values = (None, etype, None)
             else:
-                # ExpID of 'ALL' = 1
+                # ExpID of 'TOTAL' = 1
                 values = (None, etype, 1)
             self.c.execute('''INSERT INTO ExpTypes VALUES (?, ?, ?)''', values)
 

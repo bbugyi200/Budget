@@ -62,7 +62,7 @@ class Expenses(Base):
         expense_types = []
         for etype in self.c.execute('''SELECT type FROM ExpTypes'''):
             etype = etype[0]
-            if etype == 'ALL':
+            if etype == 'TOTAL':
                 pass
             else:
                 expense_types.append(etype)

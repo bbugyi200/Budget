@@ -46,7 +46,7 @@ class Main(tk.Frame):
         frame1.pack(side='left')
         addBuffer(frame1, side='RL')
 
-        self.BD = BudgetData(frame1, self.Budget)
+        self.BD = BudgetData(frame1, self)
         self.BD.pack()
 
         frame2 = tk.Frame(self)

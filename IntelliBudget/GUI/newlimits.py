@@ -32,12 +32,20 @@ class NewLimits(tk.Toplevel):
         FormField.pack(side='top')
         FormField.row = 0
 
-        self.TotalLimit = Field()
-        self.TotalLimit.label = tk.Label(FormField, text="Total Limit: ")
-        self.TotalLimit.label.grid(row=FormField.row, column=0)
-        self.TotalLimit.entry = tk.Entry(FormField)
-        self.TotalLimit.entry.grid(row=FormField.row, column=1)
-        FormField.row += 1
+        # Creates a Entry field for each expense type in the database
+        self.dynamic_limits = []
+        for etype in self.parent.Budget.getExpenseTypes():
+            DynLimit = Field()
+            text = ''.join([etype, ': '])
+
+            DynLimit.label = tk.Label(FormField, text=text)
+            DynLimit.label.grid(row=FormField.row, column=0)
+            DynLimit.entry = tk.Entry(FormField)
+            DynLimit.entry.grid(row=FormField.row, column=1)
+            FormField.row += 1
+
+            self.dynamic_limits.append((etype, DynLimit.entry))
+
 
         bottomFrame = tk.Frame(self)
         bottomFrame.pack(side='top')
@@ -51,9 +59,10 @@ class NewLimits(tk.Toplevel):
         SubmitButton.pack(side='top')
 
     def Submit(self):
-        TotalLimit = self.TotalLimit.entry.get()
+        for etype, entry in self.dynamic_limits:
+            value = entry.get()
 
-        self.parent.Budget.updateLimits(TotalLimit)
+            self.parent.Budget.updateLimits(value, etype)
 
         self.parent.refresh_screen()
         self.destroy()
