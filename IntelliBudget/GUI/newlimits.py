@@ -17,6 +17,8 @@ class NewLimits(tk.Toplevel):
         tk.Toplevel.__init__(self, master=self.parent)
 
         self.title(self.parent.MONTH + ' - Limit Form')
+        # self.resizeable(width=False, height=False)
+        self.geometry('300x200')
 
         topFrame = tk.Frame(self)
         topFrame.pack(side='top')
@@ -26,7 +28,7 @@ class NewLimits(tk.Toplevel):
                                font=fonts.title())
         WindowTitle.pack(side='top')
 
-        addBuffer(topFrame, side='top', height=10)
+        addBuffer(topFrame, side='top', height=15)
 
         FormField = tk.Frame(topFrame)
         FormField.pack(side='top')
@@ -50,7 +52,7 @@ class NewLimits(tk.Toplevel):
         bottomFrame = tk.Frame(self)
         bottomFrame.pack(side='top')
 
-        addBuffer(bottomFrame, side='top', height=10)
+        addBuffer(bottomFrame, side='top', height=15)
 
         SubmitButton = tk.Button(bottomFrame,
                                  text='Submit',
