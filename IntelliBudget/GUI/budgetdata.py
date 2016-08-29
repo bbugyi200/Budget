@@ -18,7 +18,8 @@ class BudgetData(tk.Frame):
         addBuffer(self, side='top', height=5)
 
         # Temporary Total Frame
-        # Eventually, this should be done automatically for expense types that are identified as parents.
+        # Eventually, this should be done automatically for expense types that
+        # are identified as parents.
         self.TotalLimit = tk.Label(self)
         self.TotalLimit.text = tk.StringVar()
         self.TotalLimit.config(textvariable=self.TotalLimit.text)
@@ -31,8 +32,8 @@ class BudgetData(tk.Frame):
 
         addBuffer(self, side='top', height=20)
 
-        # This loop iterates through all of the expense types in the database and creates
-        # a label for each one of them. 
+        # This loop iterates through all of the expense types in the database
+        # and creates a label for each one of them.
         self.Limits = dict()
         row = 0
         column = 0
@@ -43,7 +44,9 @@ class BudgetData(tk.Frame):
             Container = tk.Frame(MasterContainer)
             Container.grid(row=row, column=column)
 
-            EType = tk.Label(Container, text=etype, font='Verdana 10 underline')
+            EType = tk.Label(Container,
+                             text=etype,
+                             font='Verdana 10 underline')
             EType.pack(side='top')
 
             Limit = tk.Label(Container)
@@ -66,7 +69,7 @@ class BudgetData(tk.Frame):
             else:
                 column = 1
                 addBuffer(MasterContainer, row=row, column=column, width=10)
-                column += 1 
+                column += 1
 
         self.set_dynamic_data()
 
@@ -74,9 +77,11 @@ class BudgetData(tk.Frame):
         """ Used to update or initially set the data in the Budget Data
         column.
         """
+        allLimits = self.parent.Budget.Limits
+
         # Temporary Total Dynamic Calculation
-        TLimit = sum([float(self.parent.Budget.Limits[key][0]) for key in self.parent.Budget.Limits])
-        TRemaining = sum([float(self.parent.Budget.Limits[key][1]) for key in self.parent.Budget.Limits])
+        TLimit = sum([float(allLimits[key][0]) for key in allLimits])
+        TRemaining = sum([float(allLimits[key][1]) for key in allLimits])
 
         text = 'TOTAL LIMIT  -  ${0:.2f}'.format(float(TLimit))
         self.TotalLimit.text.set(text)
@@ -86,8 +91,8 @@ class BudgetData(tk.Frame):
 
         for etype in self.parent.Budget.getExpenseTypes():
             Limit, Remaining = self.Limits[etype]
-            text = 'LIMIT - ${0:.2f}'.format(float(self.parent.Budget.Limits[etype][0]))
+            text = 'LIMIT - ${0:.2f}'.format(float(allLimits[etype][0]))
             Limit.text.set(text)
 
-            text = 'REMAINING - ${0:.2f}'.format(float(self.parent.Budget.Limits[etype][1]))
+            text = 'REMAINING - ${0:.2f}'.format(float(allLimits[etype][1]))
             Remaining.text.set(text)

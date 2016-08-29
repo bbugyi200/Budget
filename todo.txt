@@ -1,5 +1,7 @@
 ----- Version 1 -----
 * Fix the window size of the newlimits window
+* Make the columns in expensedisplay.py custom fit to the length of the content within each column.
+* Color code the REMAINING amounts of each expense type in budgetdata.py
 * Add extensive comments to every function 
 * Update the README.
 * Add TODO section of README for most current todo list items
