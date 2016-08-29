@@ -60,6 +60,9 @@ class NewLimits(tk.Toplevel):
                                  font=fonts.button())
         SubmitButton.pack(side='top')
 
+        # Disables resizing of window
+        self.resizable(width=False, height=False)
+
     def Submit(self):
         for etype, entry in self.dynamic_limits:
             value = entry.get()

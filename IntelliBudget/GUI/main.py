@@ -65,6 +65,9 @@ class Main(tk.Frame):
         if FIRST_USE:
             self.FirstUse()
 
+        # Disables resizing of window
+        self.master.resizable(width=False, height=False)
+
     def FirstUse(self):
         """Asks user to setup limits if this is the first time the program's
            been run this month.
