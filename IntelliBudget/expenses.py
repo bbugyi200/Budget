@@ -13,7 +13,10 @@ class Money:
         self.val = float(val)
 
     def __repr__(self):
-        return '${0:.2f}'.format(self.val)
+        if self.val >= 0:
+            return '${0:.2f}'.format(self.val)
+        else:
+            return '-${0:.2f}'.format(abs(self.val))
 
     def __float__(self):
         return self.val
