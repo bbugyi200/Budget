@@ -3,6 +3,8 @@
 import tkinter as tk
 from .constants import fonts, addBuffer, Field
 
+from ..expenses import Money
+
 
 class BudgetData(tk.Frame):
     def __init__(self, master, parent):
@@ -113,10 +115,12 @@ class BudgetData(tk.Frame):
         TLimit = sum([float(allLimits[key][0]) for key in allLimits])
         TRemaining = sum([float(allLimits[key][1]) for key in allLimits])
 
-        text = '${0:.2f}'.format(float(TLimit))
+        value = Money(float(TLimit))
+        text = str(value)
         self.TotalLimit.money.text.set(text)
 
-        text = '${0:.2f}'.format(float(TRemaining))
+        value = Money(float(TRemaining))
+        text = str(value)
         self.TotalRem.money.text.set(text)
 
         for etype in self.parent.Budget.getExpenseTypes():
