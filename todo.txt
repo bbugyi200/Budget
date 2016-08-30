@@ -1,5 +1,8 @@
 ----- Version 1 -----
 * Color code the REMAINING amounts of each expense type in budgetdata.py
+    x Break out limit and remaining labels into two separate columns.
+    - Make numeric portion of limit and remaining labels 'Money' objects
+    - Add color coding functions to budgetdata.py
 * Add extensive comments to every function 
 * Update the README.
 * Add TODO section of README for most current todo list items
