@@ -122,11 +122,21 @@ class BudgetData(tk.Frame):
         value = Money(float(TRemaining))
         text = str(value)
         self.TotalRem.money.text.set(text)
+        if float(value) < 0.0:
+            self.TotalRem.money.config(fg='red')
+        else:
+            self.TotalRem.money.config(fg='black')
 
         for etype in self.parent.Budget.getExpenseTypes():
             Limit, Remaining = self.Limits[etype]
-            text = '${0:.2f}'.format(float(allLimits[etype][0]))
+            value = Money(float(allLimits[etype][0]))
+            text = str(value)
             Limit.money.text.set(text)
 
-            text = '${0:.2f}'.format(float(allLimits[etype][1]))
+            value = Money(float(allLimits[etype][1]))
+            text = str(value)
             Remaining.money.text.set(text)
+            if float(value) < 0.0:
+                Remaining.money.config(fg='red')
+            else:
+                Remaining.money.config(fg='black')
