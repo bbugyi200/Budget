@@ -1,7 +1,7 @@
 # IntelliBudget
 IntelliBudget is a platform independent personal budgeting application complete with a graphical user interface (implemented using Python's Tkinter library) and an SQL database designed to store user expense data.
 
-##Table of Contents
+## Table of Contents
 * [Installing/Running Program](#install)
 * [User Guide](#guide)
 * [Screenshots](#screenshot)
